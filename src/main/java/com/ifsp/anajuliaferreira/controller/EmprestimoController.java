@@ -13,6 +13,8 @@ import com.ifsp.anajuliaferreira.model.Aluno;
 import com.ifsp.anajuliaferreira.model.Matricula;
 import com.ifsp.anajuliaferreira.model.OfertaDisciplina;
 import com.ifsp.anajuliaferreira.repository.AlunoRepository;
+import com.ifsp.anajuliaferreira.repository.EmprestimoRepository;
+import com.ifsp.anajuliaferreira.repository.LivroRepository;
 import com.ifsp.anajuliaferreira.repository.MatriculaRepository;
 import com.ifsp.anajuliaferreira.repository.OfertaDisciplinaRepository;
 
