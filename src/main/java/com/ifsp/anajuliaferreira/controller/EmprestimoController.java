@@ -1,5 +1,6 @@
 package com.ifsp.anajuliaferreira.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.ifsp.anajuliaferreira.model.Aluno;
+import com.ifsp.anajuliaferreira.model.Emprestimo;
+import com.ifsp.anajuliaferreira.model.Livro;
 import com.ifsp.anajuliaferreira.model.Matricula;
 import com.ifsp.anajuliaferreira.model.OfertaDisciplina;
 import com.ifsp.anajuliaferreira.repository.AlunoRepository;
@@ -34,15 +37,15 @@ public class EmprestimoController {
          return "emprestimoFormulario";
     }
     @PostMapping("/cadastrarEmprestimo")
-    public String cadastrarEmprestimo(@RequestParam @RequestParam Long id_aluno, @RequestParam Long id_oferta_disc) {
-         OfertaDisciplina ofertadisciplina = ofertaDisciplinaRepository.findByID(id_oferta_disc);
-         Aluno aluno = alunoRepository.findByID(id_aluno);
-         matriculaRepository.save(new Matricula(aluno,ofertadisciplina));
-         return "redirect:/listarMatriculas";
+    public String cadastrarEmprestimo(@RequestParam LocalDateTime data_emprestimo, @RequestParam LocalDateTime data_devolucao,  @RequestParam Long id_aluno, @RequestParam Long id_oferta_disc) {
+         Aluno aluno = alunoRepository.findByID(id_aluno); 
+         Livro livro = livroRepository.findByID(id_oferta_disc);
+         emprestimoRepository.save(new Emprestimo(data_emprestimo, data_devolucao,  aluno, livro));
+         return "redirect:/listarEmprestimos";
     }
      @GetMapping("/listarMatriculas")
     public String list(Model model){
-        List<Matricula> matricula = matriculaRepository.findAll();
+        List<Emprestimo> emprestimos = emprestimoRepository.findAll();
         model.addAttribute("matriculas", matricula);
         return "verMatricula";
     }

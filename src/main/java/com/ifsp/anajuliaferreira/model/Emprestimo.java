@@ -12,8 +12,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "emprestimos")
 public class Emprestimo {
-<<<<<<< Updated upstream
-=======
     public Emprestimo() {
     }
     public Emprestimo(LocalDateTime data_emprestimo, LocalDateTime data_devolucao,  Aluno aluno, Livro livro) {
@@ -22,7 +20,6 @@ public class Emprestimo {
         this.aluno = aluno;
         this.livro = livro;
     }
->>>>>>> Stashed changes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_emprestimo")
