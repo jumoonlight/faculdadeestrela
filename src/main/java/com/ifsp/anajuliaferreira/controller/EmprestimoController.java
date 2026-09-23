@@ -13,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ifsp.anajuliaferreira.model.Aluno;
 import com.ifsp.anajuliaferreira.model.Emprestimo;
 import com.ifsp.anajuliaferreira.model.Livro;
-import com.ifsp.anajuliaferreira.model.Matricula;
-import com.ifsp.anajuliaferreira.model.OfertaDisciplina;
 import com.ifsp.anajuliaferreira.repository.AlunoRepository;
 import com.ifsp.anajuliaferreira.repository.EmprestimoRepository;
 import com.ifsp.anajuliaferreira.repository.LivroRepository;
-import com.ifsp.anajuliaferreira.repository.MatriculaRepository;
-import com.ifsp.anajuliaferreira.repository.OfertaDisciplinaRepository;
+
 
 
 @Controller
@@ -57,27 +54,27 @@ public class EmprestimoController {
     }
      @GetMapping("/emprestimo/{id}/editar")
     public String editarMatriculaString(@PathVariable long id, Model model){
-        Matricula matricula = matriculaRepository.findByID(id);
+        Emprestimo emprestimo = emprestimoRepository.findByID(id);
         List<Aluno> alunos = alunoRepository.findAll();
-        List<OfertaDisciplina> ofertas = ofertaDisciplinaRepository.findAll();
-        model.addAttribute("matriculas", matricula);
+        List<Livro> livros = livroRepository.findAll();
+        model.addAttribute("emprestimos", emprestimo);
+        model.addAttribute("livros", livros);
         model.addAttribute("alunos", alunos);
-        model.addAttribute("ofertas", ofertas);
-        return "editarMatricula";
+        return "editarEmprestimo";
     }
-    @PostMapping("/atualizarMatricula")
-    public String atualizarMatricula(@RequestParam long id,@RequestParam Long id_aluno,@RequestParam Long id_oferta_disc){
-        Matricula matricula = matriculaRepository.findByID(id);
-        OfertaDisciplina oferta = ofertaDisciplinaRepository.findByID(id_oferta_disc);
+    @PostMapping("/atualizarEmprestimo")
+    public String atualizarEmprestimo(@RequestParam long id, @RequestParam LocalDateTime data_emprestimo, @RequestParam LocalDateTime data_devolucao, @RequestParam Long id_livro, @RequestParam Long id_aluno){
+        Emprestimo emprestimo = emprestimoRepository.findByID(id);
         Aluno aluno = alunoRepository.findByID(id_aluno);
-        matricula.setAluno(aluno);
-        matricula.setOfertaDisc(oferta);
-        matriculaRepository.update(matricula);
-        return "redirect:/listarMatriculas";
+        Livro livro = livroRepository.findByID(id_livro);
+        emprestimo.setAluno(aluno);
+        emprestimo.setLivro(livro);
+        emprestimoRepository.update(emprestimo);
+        return "redirect:/listarEmprestimos";
     }
-    @GetMapping("/matricula/{id}/deletar")
-    public String excluirMatricula(@PathVariable long id){
-        matriculaRepository.deleteById(id);
-        return "redirect:/listarMatriculas";
+    @GetMapping("/emprestimo/{id}/deletar")
+    public String excluirEmprestimo(@PathVariable long id){
+        emprestimoRepository.deleteById(id);
+        return "redirect:/listarEmprestimos";
     }
 }
