@@ -43,19 +43,19 @@ public class EmprestimoController {
          emprestimoRepository.save(new Emprestimo(data_emprestimo, data_devolucao,  aluno, livro));
          return "redirect:/listarEmprestimos";
     }
-     @GetMapping("/listarMatriculas")
+     @GetMapping("/listarEmprestimos")
     public String list(Model model){
         List<Emprestimo> emprestimos = emprestimoRepository.findAll();
-        model.addAttribute("matriculas", matricula);
-        return "verMatricula";
+        model.addAttribute("emprestimos", emprestimos);
+        return "verEmprestimo";
     }
-    @GetMapping("/matricula/{id}")
-    public String oferta(@PathVariable long id, Model model){
-        Matricula matricula = matriculaRepository.findByID(id);
-        model.addAttribute("matriculas", matricula);
-        return "detalhesMatricula";
+    @GetMapping("/emprestimo/{id}")
+    public String emprestimo(@PathVariable long id, Model model){
+        Emprestimo emprestimo = emprestimoRepository.findByID(id);
+        model.addAttribute("emprestimo", emprestimo);
+        return "detalhesEmprestimo";
     }
-     @GetMapping("/matricula/{id}/editar")
+     @GetMapping("/emprestimo/{id}/editar")
     public String editarMatriculaString(@PathVariable long id, Model model){
         Matricula matricula = matriculaRepository.findByID(id);
         List<Aluno> alunos = alunoRepository.findAll();
