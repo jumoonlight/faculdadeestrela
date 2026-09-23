@@ -56,6 +56,18 @@
                       </form>
                 </div>
             </div>
+            <div class="conteudo-um">
+                 <h2>Livro</h2>
+                <img src="https://files.catbox.moe/n71yjg.webp" alt="Livro" width="200">
+                <div class="botoes">
+                    <form method="get" th:action="@{/formularioLivro}">
+                            <button>Cadastrar Livros</button>
+                      </form>
+                      <form method="get" th:action="@{/listarLivros}">
+                            <button>Consultar Livros</button>
+                      </form>
+                </div>
+            </div>
         </div>
         <div class="bloco">
             <div class="conteudo-dois">
@@ -91,6 +103,18 @@
                       </form>
                       <form method="get" th:action="@{/listarOfertasDisciplina}">
                             <button>Consultar Ofertas</button>
+                      </form>
+                 </div>
+            </div>
+            <div class="conteudo-dois">
+                 <h2>Empréstimos</h2>
+                 <img src="https://files.catbox.moe/s7hmv4.png" alt="Emprestimo" width="195">
+                 <div class="botoes">
+                    <form method="get" th:action="@{/formularioEmprestimo}">
+                            <button>Cadastrar Empréstimos</button>
+                      </form>
+                      <form method="get" th:action="@{/listarEmprestimos}">
+                            <button>Consultar Empréstimos</button>
                       </form>
                  </div>
             </div>
