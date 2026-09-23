@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Disciplinas</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/tabelas.css}">
+</head>
+<body>
+    <h1>Disciplina</h1>
+    <div th:if="${disciplinas.isEmpty()}" class="sem-resultados">
+                <p class="sem-resultados">Nenhuma disciplina encontrada.</p>
+                <a th:href="@{/telainicial}" class="btn-voltar">Voltar para a tela inicial</a>
+            </div>
+    <div th:unless="${disciplinas.isEmpty()}">
+    <div th:if="${erro}" style="color: red; font-weight: bold;">
+            <span th:text="${erro}"></span>
+        </div>
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome da Disciplina</th>
+                <th>Descrição da Disciplina</th>
+                <th>Número de Semestres</th>
+                <th>Carga Horária</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="disciplina : ${disciplinas}">
+                <td><span th:text="${disciplina.id}"></span></td>
+                <td th:text="${disciplina.nome}"></td>
+                <td th:text="${disciplina.desc}"></td>
+                <td th:text="${disciplina.numeroSemestres}"></td>
+                <td th:text="${disciplina.cargaHoraria}"> </td>
+                <td>
+                      <a th:href="@{/disciplina/{id}(id=${disciplina.id})}" class="btn-tabela btn-ver">Ver Detalhes</a>
+                      <a th:href="@{/disciplina/{id}/editar(id=${disciplina.id})}" class="btn-tabela btn-editar">Editar</a>
+                      <a th:href="@{/disciplina/{id}/deletar(id=${disciplina.id})}" class="detalhes deletar">Remover</a>
+                </td>
+             </tr>
+        </tbody>
+    </table>
+    <br>
+    <form method="get" th:action="@{/telainicial}">
+        <button>Voltar para a Tela Inicial</button>
+    </form>
+    </div>
+</body>

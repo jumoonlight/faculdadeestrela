@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Curso</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+</head>
+<body>
+    <div class="conteudo">
+        <div class="principal"></div>
+          <form method="post" th:action="@{/atualizarCurso}">
+             <h1>Editar Curso</h1>
+             <input type="hidden" name="id" th:value="${curso.id}">
+             <label>Nome:</label>
+             <input type="text" th:name="nome" th:value="${curso.nome}" required>
+             <label>Descrição: </label>
+             <input type="text" th:name="desc" th:value="${curso.desc}" required>
+             <label>Turno: </label>
+             <div class="opcao">
+               <input type="radio" th:name="turno" value="Manhã" required>
+               <label>Manhã</label>
+             </div>
+             <div class="opcao">
+                <input type="radio" th:name="turno" value="Tarde" required>
+                <label>Tarde</label>
+             </div>
+             <div class="opcao">
+                <input type="radio" th:name="turno" value="Noite" required>
+                <label>Noite</label>
+             </div>
+             <label>Número de Semestres: </label>
+             <input type="number" th:name="num_sem_curso" r th:value="${curso.numeroSemestres}" required>
+             <button type="submit">Editar Curso</button>
+          </form>
+        </div>
+</body>
+</html>

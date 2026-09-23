@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrícula</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+</head>
+<body>
+    <div class="conteudo">
+        <div class="principal">
+          <form method="post" th:action="@{/cadastrarMatricula}">
+             <h1>Matrícula</h1>
+             <label>Aluno que vai se matricular:</label>
+             <select name="id_aluno" required>
+                    <option value="">Selecione o nome do aluno: </option>
+                    <option th:each="aluno : ${alunos}" th:value="${aluno.id}" th:text="${aluno.nome}"></option>
+             </select>
+             <label>Oferta de disciplina desejada: </label> 
+             <select name="id_oferta_disc" required>
+                    <option value="">Selecione a oferta: </option>
+                    <option th:each="oferta : ${ofertas}" th:value="${oferta.id}" th:text="${oferta.disciplina.nome}"></option>
+             </select>
+             <button type="submit">Matricule-se!</button>
+             </form>
+        </div>
+</body>
+</html>

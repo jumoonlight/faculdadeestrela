@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Aluno</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="stylesheet" th:href="@{/css/detalhes.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Detalhes do Aluno</h1>
+    <p>Nome: <span th:text="${aluno.nome}"></span></p>
+    <p>CPF: <span th:text="${aluno.cpf}"></span></p>
+    <p>Data de Nascimento: <span th:text="${aluno.dataNasc}"></span></p>
+    <p>E-mail: <span th:text="${aluno.email}"></span></p>
+    <p>Telefone: <span th:text="${aluno.telefone}"></span></p>
+    <p>Endereço: <span th:text="${aluno.endereco}"></span></p>
+    <p>Cidade: <span th:text="${aluno.cidade}"></span></p>
+    <p>CEP: <span th:text="${aluno.cep}"></span></p>
+    <p>UF: <span th:text="${aluno.uf}"></span></p>
+    <p>Prontuário: <span th:text="${aluno.prontuario}"></span></p>
+    <p>Ano de ingresso: <span th:text="${aluno.ano_ingresso}"></span></p>
+    <p>Ano de saída: <span th:text="${aluno.ano_saida}"></span></p>
+    <br>
+    <form method="get" th:action="@{/listarAlunos}">
+        <button>Voltar para a Tela de Cadastro</button>
+    </form>
+</body>
+</html>

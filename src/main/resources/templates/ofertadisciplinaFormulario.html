@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de ofertas de disciplinas</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+</head>
+<body>
+    <div class="conteudo">
+        <div class="principal">
+          <form method="post" th:action="@{/cadastrarOfertaDisciplina}">
+             <h1>Cadastrar Ofertas de Disciplinas</h1>
+             <label>Professor:</label>
+             <select name="id_prof" required>
+                    <option value="">Selecione o professor inscrito: </option>
+                    <option th:each="professor : ${professores}" th:value="${professor.id}" th:text="${professor.nome}"></option>
+             </select>
+             <label>Curso: </label> 
+             <select name="id_curso" required>
+                    <option value="">Selecione o curso: </option>
+                    <option th:each="curso : ${cursos}" th:value="${curso.id}" th:text="${curso.nome}"></option>
+             </select>
+             <label>Disciplina: </label> 
+             <select name="id_disc" required>
+                    <option value="">Selecione a disciplina: </option>
+                    <option th:each="disciplina : ${disciplinas}" th:value="${disciplina.id}" th:text="${disciplina.nome}"></option>
+             </select>
+             <button type="submit">Cadastre a oferta</button>
+             </form>
+        </div>
+</body>
+</html>

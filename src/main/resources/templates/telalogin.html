@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <title>Login do Aluno</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+    <div class="caixa">
+         <h1>Login</h1>
+        <form method="post" th:action="@{/login}">
+        <label for="matricula">Prontuário/Siape:</label>
+        <input type="text" id="log_id" name="log_id" required>
+        <br>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+        <br>
+        <a href="/formularioAluno">É aluno e não é cadastrado? Clique aqui!</a>
+        <a href="/formularioProfessor">É professor e não é cadastrado? Clique aqui!</a>
+        <br>
+        <button type="submit">Login</button>
+    </form>
+    </div>
+</body>
+</html>

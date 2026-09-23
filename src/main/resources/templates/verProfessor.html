@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Professores</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/tabelas.css}">
+</head>
+<body>
+    <h1>Professores</h1>
+    <div th:if="${professores.isEmpty()}" class="sem-resultados">
+                <p class="sem-resultados">Nenhum professor encontrado.</p>
+                <a th:href="@{/telainicial}" class="btn-voltar">Voltar para a tela inicial</a>
+            </div>
+    <div th:unless="${professores.isEmpty()}">
+    <div th:if="${erro}" style="color: red; font-weight: bold;">
+        <span th:text="${erro}"></span>
+    </div>
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Data de Nascimento</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Endereço</th>
+                <th>Cidade</th>
+                <th>CEP</th>
+                <th>UF</th>
+                <th>Siape</th>
+                <th>Área</th>
+                <th>Formação</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="professor : ${professores}">
+                <td><span th:text="${professor.id}"></span></td>
+                <td th:text="${professor.nome}"></td>
+                <td th:text="${professor.cpf}"></td>
+                <td th:text="${professor.dataNasc}"></td>
+                <td th:text="${professor.email}"></td>
+                <td th:text="${professor.telefone}"></td>
+                <td th:text="${professor.endereco}"></td>
+                <td th:text="${professor.cidade}"></td>
+                <td th:text="${professor.cep}"></td>
+                <td th:text="${professor.uf}"></td>
+                <td th:text="${professor.siape}"></td>
+                <td th:text="${professor.area}"></td>
+                <td th:text="${professor.formacao}"></td>
+                <td>
+                      <a th:href="@{/professor/{id}(id=${professor.id})}" class="btn-tabela btn-ver">Ver Detalhes</a>
+                      <a th:href="@{/professor/{id}/editar(id=${professor.id})}" class="btn-tabela btn-editar">Editar</a>
+                      <a th:href="@{/professor/{id}/deletar(id=${professor.id})}" class="detalhes deletar">Remover</a>
+                </td>
+             </tr>
+        </tbody>
+    </table>
+    <br>
+    <form method="get" th:action="@{/telainicial}">
+        <button>Voltar para a Tela Inicial</button>
+    </form>
+    </div>
+</body>

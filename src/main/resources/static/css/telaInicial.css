@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+header{ 
+    height: 10%;
+}
+.bloco{
+    display: flex;
+    margin-top: 5%;
+    justify-content: space-around;
+}
+.botoes{
+    display: flex;
+    gap: 20px;
+    padding: 5px;
+    
+}
+button{
+    background-color: rgb(107, 107, 223);
+    padding: 10px;
+    border-radius: 10px 10px 10px 10px;
+    color: white;
+    border: 1px solid white;
+}
+h2{
+    text-align: center;
+    margin-right: 30%;
+    font-family: 'Comfortaa', cursive;
+    color: rgb(155, 155, 221);
+}
+.bloco-dois{
+    display: flex;
+    margin-top: 5%;
+    justify-content: space-around;
+}
+h1{
+    text-align: center;
+    margin-top: 3%;
+    font-family: 'Comfortaa', cursive;
+    color: rgb(107, 107, 223);
+    
+}
+footer{
+    background-color: rgb(107, 107, 223);
+    padding: 2%;
+    text-align: center;
+    color: white;
+}

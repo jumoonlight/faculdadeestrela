@@ -1,0 +1,41 @@
+body{
+   background-color: rgb(149, 215, 235);
+  
+}
+form{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+select{
+    height:20px;
+    width: 180px;
+}
+
+label{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;   
+    margin-bottom: 1%;
+}
+ button{
+    margin-top: 5%;
+    background-color: mediumaquamarine;
+    border: 1px solid  rgb(86, 124, 168);
+    border-radius: 20px 20px 20px 20px;
+    padding-left:1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    margin-bottom: 2%;
+ }
+ body{
+    font-family: 'Comfortaa', cursive;
+ }
+ .opcao{
+    display:flex;
+    align-items: center;
+    text-align: center;
+}

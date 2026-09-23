@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Professor</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+</head>
+<body>
+    <div class="conteudo">
+        <div class="principal"></div>
+          <form method="post" th:action="@{/atualizarProfessor}">
+             <h1>Editar Professor</h1>
+             <input type="hidden" name="id" th:value="${professor.id}">
+             <label>Nome:</label>
+             <input type="text" th:name="nome" th:value="${professor.nome}" required>
+             <label>CPF: </label>
+             <input type="text" th:name="cpf" th:value="${professor.cpf}" required>
+             <label>Data de Nascimento: </label>
+             <input type="date" th:name="dataNascimento" th:value="${professor.dataNasc}" required>
+             <label>E-mail: </label>
+             <input type="email" th:name="email" th:value="${professor.email}" required>
+             <label>Telefone: </label>
+             <input type="text" th:name="telefone" th:value="${professor.telefone}" required>
+             <label>Endereço: </label>
+             <input type="text" th:name="endereco" th:value="${professor.endereco}" required>
+             <label>Cidade: </label>
+             <input type="text" th:name="cidade" th:value="${professor.cidade}" required>
+             <label>CEP: </label>
+             <input type="text" th:name="cep" th:value="${professor.cep}" required>
+             <label>UF: </label>
+             <select th:name="uf" required>
+                <option value="">Selecione...</option>
+                <option value="AC" th:selected="${professor.uf == 'AC'}">AC</option>
+                <option value="AP" th:selected="${professor.uf == 'AP'}">AP</option>
+                <option value="AM" th:selected="${professor.uf == 'AM'}">AM</option>
+                <option value="PA" th:selected="${professor.uf == 'PA'}">PA</option>
+                <option value="RO" th:selected="${professor.uf == 'RO'}">RO</option>
+                <option value="RR" th:selected="${professor.uf == 'RR'}">RR</option>
+                <option value="TO" th:selected="${professor.uf == 'TO'}">TO</option>
+                <option value="MT" th:selected="${professor.uf == 'MT'}">MT</option>
+                <option value="MS" th:selected="${professor.uf == 'MS'}">MS</option>
+                <option value="GO" th:selected="${professor.uf == 'GO'}">GO</option>
+                <option value="DF" th:selected="${professor.uf == 'DF'}">DF</option>
+                <option value="MA" th:selected="${professor.uf == 'MA'}">MA</option>
+                <option value="PI" th:selected="${professor.uf == 'PI'}">PI</option>
+                <option value="CE" th:selected="${professor.uf == 'CE'}">CE</option>
+                <option value="RN" th:selected="${professor.uf == 'RN'}">RN</option>
+                <option value="PB" th:selected="${professor.uf == 'PB'}">PB</option>
+                <option value="PE" th:selected="${professor.uf == 'PE'}">PE</option>
+                <option value="AL" th:selected="${professor.uf == 'AL'}">AL</option>
+                <option value="SE" th:selected="${professor.uf == 'SE'}">SE</option>
+                <option value="BA" th:selected="${professor.uf == 'BA'}">BA</option>
+                <option value="MG" th:selected="${professor.uf == 'MG'}">MG</option>
+                <option value="ES" th:selected="${professor.uf == 'ES'}">ES</option>
+                <option value="RJ" th:selected="${professor.uf == 'RJ'}">RJ</option>
+                <option value="SP" th:selected="${professor.uf == 'SP'}">SP</option>
+                <option value="PR" th:selected="${professor.uf == 'PR'}">PR</option>
+                <option value="SC" th:selected="${professor.uf == 'SC'}">SC</option>
+                <option value="RS" th:selected="${professor.uf == 'RS'}">RS</option>
+            </select>
+             <label>Siape:</label>
+             <input type="text" th:name="siape" th:value="${professor.siape}" required>
+             <label>Área: </label>
+             <input type="text" th:name="area" th:value="${professor.area}" required>
+             <label>Formação: </label>
+             <input type="text" th:name="formacao" th:value="${professor.formacao}" required>
+            <button type="submit">Editar Professor</button>
+          </form>
+        </div>
+</body>
+</html>

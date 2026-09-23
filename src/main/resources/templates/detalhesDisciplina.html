@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Disciplina</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="stylesheet" th:href="@{/css/detalhes.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Detalhes da Disciplina</h1>
+    <p>Nome: <span th:text="${disciplina.nome}"></span></p>
+    <p>Descrição: <span th:text="${disciplina.desc}"></span></p>
+    <p>Número de Semestres: <span th:text="${disciplina.numeroSemestres}"></span></p>
+    <p>Carga Horária: <span th:text="${disciplina.cargaHoraria}"></span></p>
+    <br>
+    <form method="get" th:action="@{/listarDisciplinas}">
+        <button>Voltar para a Tela de Cadastro</button>
+    </form>
+</body>
+</html>

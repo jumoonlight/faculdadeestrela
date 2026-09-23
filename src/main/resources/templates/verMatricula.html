@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Matrículas</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/tabelas.css}">
+</head>
+<body>
+    <h1>Matriculas</h1>
+    <div th:if="${matriculas.isEmpty()}" class="sem-resultados">
+                <p class="sem-resultados">Nenhuma matrícula encontrada.</p>
+                <a th:href="@{/telainicial}" class="btn-voltar">Voltar para a tela inicial</a>
+            </div>
+    <div th:unless="${matriculas.isEmpty()}">
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome do Aluno</th>
+                <th>Nome da Oferta Disciplina</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="matricula : ${matriculas}">
+                <td><span th:text="${matricula.id}"></span></td>
+                <td th:text="${matricula.aluno.nome}"></td>
+                <td th:text="${matricula.ofertaDisc.disciplina.nome}"></td>
+                <td>
+                      <a th:href="@{/matricula/{id}(id=${matricula.id})}" class="btn-tabela btn-ver">Ver Detalhes</a>
+                      <a th:href="@{/matricula/{id}/editar(id=${matricula.id})}" class="btn-tabela btn-editar">Editar</a>
+                      <a th:href="@{/matricula/{id}/deletar(id=${matricula.id})}" class="detalhes deletar">Remover</a>
+                </td>
+             </tr>
+        </tbody>
+    </table>
+    <br>
+    <form method="get" th:action="@{/telainicial}">
+        <button>Voltar para a Tela Inicial</button>
+    </form>
+    </div>
+</body>

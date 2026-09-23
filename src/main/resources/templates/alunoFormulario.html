@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Alunos</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+</head>
+<body>
+    <div class="conteudo">
+          <form method="post" th:action="@{/cadastrarAluno}">
+             <h1>Cadastro de Aluno</h1>
+             <div th:if="${erro}" style="color: red; font-weight: bold;">
+                <span th:text="${erro}"></span>
+             </div>
+             <label>Nome:</label>
+             <input type="text" th:name="nome" required>
+             <label>CPF: </label>
+             <input type="text" th:name="cpf" required>
+             <label>Data de Nascimento: </label>
+             <input type="date" th:name="dataNascimento" required>
+             <label>E-mail: </label>
+             <input type="email" th:name="email" required>
+             <label>Telefone: </label>
+             <input type="tel" th:name="telefone" required>
+             <label>Endereço: </label>
+             <input type="text" th:name="endereco" required>
+             <label>Cidade: </label>
+             <input type="text" th:name="cidade" required>
+             <label>CEP: </label>
+             <input type="text" th:name="cep" required>
+             <label>UF: </label>
+             <select th:name="uf" required>
+                <option>AC</option>
+                <option>AP</option>
+                <option>AM</option>
+                <option>PA</option>
+                <option>RO</option>
+                <option>RR</option>
+                <option>TO</option>
+                <option>MT</option>
+                <option>MS</option>
+                <option>GO</option>
+                <option>DF</option>
+                <option>MA</option>
+                <option>PI</option>
+                <option>CE</option>
+                <option>RN</option>
+                <option>PB</option>
+                <option>PE</option>
+                <option>AL</option>
+                <option>SE</option>
+                <option>BA</option>
+                <option value="MG">MG</option>
+                <option value="ES">ES</option>
+                <option value="RJ">RJ</option>
+                <option value="SP">SP</option>
+                <option value="PR">PR</option>
+                <option value="SC">SC</option>
+                <option value="RS">RS</option>
+             </select>
+             <label>Prontuário:</label>
+             <input type="text" th:name="pront" required>
+             <label>Ano de ingresso: </label>
+             <input type="number" th:name="ano_ingresso" required>
+             <label>Ano de saída: </label>
+             <input type="number" th:name="ano_saida" required>
+             <button type="submit">Cadastrar Aluno</button>
+             </form>
+        </div>
+</body>
+</html>

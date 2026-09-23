@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Curso</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="stylesheet" th:href="@{/css/detalhes.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Detalhes do Curso</h1>
+    <p>Nome: <span th:text="${curso.nome}"></span></p>
+    <p>Descrição: <span th:text="${curso.desc}"></span></p>
+    <p>Turno: <span th:text="${curso.turno}"></span></p>
+    <p>Número de Semestres: <span th:text="${curso.numeroSemestres}"></span></p>
+    <br>
+    <form method="get" th:action="@{/listarCursos}">
+        <button>Voltar para a Tela de Cadastro</button>
+    </form>
+</body>
+</html>
