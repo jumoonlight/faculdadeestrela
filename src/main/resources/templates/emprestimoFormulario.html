@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de empréstimos</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+</head>
+<body>
+    <div class="conteudo">
+        <div class="principal">
+          <form method="post" th:action="@{/cadastrarOfertaDisciplina}">
+             <h1>Cadastrar Empréstimos</h1>
+             <label>Data de Empréstimo: </label>
+             <input type="date" name="data_emprestimo" required>
+             <label>Data de Devolução: </label>
+             <input type="date" name="data_devolucao" required>
+             <label>Aluno que irá emprestar:</label>
+             <select name="id_aluno" required>
+                    <option value="">Selecione o nome do aluno: </option>
+                    <option th:each="aluno : ${alunos}" th:value="${aluno.id}" th:text="${aluno.nome}"></option>
+             </select>
+             <label>Livro que será emprestado: </label> 
+             <select name="id_livro" required>
+                    <option value="">Selecione o título do livro: </option>
+                    <option th:each="livro : ${livros}" th:value="${livro.id}" th:text="${livro.titulo}"></option>
+             </select>
+             <button type="submit">Cadastre o livro</button>
+             </form>
+        </div>
+</body>
+</html>

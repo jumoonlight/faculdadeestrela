@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Empréstimo</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="stylesheet" th:href="@{/css/detalhes.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Detalhes do emprestimos</h1>
+    <p>Nome do Aluno: <span th:text="${emprestimos.aluno.nome}"></span></p>
+    <p>CPF do Aluno: <span th:text="${emprestimos.aluno.cpf}"></span></p>
+    <p>Data de Nascimento do Aluno: <span th:text="${emprestimos.aluno.dataNasc}"></span></p>
+    <p>E-mail do Aluno: <span th:text="${emprestimos.aluno.email}"></span></p>
+    <p>Telefone do Aluno: <span th:text="${emprestimos.aluno.telefone}"></span></p>
+    <p>Endereço do Aluno: <span th:text="${emprestimos.aluno.endereco}"></span></p>
+    <p>Cidade do Aluno: <span th:text="${emprestimos.aluno.cidade}"></span></p>
+    <p>CEP do Aluno: <span th:text="${emprestimos.aluno.cep}"></span></p>
+    <p>UF do Aluno: <span th:text="${emprestimos.aluno.uf}"></span></p>
+    <p>Prontuário do Aluno: <span th:text="${emprestimos.aluno.prontuario}"></span></p>
+    <p>Data de  Ingresso do Aluno: <span th:text="${emprestimos.aluno.ano_ingresso}"></span></p>
+    <p>Data de Saída do Aluno: <span th:text="${emprestimos.aluno.ano_saida}"></span></p>
+    <p>Título do Livro: <span th:text="${emprestimos.livro.titulo}"></span></p>
+    <p>Autor do Livro: <span th:text="${emprestimos.livro.autor}"></span></p>
+    <p>Ano de Publicação do Livro: <span th:text="${emprestimos.livro.anoPublicacao}"></span></p>
+    <p>Editora do Livro: <span th:text="${emprestimos.livro.editora}"></span></p>
+    <p>ISBN do Livro: <span th:text="${emprestimos.livro.isbn}"></span></p>
+    <p>Editora do Livro: <span th:text="${emprestimos.livro.numPaginas}"></span></p>
+    <br>
+    <form method="get" th:action="@{/listarEmprestimos}">
+        <button>Voltar para a tabela de Empréstimos</button>
+    </form>
+</html>
