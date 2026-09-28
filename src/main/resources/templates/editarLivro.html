@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Livro</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+</head>
+<body>
+    <div class="conteudo">
+        <div class="principal"></div>
+          <form method="post" th:action="@{/atualizarLivro}">
+             <h1>Editar Livro</h1>
+             <input type="hidden" name="id" th:value="${livro.id}">
+             <label>Título do Livro:</label>
+             <input type="text" th:name="titulo" required>
+             <label>Nome do Autor: </label>
+             <input type="text" th:name="autor" required>
+             <label>Ano de publicação: </label>
+             <input type="number" th:name="anoPublicacao" required>
+             <label>Nome da Editora: </label>
+             <input type="text" th:name="editora" required>
+             <label>ISBN: </label>
+             <input type="text" th:name="isbn" required>
+             <label>Número de Páginas: </label>
+             <input type="number" th:name="numPaginas" required>
+             <button type="submit">Editar Disciplina</button>
+          </form>
+        </div>
+</body>
+</html>

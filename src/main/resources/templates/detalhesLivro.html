@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Livro</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="stylesheet" th:href="@{/css/detalhes.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Detalhes do Livro</h1>
+    <p>Título do Livro: <span th:text="${livro.titulo}"></span></p>
+    <p>Autor do Livro: <span th:text="${livro.autor}"></span></p>
+    <p>Ano de Publicação do Livro: <span th:text="${livro.anoPublicacao}"></span></p>
+    <p>Editora do Livro: <span th:text="${livro.editora}"></span></p>
+    <p>ISBN do Livro: <span th:text="${livro.isbn}"></span></p>
+     <p>Editora do Livro: <span th:text="${livro.numPaginas}"></span></p>
+    <br>
+    <form method="get" th:action="@{/listarLivros}">
+        <button>Voltar para a tabela de Livros</button>
+    </form>
+</body>
+</html>
