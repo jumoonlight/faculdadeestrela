@@ -17,18 +17,18 @@
              <h1>Editar Livro</h1>
              <input type="hidden" name="id" th:value="${livro.id}">
              <label>Título do Livro:</label>
-             <input type="text" th:name="titulo" required>
+             <input type="text" th:value="${livro.titulo}" th:name="titulo" required>
              <label>Nome do Autor: </label>
-             <input type="text" th:name="autor" required>
+             <input type="text" th:value="${livro.autor}" th:name="autor" required>
              <label>Ano de publicação: </label>
-             <input type="number" th:name="anoPublicacao" required>
+             <input type="number" th:value="${livro.anoPublicacao}" th:name="anoPublicacao" required>
              <label>Nome da Editora: </label>
-             <input type="text" th:name="editora" required>
+             <input type="text" th:value="${livro.editora}" th:name="editora" required>
              <label>ISBN: </label>
-             <input type="text" th:name="isbn" required>
+             <input type="text" th:value="${livro.isbn}" th:name="isbn" required>
              <label>Número de Páginas: </label>
-             <input type="number" th:name="numPaginas" required>
-             <button type="submit">Editar Disciplina</button>
+             <input type="number" th:value="${livro.numPaginas}" th:name="numPaginas" required>
+             <button type="submit">Editar Livro</button>
           </form>
         </div>
 </body>

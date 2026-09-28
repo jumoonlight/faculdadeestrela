@@ -13,9 +13,13 @@
 <body>
     <div class="conteudo">
         <div class="principal">
-          <form method="post" th:action="@{/atualizarMatricula}">
+          <form method="post" th:action="@{/atualizarEmprestimo}">
              <h1>Empréstimos</h1>
-             <input type="hidden" name="id" th:value="${matriculas.id}">
+             <input type="hidden" name="id" th:value="${emprestimos.id}">
+             <label>Data de Empréstimo: </label>
+             <input type="date" th:name="data_emprestimo" th:value="${emprestimos.data_emprestimo}" required>
+             <label>Data de Devolução: </label>
+             <input type="date" th:name="data_devolucao" th:value="${emprestimos.data_devolucao}" required>
              <label>Aluno que irá emprestar:</label>
              <select name="id_aluno" required>
                     <option value="">Selecione o nome do aluno:  </option>

@@ -1,6 +1,5 @@
 package com.ifsp.anajuliaferreira.controller;
-
-import java.time.LocalDateTime;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class EmprestimoController {
          return "emprestimoFormulario";
     }
     @PostMapping("/cadastrarEmprestimo")
-    public String cadastrarEmprestimo(@RequestParam LocalDateTime data_emprestimo, @RequestParam LocalDateTime data_devolucao,  @RequestParam Long id_aluno, @RequestParam Long id_oferta_disc) {
+    public String cadastrarEmprestimo(@RequestParam Date data_emprestimo, @RequestParam Date data_devolucao,  @RequestParam Long id_aluno, @RequestParam Long id_oferta_disc) {
          Aluno aluno = alunoRepository.findByID(id_aluno); 
          Livro livro = livroRepository.findByID(id_oferta_disc);
          emprestimoRepository.save(new Emprestimo(data_emprestimo, data_devolucao,  aluno, livro));
@@ -63,10 +62,12 @@ public class EmprestimoController {
         return "editarEmprestimo";
     }
     @PostMapping("/atualizarEmprestimo")
-    public String atualizarEmprestimo(@RequestParam long id, @RequestParam LocalDateTime data_emprestimo, @RequestParam LocalDateTime data_devolucao, @RequestParam Long id_livro, @RequestParam Long id_aluno){
+    public String atualizarEmprestimo(@RequestParam long id, @RequestParam Date data_emprestimo, @RequestParam Date data_devolucao, @RequestParam Long id_livro, @RequestParam Long id_aluno){
         Emprestimo emprestimo = emprestimoRepository.findByID(id);
         Aluno aluno = alunoRepository.findByID(id_aluno);
         Livro livro = livroRepository.findByID(id_livro);
+        emprestimo.setDataEmprestimo(data_emprestimo);
+        emprestimo.setDataDevolucao(data_devolucao);
         emprestimo.setAluno(aluno);
         emprestimo.setLivro(livro);
         emprestimoRepository.update(emprestimo);

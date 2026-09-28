@@ -16,14 +16,14 @@ public class LivroRepository {
 
     @Transactional
     public void save (Livro livro){
-        String sql = "INSERT INTO livros (titulo, autor, anoPublicacao, editora, isbn, numPaginas) VALUES (:titulo, :autor, :anoPublicacao, :editora, :isbn, :numPaginas)";
+        String sql = "INSERT INTO livros (titulo, autor, ano_publicacao, editora, isbn, num_paginas) VALUES (:titulo, :autor, :ano_publicacao, :editora, :isbn, :num_paginas)";
         Query query = em.createNativeQuery (sql);
         query.setParameter("titulo", livro.getTitulo());
         query.setParameter("autor", livro.getAutor());
-        query.setParameter("anoPublicacao", livro.getAnoPublicacao());
+        query.setParameter("ano_publicacao", livro.getAnoPublicacao());
         query.setParameter("editora", livro.getEditora());
         query.setParameter("isbn", livro.getIsbn());
-        query.setParameter("numPaginas", livro.getNumPaginas());
+        query.setParameter("num_paginas", livro.getNumPaginas());
         query.executeUpdate();
     }
      @Transactional
@@ -43,15 +43,15 @@ public class LivroRepository {
     }
     @Transactional
      public void update(Livro livro){
-        String sql = "UPDATE livros SET titulo = :titulo, autor = :autor, anoPublicacao = :anoPublicacao, editora = :editora, isbn = :isbn, numPaginas = :numPaginas WHERE id_livro = :id_livro";
+        String sql = "UPDATE livros SET titulo = :titulo, autor = :autor, ano_publicacao = :ano_publicacao, editora = :editora, isbn = :isbn, num_paginas = :num_paginas WHERE id_livro = :id_livro";
         Query query =em.createNativeQuery(sql);
         query.setParameter("id_livro", livro.getId());
         query.setParameter("titulo", livro.getTitulo());
         query.setParameter("autor", livro.getAutor());
-        query.setParameter("anoPublicacao", livro.getAnoPublicacao());
+        query.setParameter("ano_publicacao", livro.getAnoPublicacao());
         query.setParameter("editora", livro.getEditora());
         query.setParameter("isbn", livro.getIsbn());
-        query.setParameter("numPaginas", livro.getNumPaginas());
+        query.setParameter("num_paginas", livro.getNumPaginas());
         query.executeUpdate();
     }
     @Transactional

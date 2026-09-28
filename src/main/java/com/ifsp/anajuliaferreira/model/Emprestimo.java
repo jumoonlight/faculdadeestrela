@@ -1,5 +1,5 @@
 package com.ifsp.anajuliaferreira.model;
-import java.time.LocalDateTime;
+import java.sql.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class Emprestimo {
     public Emprestimo() {
     }
-    public Emprestimo(LocalDateTime data_emprestimo, LocalDateTime data_devolucao,  Aluno aluno, Livro livro) {
+    public Emprestimo(Date data_emprestimo, Date data_devolucao,  Aluno aluno, Livro livro) {
         this.data_emprestimo = data_emprestimo;
         this.data_devolucao = data_devolucao;
         this.aluno = aluno;
@@ -31,19 +31,19 @@ public class Emprestimo {
         this.id = id;
     }   
     @Column(name = "data_emprestimo")
-    private LocalDateTime data_emprestimo;
-    public LocalDateTime getDataEmprestimo(){
+    private Date data_emprestimo;
+    public Date getDataEmprestimo(){
         return data_emprestimo;
     }
-    public void setDataEmprestimo(LocalDateTime dataEmprestimo) {
+    public void setDataEmprestimo(Date dataEmprestimo) {
         this.data_emprestimo = dataEmprestimo;
     }
     @Column(name = "data_devolucao")
-    private LocalDateTime data_devolucao;
-    public LocalDateTime getDataDevolucao(){
+    private Date data_devolucao;
+    public Date getDataDevolucao(){
         return data_devolucao;
     }
-    public void setDataDevolucao(LocalDateTime dataDevolucao) {
+    public void setDataDevolucao(Date dataDevolucao) {
         this.data_devolucao = dataDevolucao;
     }
     @ManyToOne

@@ -59,6 +59,7 @@ public class LivroController {
         livro.setEditora(editora);
         livro.setIsbn(isbn);
         livro.setNumPaginas(numPaginas);
+        livroRepository.update(livro);
         return "redirect:/listarLivros";
     }
     @GetMapping("/livro/{id}/deletar")
