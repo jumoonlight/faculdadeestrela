@@ -33,9 +33,9 @@ public class EmprestimoController {
          return "emprestimoFormulario";
     }
     @PostMapping("/cadastrarEmprestimo")
-    public String cadastrarEmprestimo(@RequestParam Date data_emprestimo, @RequestParam Date data_devolucao,  @RequestParam Long id_aluno, @RequestParam Long id_oferta_disc) {
+    public String cadastrarEmprestimo(@RequestParam Date data_emprestimo, @RequestParam Date data_devolucao,  @RequestParam Long id_aluno, @RequestParam Long id_livro) {
          Aluno aluno = alunoRepository.findByID(id_aluno); 
-         Livro livro = livroRepository.findByID(id_oferta_disc);
+         Livro livro = livroRepository.findByID(id_livro);
          emprestimoRepository.save(new Emprestimo(data_emprestimo, data_devolucao,  aluno, livro));
          return "redirect:/listarEmprestimos";
     }

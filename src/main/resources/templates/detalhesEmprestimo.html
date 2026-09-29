@@ -10,24 +10,26 @@
 </head>
 <body>
     <h1>Detalhes do emprestimos</h1>
-    <p>Nome do Aluno: <span th:text="${emprestimos.aluno.nome}"></span></p>
-    <p>CPF do Aluno: <span th:text="${emprestimos.aluno.cpf}"></span></p>
-    <p>Data de Nascimento do Aluno: <span th:text="${emprestimos.aluno.dataNasc}"></span></p>
-    <p>E-mail do Aluno: <span th:text="${emprestimos.aluno.email}"></span></p>
-    <p>Telefone do Aluno: <span th:text="${emprestimos.aluno.telefone}"></span></p>
-    <p>Endereço do Aluno: <span th:text="${emprestimos.aluno.endereco}"></span></p>
-    <p>Cidade do Aluno: <span th:text="${emprestimos.aluno.cidade}"></span></p>
-    <p>CEP do Aluno: <span th:text="${emprestimos.aluno.cep}"></span></p>
-    <p>UF do Aluno: <span th:text="${emprestimos.aluno.uf}"></span></p>
-    <p>Prontuário do Aluno: <span th:text="${emprestimos.aluno.prontuario}"></span></p>
-    <p>Data de  Ingresso do Aluno: <span th:text="${emprestimos.aluno.ano_ingresso}"></span></p>
-    <p>Data de Saída do Aluno: <span th:text="${emprestimos.aluno.ano_saida}"></span></p>
-    <p>Título do Livro: <span th:text="${emprestimos.livro.titulo}"></span></p>
-    <p>Autor do Livro: <span th:text="${emprestimos.livro.autor}"></span></p>
-    <p>Ano de Publicação do Livro: <span th:text="${emprestimos.livro.anoPublicacao}"></span></p>
-    <p>Editora do Livro: <span th:text="${emprestimos.livro.editora}"></span></p>
-    <p>ISBN do Livro: <span th:text="${emprestimos.livro.isbn}"></span></p>
-    <p>Editora do Livro: <span th:text="${emprestimos.livro.numPaginas}"></span></p>
+    <p>Data de Empréstimo: <span th:text="${emprestimo.dataEmprestimo}"></span></p>
+    <p>Data de Devolução: <span th:text="${emprestimo.dataDevolucao}"></span></p>
+    <p>Nome do Aluno: <span th:text="${emprestimo.aluno.nome}"></span></p>
+    <p>CPF do Aluno: <span th:text="${emprestimo.aluno.cpf}"></span></p>
+    <p>Data de Nascimento do Aluno: <span th:text="${emprestimo.aluno.dataNasc}"></span></p>
+    <p>E-mail do Aluno: <span th:text="${emprestimo.aluno.email}"></span></p>
+    <p>Telefone do Aluno: <span th:text="${emprestimo.aluno.telefone}"></span></p>
+    <p>Endereço do Aluno: <span th:text="${emprestimo.aluno.endereco}"></span></p>
+    <p>Cidade do Aluno: <span th:text="${emprestimo.aluno.cidade}"></span></p>
+    <p>CEP do Aluno: <span th:text="${emprestimo.aluno.cep}"></span></p>
+    <p>UF do Aluno: <span th:text="${emprestimo.aluno.uf}"></span></p>
+    <p>Prontuário do Aluno: <span th:text="${emprestimo.aluno.prontuario}"></span></p>
+    <p>Data de  Ingresso do Aluno: <span th:text="${emprestimo.aluno.ano_ingresso}"></span></p>
+    <p>Data de Saída do Aluno: <span th:text="${emprestimo.aluno.ano_saida}"></span></p>
+    <p>Título do Livro: <span th:text="${emprestimo.livro.titulo}"></span></p>
+    <p>Autor do Livro: <span th:text="${emprestimo.livro.autor}"></span></p>
+    <p>Ano de Publicação do Livro: <span th:text="${emprestimo.livro.anoPublicacao}"></span></p>
+    <p>Editora do Livro: <span th:text="${emprestimo.livro.editora}"></span></p>
+    <p>ISBN do Livro: <span th:text="${emprestimo.livro.isbn}"></span></p>
+    <p>Editora do Livro: <span th:text="${emprestimo.livro.numPaginas}"></span></p>
     <br>
     <form method="get" th:action="@{/listarEmprestimos}">
         <button>Voltar para a tabela de Empréstimos</button>

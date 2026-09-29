@@ -17,16 +17,16 @@
              <h1>Empréstimos</h1>
              <input type="hidden" name="id" th:value="${emprestimos.id}">
              <label>Data de Empréstimo: </label>
-             <input type="date" th:name="data_emprestimo" th:value="${emprestimos.data_emprestimo}" required>
+             <input type="date" th:name="data_emprestimo" th:value="${emprestimos.dataEmprestimo}" required>
              <label>Data de Devolução: </label>
-             <input type="date" th:name="data_devolucao" th:value="${emprestimos.data_devolucao}" required>
+             <input type="date" th:name="data_devolucao" th:value="${emprestimos.dataDevolucao}" required>
              <label>Aluno que irá emprestar:</label>
              <select name="id_aluno" required>
                     <option value="">Selecione o nome do aluno:  </option>
                     <option th:each="aluno : ${alunos}" th:value="${aluno.id}" th:text="${aluno.nome}" th:selected="${aluno.id == emprestimos.aluno.id}"></option>
              </select>
              <label>Livro que será emprestado:  </label> 
-             <select name="id_oferta_disc" required>
+             <select name="id_livro" required>
                     <option value="">Selecione o título do livro: : </option>
                     <option th:each="livro : ${livros}" th:value="${livro.id}" th:text="${livro.titulo}" th:selected="${livro.id == emprestimos.livro.id}"></option>
              </select>

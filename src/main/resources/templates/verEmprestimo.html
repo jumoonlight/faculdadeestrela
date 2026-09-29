@@ -13,7 +13,7 @@
 <body>
     <h1>Empréstimos</h1>
     <div th:if="${emprestimos.isEmpty()}" class="sem-resultados">
-                <p class="sem-resultados">Nenhuma oferta foi encontrada.</p>
+                <p class="sem-resultados">Nenhum empréstimo foi encontrado.</p>
                 <a th:href="@{/telainicial}" class="btn-voltar">Voltar para a tela inicial</a>
     </div>
     <div th:unless="${emprestimos.isEmpty()}">
@@ -34,8 +34,8 @@
         <tbody>
             <tr th:each="emprestimo : ${emprestimos}">
                 <td><span th:text="${emprestimo.id}"></span></td>
-                <td th:text="${emprestimo.data_emprestimo}"></td>
-                <td th:text="${emprestimo.data_devolucao}"></td>
+                <td th:text="${emprestimo.dataEmprestimo}"></td>
+                <td th:text="${emprestimo.dataDevolucao}"></td>
                 <td th:text="${emprestimo.aluno.nome}"></td>
                 <td th:text="${emprestimo.livro.titulo}"></td>
                 <td>
