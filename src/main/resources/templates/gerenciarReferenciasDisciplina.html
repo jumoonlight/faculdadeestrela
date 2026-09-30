@@ -15,21 +15,24 @@
         <span th:text="${erro}"></span>
     </div>
 
-    <!-- Formulário para adicionar nova referência -->
     <form method="post" th:action="@{/disciplina/{id}/referencias/adicionar(id=${disciplina.id})}">
         <label>Adicionar livro de referência:</label>
+        <br>
+        <br>
         <select name="id_livro" required>
             <option value="">-- Selecione um livro --</option>
             <option th:each="l : ${livros}"
                     th:value="${l.id}"
                     th:text="${l.titulo + ' (' + l.autor + ')'}"></option>
         </select>
+        <br>
+        <br>
         <button type="submit">Adicionar</button>
     </form>
 
     <br>
 
-    <!-- Lista das referências atuais -->
+
     <div th:if="${referencias.isEmpty()}">
         <p>Nenhuma referência cadastrada ainda.</p>
     </div>
@@ -39,6 +42,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Capa</th>
                     <th>Título do Livro</th>
                     <th>Autor</th>
                     <th>Editora</th>
@@ -48,6 +52,9 @@
             <tbody>
                 <tr th:each="r : ${referencias}">
                     <td th:text="${r.id}"></td>
+                     <td><img th:if="${r.livro.capa != null and !r.livro.capa.isEmpty()}" th:src="@{'/' + ${r.livro.capa}}" alt="Capa" style="width: 60px; height: auto;">
+            <span th:unless="${r.livro.capa != null and !r.livro.capa.isEmpty()}">—</span>
+        </td>
                     <td th:text="${r.livro.titulo}"></td>
                     <td th:text="${r.livro.autor}"></td>
                     <td th:text="${r.livro.editora}"></td>

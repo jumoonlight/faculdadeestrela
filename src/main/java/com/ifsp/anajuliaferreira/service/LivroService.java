@@ -11,7 +11,7 @@ import org.springframework.web.multipart. MultipartFile;
 
 @Service
 public class LivroService{
-    public static final String endereco_armazenamento_arquivo = "C:\\Users\\misou\\faculdadeestrela\\src\\main\\resources\\static\\images";
+    public static final String endereco_armazenamento_arquivo = "C:\\Users\\3036065\\faculdadeestrela\\src\\main\\resources\\static\\images";
 
     public String salvarCapa (MultipartFile arquivo) throws IOException {
         if(arquivo==null) {

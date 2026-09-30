@@ -87,7 +87,7 @@ public class LivroController {
             livroRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
-            redirectAttributes.addFlashAttribute("erro", "Não é possível excluir o livro pois ele está relacionado a um empréstimo. Por favor, exclua o empréstimo antes de excluir o livro.");
+            redirectAttributes.addFlashAttribute("erro", "Não é possível excluir o livro pois ele está relacionado a um empréstimo ou referenciado em uma disciplina. Por favor, exclua o empréstimo antes de excluir o livro.");
             return "redirect:/listarLivros";
         }
         return "redirect:/listarLivros";
