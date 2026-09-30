@@ -25,6 +25,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Capa</th>
                 <th>Título do Livro</th>
                 <th>Autor do Livro</th>
                 <th>Ano de Publicação do Livro</th>
@@ -37,6 +38,9 @@
         <tbody>
             <tr th:each="livro : ${livros}">
                 <td><span th:text="${livro.id}"></span></td>
+                <td><img th:if="${livro.capa != null and !livro.capa.isEmpty()}" th:src="@{'/' + ${livro.capa}}" alt="Capa" style="width: 60px; height: auto;">
+            <span th:unless="${livro.capa != null and !livro.capa.isEmpty()}">—</span>
+        </td>
                 <td th:text="${livro.titulo}"></td>
                 <td th:text="${livro.autor}"></td>
                 <td th:text="${livro.anoPublicacao}"></td>

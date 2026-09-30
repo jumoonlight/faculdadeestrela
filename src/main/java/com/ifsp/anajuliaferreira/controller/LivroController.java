@@ -1,5 +1,6 @@
 package com.ifsp.anajuliaferreira.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.ifsp.anajuliaferreira.model.Livro;
 import com.ifsp.anajuliaferreira.repository.LivroRepository;
+import com.ifsp.anajuliaferreira.service.LivroService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -18,6 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LivroController {
     @Autowired
     private LivroRepository livroRepository;
+    @Autowired
+    private LivroService livroService;
     @GetMapping("/formularioLivro")
     public String disciplina(){
         return "livroFormulario";
@@ -28,8 +34,15 @@ public class LivroController {
          @RequestParam int anoPublicacao,
          @RequestParam String editora,
          @RequestParam String isbn,
-         @RequestParam int numPaginas) {
-         livroRepository.save(new Livro(titulo, autor, anoPublicacao, editora, isbn, numPaginas));
+         @RequestParam int numPaginas,
+        @RequestParam ("capa") MultipartFile capa) {
+            try {
+            String caminho_arquivo = livroService.salvarCapa(capa);
+            Livro livro = new Livro(titulo, autor, anoPublicacao, editora, isbn, numPaginas,  caminho_arquivo);
+            livroRepository.save(livro);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
          return "redirect:/listarLivros";
     }
     @GetMapping("/listarLivros")
@@ -51,7 +64,7 @@ public class LivroController {
         return "editarLivro";
     }
     @PostMapping("/atualizarLivro")
-    public String atualizarLivro(@RequestParam long id,@RequestParam String titulo, @RequestParam String autor, @RequestParam int anoPublicacao, @RequestParam String editora, @RequestParam String isbn, @RequestParam int numPaginas){
+    public String atualizarLivro(@RequestParam long id,@RequestParam String titulo, @RequestParam String autor, @RequestParam int anoPublicacao, @RequestParam String editora, @RequestParam String isbn, @RequestParam int numPaginas,  @RequestParam ("capa") MultipartFile capa){
         Livro livro = livroRepository.findByID(id);
         livro.setTitulo(titulo);
         livro.setAutor(autor);
@@ -59,6 +72,12 @@ public class LivroController {
         livro.setEditora(editora);
         livro.setIsbn(isbn);
         livro.setNumPaginas(numPaginas);
+        try {
+            String caminho_arquivo = livroService.salvarCapa(capa);
+            livro.setCapa(caminho_arquivo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         livroRepository.update(livro);
         return "redirect:/listarLivros";
     }

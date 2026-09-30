@@ -13,13 +13,14 @@ import jakarta.persistence.Table;
 public class Livro {
     public Livro() {
     }
-    public Livro(String titulo, String autor, int anoPublicacao, String editora, String isbn, int numPaginas) {
+    public Livro(String titulo, String autor, int anoPublicacao, String editora, String isbn, int numPaginas, String capa) {
         this.titulo = titulo;
         this.autor = autor;
         this.anoPublicacao = anoPublicacao;
         this.editora = editora;
         this.isbn = isbn;
         this.numPaginas = numPaginas;
+        this.capa = capa;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,6 +79,14 @@ public class Livro {
     }
     public void setNumPaginas(int numPaginas) {
         this.numPaginas = numPaginas;
+    }
+    @Column(name = "capa")
+    private String capa;
+    public String getCapa() {
+        return capa;
+    }
+    public void setCapa(String capa) {
+        this.capa = capa;
     }
     
 

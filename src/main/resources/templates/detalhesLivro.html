@@ -10,6 +10,10 @@
 </head>
 <body>
     <h1>Detalhes do Livro</h1>
+    <img th:if="${livro.capa != null and !livro.capa.isEmpty()}"
+     th:src="@{'/' + ${livro.capa}}"
+     alt="Capa do livro"
+     style="max-width: 200px; height: auto; display:block; margin-bottom: 15px;">
     <p>Título do Livro: <span th:text="${livro.titulo}"></span></p>
     <p>Autor do Livro: <span th:text="${livro.autor}"></span></p>
     <p>Ano de Publicação do Livro: <span th:text="${livro.anoPublicacao}"></span></p>

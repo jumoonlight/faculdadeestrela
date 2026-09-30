@@ -16,7 +16,7 @@ public class LivroRepository {
 
     @Transactional
     public void save (Livro livro){
-        String sql = "INSERT INTO livros (titulo, autor, ano_publicacao, editora, isbn, num_paginas) VALUES (:titulo, :autor, :ano_publicacao, :editora, :isbn, :num_paginas)";
+        String sql = "INSERT INTO livros (titulo, autor, ano_publicacao, editora, isbn, num_paginas, capa) VALUES (:titulo, :autor, :ano_publicacao, :editora, :isbn, :num_paginas, :capa)";
         Query query = em.createNativeQuery (sql);
         query.setParameter("titulo", livro.getTitulo());
         query.setParameter("autor", livro.getAutor());
@@ -24,6 +24,7 @@ public class LivroRepository {
         query.setParameter("editora", livro.getEditora());
         query.setParameter("isbn", livro.getIsbn());
         query.setParameter("num_paginas", livro.getNumPaginas());
+         query.setParameter("capa", livro.getCapa());
         query.executeUpdate();
     }
      @Transactional
@@ -43,7 +44,7 @@ public class LivroRepository {
     }
     @Transactional
      public void update(Livro livro){
-        String sql = "UPDATE livros SET titulo = :titulo, autor = :autor, ano_publicacao = :ano_publicacao, editora = :editora, isbn = :isbn, num_paginas = :num_paginas WHERE id_livro = :id_livro";
+        String sql = "UPDATE livros SET titulo = :titulo, autor = :autor, ano_publicacao = :ano_publicacao, editora = :editora, isbn = :isbn, num_paginas = :num_paginas, capa = :capa WHERE id_livro = :id_livro";
         Query query =em.createNativeQuery(sql);
         query.setParameter("id_livro", livro.getId());
         query.setParameter("titulo", livro.getTitulo());
@@ -52,6 +53,7 @@ public class LivroRepository {
         query.setParameter("editora", livro.getEditora());
         query.setParameter("isbn", livro.getIsbn());
         query.setParameter("num_paginas", livro.getNumPaginas());
+         query.setParameter("capa", livro.getCapa());
         query.executeUpdate();
     }
     @Transactional

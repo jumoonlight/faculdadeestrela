@@ -13,7 +13,7 @@
 <body>
     <div class="conteudo">
         <div class="principal"></div>
-          <form method="post" th:action="@{/atualizarLivro}">
+          <form method="post" th:action="@{/atualizarLivro}" enctype="multipart/form-data">
              <h1>Editar Livro</h1>
              <input type="hidden" name="id" th:value="${livro.id}">
              <label>Título do Livro:</label>
@@ -28,6 +28,8 @@
              <input type="text" th:value="${livro.isbn}" th:name="isbn" required>
              <label>Número de Páginas: </label>
              <input type="number" th:value="${livro.numPaginas}" th:name="numPaginas" required>
+             <label>Capa: </label>
+             <input type="file" th:name="capa" accept="image/*" required>
              <button type="submit">Editar Livro</button>
           </form>
         </div>

@@ -13,7 +13,7 @@
 <body>
     <div class="conteudo">
         <div class="principal">
-          <form method="post" th:action="@{/cadastrarLivro}">
+          <form method="post" th:action="@{/cadastrarLivro}" enctype="multipart/form-data">
              <h1>Cadastro de Livros</h1>
              <label>Título do Livro:</label>
              <input type="text" th:name="titulo" required>
@@ -27,6 +27,9 @@
              <input type="text" th:name="isbn" required>
              <label>Número de Páginas: </label>
              <input type="number" th:name="numPaginas" required>
+             <label>Capa: </label>
+             <input type="file"  th:name="capa" accept="image/*" required>
+             
              <button type="submit">Cadastrar Livro</button>
              </form>
         </div>
