@@ -16,7 +16,7 @@ public class DisciplinaRepository {
     private EntityManager em;
 
     @Transactional
-    public void save (Disciplina disciplina){
+    public Long save (Disciplina disciplina){
         String sql = "INSERT INTO disciplinas (nome, descricao, semestres, carga_horaria) VALUES (:nome, :descricao, :semestres, :carga_horaria)";
         Query query = em.createNativeQuery (sql);
         query.setParameter("nome", disciplina.getNome());
@@ -24,6 +24,11 @@ public class DisciplinaRepository {
         query.setParameter("semestres", disciplina.getNumeroSemestres());
         query.setParameter("carga_horaria", disciplina.getCargaHoraria());
         query.executeUpdate();
+
+        Number idGerado = (Number) em
+            .createNativeQuery("SELECT LAST_INSERT_ID()")
+            .getSingleResult();
+             return idGerado.longValue();
     }
      @Transactional
     public List<Disciplina> findAll() {

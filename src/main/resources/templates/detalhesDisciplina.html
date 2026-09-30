@@ -15,6 +15,40 @@
     <p>Número de Semestres: <span th:text="${disciplina.numeroSemestres}"></span></p>
     <p>Carga Horária: <span th:text="${disciplina.cargaHoraria}"></span></p>
     <br>
+
+    <h2>Livros de Referência</h2>
+
+<div th:if="${referencias == null or referencias.isEmpty()}">
+    <p>Nenhum livro de referência cadastrado para esta disciplina.</p>
+</div>
+
+<div th:unless="${referencias == null or referencias.isEmpty()}">
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>Capa</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Editora</th>
+                <th>Ano</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="r : ${referencias}">
+                <td>
+                    <img th:if="${r.livro.capa != null and !r.livro.capa.isEmpty()}"
+                         th:src="@{'/' + ${r.livro.capa}}"
+                         alt="Capa"
+                         style="width: 50px; height: auto;">
+                </td>
+                <td th:text="${r.livro.titulo}"></td>
+                <td th:text="${r.livro.autor}"></td>
+                <td th:text="${r.livro.editora}"></td>
+                <td th:text="${r.livro.anoPublicacao}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
     <form method="get" th:action="@{/listarDisciplinas}">
         <button>Voltar para a tabela de Disciplinas</button>
     </form>

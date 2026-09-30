@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Referência</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
+</head>
+<body>
+    <div class="conteudo">
+        <div class="principal">
+          <form method="post" th:action="@{/cadastrarReferencia}">
+             <h1>Cadastro de Referência</h1>
+
+             <label>Disciplina:</label>
+             <select name="id_disc" required>
+                <option value="">-- Selecione --</option>
+                <option th:each="d : ${disciplinas}"
+                        th:value="${d.id}"
+                        th:text="${d.nome}"></option>
+             </select>
+
+             <label>Livro de Referência:</label>
+             <select name="id_livro" required>
+                <option value="">-- Selecione --</option>
+                <option th:each="l : ${livros}"
+                        th:value="${l.id}"
+                        th:text="${l.titulo}"></option>
+             </select>
+
+             <button type="submit">Cadastrar Referência</button>
+          </form>
+        </div>
+    </div>
+</body>
+</html>
