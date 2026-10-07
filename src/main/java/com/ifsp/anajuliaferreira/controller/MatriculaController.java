@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.ifsp.anajuliaferreira.model.Aluno;
 import com.ifsp.anajuliaferreira.model.Matricula;
 import com.ifsp.anajuliaferreira.model.OfertaDisciplina;
@@ -32,9 +34,13 @@ public class MatriculaController {
          return "matriculaFormulario";
     }
     @PostMapping("/cadastrarMatricula")
-    public String cadastrarMatricula(@RequestParam Long id_aluno, @RequestParam Long id_oferta_disc) {
+    public String cadastrarMatricula(@RequestParam Long id_aluno, @RequestParam Long id_oferta_disc, RedirectAttributes redirectAttributes) {
          OfertaDisciplina ofertadisciplina = ofertaDisciplinaRepository.findByID(id_oferta_disc);
          Aluno aluno = alunoRepository.findByID(id_aluno);
+         if(matriculaRepository.existe(id_aluno, id_oferta_disc).equals("true")){
+            redirectAttributes.addFlashAttribute("erro", "Aluno já matriculado nessa disciplina!");
+            return "redirect:/formularioMatricula";
+         }
          matriculaRepository.save(new Matricula(aluno,ofertadisciplina));
          return "redirect:/listarMatriculas";
     }

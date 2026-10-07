@@ -16,6 +16,20 @@ public class MatriculaRepository {
     @PersistenceContext
     private EntityManager em;
 
+    @Transactional 
+    public String existe(Long id_aluno, Long id_oferta_disc){
+        String sql = "SELECT * FROM matricula WHERE id_aluno = :id_aluno AND id_oferta_disc = :id_oferta_disc";
+        Query query = em.createNativeQuery(sql, Matricula.class);
+        query.setParameter("id_aluno", id_aluno);
+        query.setParameter("id_oferta_disc", id_oferta_disc);
+        List<Matricula> matriculas = query.getResultList();
+        if(matriculas.isEmpty()){
+            return "false";
+        }else{
+            return "true";
+        }
+    }
+
     @Transactional
     public void save (Matricula matricula){
         String sql = "INSERT INTO matricula (id_aluno, id_oferta_disc) VALUES (:id_aluno , :id_oferta_disc)";

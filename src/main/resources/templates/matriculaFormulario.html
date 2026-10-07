@@ -15,6 +15,9 @@
         <div class="principal">
           <form method="post" th:action="@{/cadastrarMatricula}">
              <h1>Matrícula</h1>
+             <div th:if="${erro}" style="color: red; font-weight: bold;">
+                <span th:text="${erro}"></span>
+             </div>
              <label>Aluno que vai se matricular:</label>
              <select name="id_aluno" required>
                     <option value="">Selecione o nome do aluno: </option>
