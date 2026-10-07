@@ -8,12 +8,13 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import com.ifsp.anajuliaferreira.model.Livro;
+import com.ifsp.anajuliaferreira.model.Matricula;
 
 @Repository
 public class LivroRepository {
     @PersistenceContext
     private EntityManager em;
-
+    
     @Transactional
     public void save (Livro livro){
         String sql = "INSERT INTO livros (titulo, autor, ano_publicacao, editora, isbn, num_paginas, capa) VALUES (:titulo, :autor, :ano_publicacao, :editora, :isbn, :num_paginas, :capa)";

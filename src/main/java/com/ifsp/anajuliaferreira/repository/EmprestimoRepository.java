@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.ifsp.anajuliaferreira.model.Emprestimo;
+import com.ifsp.anajuliaferreira.model.Livro;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -15,6 +16,20 @@ import jakarta.transaction.Transactional;
 public class EmprestimoRepository {
     @PersistenceContext
     private EntityManager em;
+    @Transactional 
+    public String existe(Long id_livro, Long id_aluno, Long id_emprestimo){
+        String sql = "SELECT * FROM emprestimos WHERE id_livro = :id_livro AND id_aluno= :id_aluno AND id_emprestimo != :id_emprestimo";
+        Query query = em.createNativeQuery(sql, Emprestimo.class);
+        query.setParameter("id_livro", id_livro);
+        query.setParameter("id_aluno", id_aluno);
+        query.setParameter("id_emprestimo", id_emprestimo);
+        List<Emprestimo> emprestimos = query.getResultList();
+        if(emprestimos.isEmpty()){
+            return "false";
+        }else{
+            return "true";
+        }
+    }
 
     @Transactional
     public void save (Emprestimo emprestimo){
