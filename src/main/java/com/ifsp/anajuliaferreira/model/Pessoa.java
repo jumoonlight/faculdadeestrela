@@ -1,9 +1,20 @@
 package com.ifsp.anajuliaferreira.model;
 
 import java.sql.Date;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.ifsp.anajuliaferreira.service.PessoaRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,11 +23,11 @@ import jakarta.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Pessoa {
+public class Pessoa implements UserDetails {
     public Pessoa() {
     }
     public Pessoa(String nome, String cpf, Date dataNasc, String email, String telefone, String endereco, String cidade,
-        String cep, String uf) {
+        String cep, String uf,  String login, String password) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNasc = dataNasc;
@@ -26,6 +37,8 @@ public class Pessoa {
         this.cidade = cidade;
         this.cep = cep;
         this.uf = uf;
+        this.login = login;
+        this.password = password;
     }
 
     @Id
@@ -37,6 +50,15 @@ public class Pessoa {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+    @Enumerated (EnumType.STRING)
+    @Column(name = "role")
+    private PessoaRole role;
+    public PessoaRole getRole() {
+        return role;
+    }
+    public void setRole(PessoaRole role) {
+        this.role = role;
     }
 
     @Column(name = "nome")
@@ -119,5 +141,39 @@ public class Pessoa {
     public void setUf(String uf) {
         this.uf = uf;
     }
-    
+    @Column(name = "login")
+    private String login;
+    public String getLogin() {
+        return login;
+    }
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    @Column(name = "password")
+    private String password;
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    @Override 
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.role == PessoaRole.ADMIN){
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }else if(this.role == PessoaRole.PROFESSOR){
+            return List.of(new SimpleGrantedAuthority("ROLE_PROFESSOR"));
+        }else if(this.role == PessoaRole.ALUNO){
+            return List.of(new SimpleGrantedAuthority("ROLE_ALUNO"));
+        }else if(this.role == PessoaRole.BIBLIOTECARIO){
+            return List.of(new SimpleGrantedAuthority("ROLE_BIBLIOTECARIO"));
+        }else{
+            return Collections.emptyList();
+        }
+    }
+    @Override 
+    public String getUsername() {
+        return login;
+    }
+
 }

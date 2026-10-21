@@ -17,6 +17,7 @@ public class Aluno extends Pessoa{
         this.prontuario = prontuario;
         this.ano_ingresso = ano_ingresso;
         this.ano_saida = ano_saida;
+        this.setRole(com.ifsp.anajuliaferreira.service.PessoaRole.ALUNO);
     }
 
     @Column(name = "prontuario")

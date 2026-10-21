@@ -19,7 +19,7 @@ public class AlunoRepository {
         try {
             String comando;
             Query query;
-            comando = "INSERT INTO pessoa(nome, cpf, data_nasc, email, telefone, endereco, cidade, cep, uf) VALUES (:nome, :cpf, :data_nasc, :email, :telefone, :endereco, :cidade, :cep, :uf)";
+            comando = "INSERT INTO pessoa(nome, cpf, data_nasc, email, telefone, endereco, cidade, cep, uf, login, password) VALUES (:nome, :cpf, :data_nasc, :email, :telefone, :endereco, :cidade, :cep, :uf, :login, :password)";
             query = em.createNativeQuery(comando);
             query.setParameter("nome", aluno.getNome());
             query.setParameter("cpf", aluno.getCpf());
@@ -30,6 +30,8 @@ public class AlunoRepository {
             query.setParameter("cidade", aluno.getCidade());
             query.setParameter("cep", aluno.getCep());
             query.setParameter("uf", aluno.getUf());
+            query.setParameter("login", aluno.getLogin());
+            query.setParameter("password", aluno.getPassword());
             query.executeUpdate();
 
             Number idGerado = (Number) em
@@ -68,7 +70,7 @@ public class AlunoRepository {
      public void update(Aluno aluno){
         try{
             String sql;
-            sql = "UPDATE pessoa SET id_pessoa = :id_pessoa, nome = :nome, cpf = :cpf, data_nasc = :data_nasc, email = :email, telefone = :telefone, endereco = :endereco, cidade = :cidade, cep = :cep, uf = :uf  WHERE id_pessoa = :id_pessoa";
+            sql = "UPDATE pessoa SET id_pessoa = :id_pessoa, nome = :nome, cpf = :cpf, data_nasc = :data_nasc, email = :email, telefone = :telefone, endereco = :endereco, cidade = :cidade, cep = :cep, uf = :uf, login = :login, password = :password WHERE id_pessoa = :id_pessoa";
             Query query =em.createNativeQuery(sql);
             query.setParameter("id_pessoa", aluno.getId());
             query.setParameter("nome", aluno.getNome());
@@ -80,6 +82,8 @@ public class AlunoRepository {
             query.setParameter("cidade", aluno.getCidade());
             query.setParameter("cep", aluno.getCep());
             query.setParameter("uf", aluno.getUf());
+            query.setParameter("login", aluno.getLogin());
+            query.setParameter("password", aluno.getPassword());
             sql= "UPDATE aluno SET id_pessoa = :id_pessoa, prontuario = :prontuario, ano_ingresso = :ano_ingresso, ano_saida = :ano_saida  WHERE id_pessoa = :id_pessoa";
             query =em.createNativeQuery(sql);
             query.setParameter("id_pessoa", aluno.getId());

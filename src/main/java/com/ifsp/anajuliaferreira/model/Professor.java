@@ -16,6 +16,7 @@ public class Professor  extends Pessoa{
         this.siape = siape;
         this.area = area;
         this.formacao = formacao;
+        this.setRole(com.ifsp.anajuliaferreira.service.PessoaRole.PROFESSOR);
     }
 
     @Column(name = "siape")
