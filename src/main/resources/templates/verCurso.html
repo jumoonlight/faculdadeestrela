@@ -34,15 +34,15 @@
         </thead>
         <tbody>
             <tr th:each="curso : ${cursos}">
-                <td><span th:text="${curso.id}"></span></td>
+                <td><span th:text="${curso.idCurso}"></span></td>
                 <td th:text="${curso.nome}"></td>
                 <td th:text="${curso.desc}"></td>
                 <td th:text="${curso.turno}"></td>
                 <td th:text="${curso.numeroSemestres}"></td>
                 <td>
-                      <a th:href="@{/curso/{id}(id=${curso.id})}" class="btn-tabela btn-ver">Ver Detalhes</a>
-                      <a th:href="@{/curso/{id}/editar(id=${curso.id})}" class="btn-tabela btn-editar">Editar</a>
-                      <a th:href="@{/curso/{id}/deletar(id=${curso.id})}" class="detalhes deletar">Remover</a>
+                      <a th:href="@{/curso/{id}(id=${curso.idCurso})}" class="btn-tabela btn-ver">Ver Detalhes</a>
+                      <a th:href="@{/curso/{id}/editar(id=${curso.idCurso})}" class="btn-tabela btn-editar">Editar</a>
+                      <a th:href="@{/curso/{id}/deletar(id=${curso.idCurso})}" class="detalhes deletar">Remover</a>
                 </td>
              </tr>
         </tbody>

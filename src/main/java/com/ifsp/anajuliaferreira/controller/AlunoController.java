@@ -40,7 +40,7 @@ public class AlunoController {
         model.addAttribute("alunos", alunos);
         model.addAttribute("cursos", cursoRepository.findAll());
         model.addAttribute("idCursoFiltro", idCurso);
-        return "formListarAluno";
+        return "verALuno";
     }
 
     @GetMapping("/cadastrar")
@@ -152,7 +152,7 @@ public class AlunoController {
         model.addAttribute("aluno", aluno);
         model.addAttribute("cursos", cursoRepository.findAll());
         model.addAttribute("ufs", UF.values());
-        return "formCadAluno";
+        return "editarAluno";
     }
 
     @GetMapping("/excluir/{id}")

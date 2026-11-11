@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="conteudo">
-          <form method="post" th:action="@{/cadastrarAluno}">
+          <form method="post" th:object="${aluno}" th:action="@{/aluno/cadastrar}" >
              <h1>Cadastro de Aluno</h1>
              <div th:if="${erro}" style="color: red; font-weight: bold;">
                 <span th:text="${erro}"></span>
@@ -68,7 +68,15 @@
              <label>Ano de ingresso: </label>
              <input type="number" th:name="ano_ingresso" required>
              <label>Ano de saída: </label>
-             <input type="number" th:name="ano_saida" required>
+             <input type="number" th:name="ano_saida">
+          
+                    <label>Curso</label>
+                    <select class="form-select"  th:field="*{idCurso}" required>
+                        <option value="">Selecione</option>
+                        <option th:each="curso : ${cursos}" th:value="${curso.idCurso}" th:text="${curso.nome}"></option>
+                    </select>
+
+                </div>
              <button type="submit">Cadastrar Aluno</button>
              </form>
         </div>
