@@ -2,6 +2,8 @@ package com.ifsp.anajuliaferreira.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import com.ifsp.anajuliaferreira.model.Professor;
 import jakarta.persistence.EntityManager;
@@ -19,7 +21,7 @@ public class ProfessorRepository {
         try {
             String comando;
             Query query;
-            comando = "INSERT INTO pessoa(nome, cpf, data_nasc, email, telefone, endereco, cidade, cep, uf, login, password) VALUES (:nome, :cpf, :data_nasc, :email, :telefone, :endereco, :cidade, :cep, :uf, :login, :password)";
+            comando = "INSERT INTO pessoa(nome, cpf, data_nasc, email, telefone, endereco, cidade, cep, uf, password) VALUES (:nome, :cpf, :data_nasc, :email, :telefone, :endereco, :cidade, :cep, :uf,  :password)";
             query = em.createNativeQuery(comando);
             query.setParameter("nome", professor.getNome());
             query.setParameter("cpf", professor.getCpf());
@@ -30,7 +32,6 @@ public class ProfessorRepository {
             query.setParameter("cidade", professor.getCidade());
             query.setParameter("cep", professor.getCep());
             query.setParameter("uf", professor.getUf());
-            query.setParameter("login", professor.getLogin());
             query.setParameter("password", professor.getPassword());
             query.executeUpdate();
 
@@ -70,7 +71,7 @@ public class ProfessorRepository {
      public void update(Professor professor){
          try{
             String sql;
-            sql = "UPDATE pessoa SET id_pessoa = :id_pessoa, nome = :nome, cpf = :cpf, data_nasc = :data_nasc, email = :email, telefone = :telefone, endereco = :endereco, cidade = :cidade, cep = :cep, uf = :uf, login = :login, password = :password WHERE id_pessoa = :id_pessoa";
+            sql = "UPDATE pessoa SET id_pessoa = :id_pessoa, nome = :nome, cpf = :cpf, data_nasc = :data_nasc, email = :email, telefone = :telefone, endereco = :endereco, cidade = :cidade, cep = :cep, uf = :uf, password = :password WHERE id_pessoa = :id_pessoa";
             Query query =em.createNativeQuery(sql);
             query.setParameter("id_pessoa", professor.getId());
             query.setParameter("nome", professor.getNome());
@@ -82,7 +83,6 @@ public class ProfessorRepository {
             query.setParameter("cidade", professor.getCidade());
             query.setParameter("cep", professor.getCep());
             query.setParameter("uf", professor.getUf());
-            query.setParameter("login", professor.getLogin());
             query.setParameter("password", professor.getPassword());
             sql= "UPDATE professor SET id_pessoa = :id_pessoa, siape = :siape, area = :area, formacao = :formacao  WHERE id_pessoa = :id_pessoa";
             query =em.createNativeQuery(sql);

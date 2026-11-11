@@ -10,39 +10,20 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "admin")
-    public class Admin{
+    public class Admin extends Pessoa{
         public Admin() {
         }
-        public Admin(String login, String password) {
-            this.login = login;
-            this.password = password;
-            this.role = PessoaRole.ADMIN;
+        public Admin(PessoaRole role) {
+            this.role = role;
         }
         @Enumerated (EnumType.STRING)
         @Column(name = "role")
-        private PessoaRole role;
+        private PessoaRole role  = PessoaRole.ADMIN;
         public PessoaRole getRole() {
             return role;
         }
         public void setRole(PessoaRole role) {
             this.role = role;
-        }
-        @Column (name = "login")
-        private String login;
-        public String getLogin() {
-            return login;
-        }
-        public void setLogin(String login) {
-            this.login = login;
-        }
-
-        @Column (name = "password")
-        private String password;
-        public String getPassword() {
-            return password;
-        }
-        public void setPassword(String password) {
-            this.password = password;
         }
     }
 

@@ -1,7 +1,11 @@
 package com.ifsp.anajuliaferreira.model;
+import com.ifsp.anajuliaferreira.service.PessoaRole;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
@@ -13,11 +17,20 @@ public class Aluno extends Pessoa{
 
     public Aluno() {
     }
-    public Aluno(String prontuario, int ano_ingresso, int ano_saida) {
+    public Aluno(String prontuario, int ano_ingresso, int ano_saida, PessoaRole role) {
         this.prontuario = prontuario;
         this.ano_ingresso = ano_ingresso;
         this.ano_saida = ano_saida;
-        this.setRole(com.ifsp.anajuliaferreira.service.PessoaRole.ALUNO);
+        this.role = role;
+    }
+    @Enumerated (EnumType.STRING)
+    @Column(name = "role")
+    private PessoaRole role = PessoaRole.ALUNO;
+    public PessoaRole getRole() {
+        return role;
+    }
+    public void setRole(PessoaRole role) {
+        this.role = role;
     }
 
     @Column(name = "prontuario")

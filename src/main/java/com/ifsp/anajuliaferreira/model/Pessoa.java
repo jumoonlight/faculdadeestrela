@@ -27,7 +27,7 @@ public class Pessoa implements UserDetails {
     public Pessoa() {
     }
     public Pessoa(String nome, String cpf, Date dataNasc, String email, String telefone, String endereco, String cidade,
-        String cep, String uf,  String login, String password) {
+        String cep, String uf, String password) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNasc = dataNasc;
@@ -37,7 +37,6 @@ public class Pessoa implements UserDetails {
         this.cidade = cidade;
         this.cep = cep;
         this.uf = uf;
-        this.login = login;
         this.password = password;
     }
 
@@ -88,14 +87,6 @@ public class Pessoa implements UserDetails {
         this.dataNasc = dataNasc;
     }
 
-    @Column(name = "email")
-    private String email;
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     @Column(name = "telefone")
     private String telefone;
@@ -141,19 +132,16 @@ public class Pessoa implements UserDetails {
     public void setUf(String uf) {
         this.uf = uf;
     }
-    @Column(name = "login")
-    private String login;
-    public String getLogin() {
-        return login;
+     @Column(name = "email")
+    private String email;
+    public String getEmail() {
+        return email;
     }
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String email) {
+        this.email = email;
     }
     @Column(name = "password")
     private String password;
-    public String getPassword() {
-        return password;
-    }
     public void setPassword(String password) {
         this.password = password;
     }
@@ -173,7 +161,12 @@ public class Pessoa implements UserDetails {
     }
     @Override 
     public String getUsername() {
-        return login;
+        return email;
     }
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
 
 }
