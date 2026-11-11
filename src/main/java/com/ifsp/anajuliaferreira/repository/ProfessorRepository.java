@@ -70,7 +70,7 @@ public class ProfessorRepository {
             String sql;
             sql = "UPDATE pessoa SET id_pessoa = :id_pessoa, nome = :nome, cpf = :cpf, data_nasc = :data_nasc, email = :email, telefone = :telefone, endereco = :endereco, cidade = :cidade, cep = :cep, uf = :uf  WHERE id_pessoa = :id_pessoa";
             Query query =em.createNativeQuery(sql);
-            query.setParameter("id_pessoa", professor.getId());
+            query.setParameter("id_pessoa", professor.getIdPessoa());
             query.setParameter("nome", professor.getNome());
             query.setParameter("cpf", professor.getCpf());
             query.setParameter("data_nasc", professor.getDataNasc());
@@ -82,7 +82,7 @@ public class ProfessorRepository {
             query.setParameter("uf", professor.getUf());
             sql= "UPDATE professor SET id_pessoa = :id_pessoa, siape = :siape, area = :area, formacao = :formacao  WHERE id_pessoa = :id_pessoa";
             query =em.createNativeQuery(sql);
-            query.setParameter("id_pessoa", professor.getId());
+            query.setParameter("id_pessoa", professor.getIdPessoa());
             query.setParameter("siape", professor.getSiape());
             query.setParameter("area", professor.getArea());
             query.setParameter("formacao", professor.getFormacao());

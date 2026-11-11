@@ -1,151 +1,168 @@
 package com.ifsp.anajuliaferreira.controller;
 
-import java.sql.Date;
-import java.util.List;
 
+import org.hibernate.type.descriptor.jdbc.LongNVarcharJdbcType;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.ifsp.anajuliaferreira.model.Aluno;
+import com.ifsp.anajuliaferreira.model.UF;
 import com.ifsp.anajuliaferreira.repository.AlunoRepository;
+import com.ifsp.anajuliaferreira.repository.CursoRepository;
 import com.ifsp.anajuliaferreira.util.Util;
-import org.springframework.dao.DataIntegrityViolationException;
+import static com.ifsp.anajuliaferreira.util.Util.*;
+
+import java.util.List;
 
 @Controller
+@RequestMapping("/aluno")
 public class AlunoController {
+
+
     @Autowired
     private AlunoRepository alunoRepository;
-    @GetMapping("/formularioAluno")
-    public String aluno(){
-        return "alunoFormulario";
-    }
-    @PostMapping("/cadastrarAluno")
-    public String cadastrarAluno(@RequestParam String nome, 
-         @RequestParam String cpf,
-         @RequestParam Date dataNascimento, 
-         @RequestParam String email, 
-         @RequestParam String telefone, 
-         @RequestParam String endereco,
-         @RequestParam String cidade, 
-         @RequestParam String cep,
-         @RequestParam String uf,
-         @RequestParam String pront,
-         @RequestParam int ano_ingresso, 
-         @RequestParam int ano_saida,
-         RedirectAttributes redirectAttributes){
-            Aluno aluno = new Aluno();
-            aluno.setNome(nome);
-            aluno.setCpf(cpf);
-            aluno.setDataNasc(dataNascimento);
-            aluno.setEmail(email);
-            aluno.setTelefone(telefone);
-            aluno.setEndereco(endereco);
-            aluno.setCidade(cidade);
-            aluno.setCep(cep);
-            aluno.setUf(uf);
-            aluno.setProntuario(pront);
-            aluno.setAno_ingresso(ano_ingresso);
-            aluno.setAno_saida(ano_saida);
-             if (!Util.validarCPF(cpf)) {
-                redirectAttributes.addFlashAttribute("erro", "CPF inválido!");
-                return "redirect:/formularioAluno";
-            } else if (!Util.validarNome(nome)){
-                 redirectAttributes.addFlashAttribute("erro", "Nome inválido!");
-                 return "redirect:/formularioAluno";
-            } else if (!Util.validarTelefone(telefone)){
-                 redirectAttributes.addFlashAttribute("erro", "Telefone inválido");
-                 return "redirect:/formularioAluno";
-            } else if (!Util.validarEmail(email)){
-                 redirectAttributes.addFlashAttribute("erro", "Email inválido");
-                 return "redirect:/formularioAluno";
-            } else if (alunoRepository.findByCpf(cpf) != null) {
-                 redirectAttributes.addFlashAttribute("erro", "CPF já cadastrado!");
-                 return "redirect:/formularioAluno";
-            } else if (alunoRepository.findByEmail(email) != null) {
-                 redirectAttributes.addFlashAttribute("erro", "Email já cadastrado!");
-                 return "redirect:/formularioAluno";
-            } else if (alunoRepository.findByProntuario(pront) != null) {
-                 redirectAttributes.addFlashAttribute("erro", "Prontuário já cadastrado!");
-                 return "redirect:/formularioAluno";
-            }else{
-                alunoRepository.insert(aluno);
-                return "redirect:/listarAlunos";
-            }
-    }
-    @GetMapping("/listarAlunos")
-    public String list(Model model){
-        List<Aluno> alunos = alunoRepository.findAll();
+
+    @Autowired
+    private CursoRepository cursoRepository;
+
+    @GetMapping("/listar")
+    public String listar(@RequestParam(value = "idCurso", required = false) Integer idCurso, Model model) {
+        List<Aluno> alunos;
+        if (idCurso != null && idCurso > 0) {
+            alunos = alunoRepository.findByCurso(idCurso);
+        } else {
+            alunos = alunoRepository.findAll();
+        }
         model.addAttribute("alunos", alunos);
-        return "verAluno";
+        model.addAttribute("cursos", cursoRepository.findAll());
+        model.addAttribute("idCursoFiltro", idCurso);
+        return "formListarAluno";
     }
-    @GetMapping("/aluno/{id}")
-    public String aluno(@PathVariable long id, Model model){
-        Aluno aluno = alunoRepository.findByID(id);
-        model.addAttribute("aluno", aluno);
-        return "detalhesAluno";
+
+    @GetMapping("/cadastrar")
+    public String novo(Model model, RedirectAttributes redirect) {
+         if (cursoRepository.findAll().isEmpty() || cursoRepository.findAll() == null ) {
+              redirect.addFlashAttribute("erro", "Não há nenhum curso cadastrado para vincular um aluno");
+              return  "redirect:/aluno/listar";
+        }else{
+              model.addAttribute("aluno", new Aluno());
+            model.addAttribute("cursos", cursoRepository.findAll());
+            model.addAttribute("ufs", UF.values());
+            return "alunoFormulario";
+        }
+      
     }
-    @GetMapping("/aluno/{id}/editar")
-    public String editarAluno(@PathVariable long id, Model model){
-        Aluno aluno = alunoRepository.findByID(id);
-        model.addAttribute("aluno", aluno);
-        return "editarAluno";
-    }
-    @PostMapping("/atualizarAluno")
-    public String atualizarAluno(@RequestParam long id,@RequestParam String nome, @RequestParam String cpf, @RequestParam Date dataNascimento, @RequestParam String email, @RequestParam String telefone, @RequestParam String endereco, @RequestParam String cidade, @RequestParam String cep, @RequestParam String uf, @RequestParam String pront, @RequestParam int ano_ingresso, @RequestParam int ano_saida, RedirectAttributes redirectAttributes){
-        Aluno aluno = alunoRepository.findByID(id);
+
+    @PostMapping("/salvar")
+    public String salvar(
+            @RequestParam(value = "idAluno", required = false) Long idAluno,
+            @RequestParam("nome") String nome,
+            @RequestParam("idade") int idade,
+            @RequestParam("email") String email,
+            @RequestParam("telefone") String telefone,
+            @RequestParam("endereco") String endereco,
+            @RequestParam("cidade") String cidade,
+            @RequestParam("uf") String uf,
+            @RequestParam("cpf") String cpf,
+            @RequestParam("prontuario") String prontuario,
+            @RequestParam("nomeMae") String nomeMae,
+            @RequestParam("nomePai") String nomePai,
+            @RequestParam("contatoResponsavel") String contatoResponsavel,
+            @RequestParam("anoIngresso") int anoIngresso,
+            @RequestParam(value = "anoSaida", required = false) Integer anoSaida,
+            @RequestParam("idCurso") Integer idCurso,
+            RedirectAttributes redirect) {
+
+        
+
+        if (!Util.validarCPF(cpf)) {
+            redirect.addFlashAttribute("erro", CPF_INVALIDO);
+            return "redirect:/aluno/cadastrar";
+        }
+
+        if (!Util.validarEmail(email)) {
+            redirect.addFlashAttribute("erro", EMAIL_INVALIDO);
+            return "redirect:/aluno/cadastrar";
+        }
+
+        if (!Util.validarTelefone(telefone)) {
+            redirect.addFlashAttribute("erro", TELEFONE_INVALIDO);
+            return "redirect:/aluno/cadastrar";
+        }
+
+        Long idIgnorar = (idAluno != null && idAluno > 0) ? idAluno : null;
+        if (alunoRepository.existeEmail(email, idIgnorar)) {
+            redirect.addFlashAttribute("erro", EMAIL_DUPLICADO);
+            return "redirect:/aluno/cadastrar";
+        }
+
+        if (alunoRepository.existeCpf(cpf, idIgnorar)) {
+            redirect.addFlashAttribute("erro", CPF_DUPLICADO);
+            return "redirect:/aluno/cadastrar";
+        }
+
+        if (alunoRepository.existeProntuario(prontuario, idIgnorar)) {
+            redirect.addFlashAttribute("erro", PRONTUARIO_DUPLICADO);
+            return "redirect:/aluno/cadastrar";
+        }
+
+        
+        Aluno aluno = new Aluno();
+        if (idAluno != null && idAluno > 0) {
+            aluno.setIdAluno(idAluno);
+        }
         aluno.setNome(nome);
-        aluno.setCpf(cpf);
-        aluno.setDataNasc(dataNascimento);
         aluno.setEmail(email);
         aluno.setTelefone(telefone);
         aluno.setEndereco(endereco);
         aluno.setCidade(cidade);
-        aluno.setCep(cep);
         aluno.setUf(uf);
-        aluno.setProntuario(pront);
-        aluno.setAno_ingresso(ano_ingresso);
-        aluno.setAno_saida(ano_saida);
-        if (!Util.validarCPF(cpf)) {
-                redirectAttributes.addFlashAttribute("erro", "CPF inválido!");
-                return "redirect:/formularioAluno";
-            } else if (!Util.validarNome(nome)){
-                 redirectAttributes.addFlashAttribute("erro", "Nome inválido!");
-                 return "redirect:/formularioAluno";
-            } else if (!Util.validarTelefone(telefone)){
-                 redirectAttributes.addFlashAttribute("erro", "Telefone inválido");
-                 return "redirect:/formularioAluno";
-            } else if (!Util.validarEmail(email)){
-                 redirectAttributes.addFlashAttribute("erro", "Email inválido");
-                 return "redirect:/formularioAluno";
-            } else if (alunoRepository.findByCpfUpdate(cpf, id) != null) {
-                 redirectAttributes.addFlashAttribute("erro", "CPF já cadastrado!");
-                 return "redirect:/formularioAluno";
-            } else if(alunoRepository.findByEmailUpdate(email, id) != null) {
-                 redirectAttributes.addFlashAttribute("erro", "Email já cadastrado!");
-                 return "redirect:/formularioAluno";
-            } else if(alunoRepository.findByProntuarioUpdate(pront, id) != null) {
-                 redirectAttributes.addFlashAttribute("erro", "Prontuário já cadastrado!");
-                 return "redirect:/formularioAluno"; 
-            } else{
-                 alunoRepository.update(aluno);
-                 return "redirect:/listarAlunos";
-            }
-    }
-    @GetMapping("/aluno/{id}/deletar")
-    public String excluirAluno(@PathVariable long id, RedirectAttributes redirectAttributes){
-        try{
-            alunoRepository.deleteById(id);
-        } catch (DataIntegrityViolationException e) {
-            e.printStackTrace();
-            redirectAttributes.addFlashAttribute("erro", "Não é possível excluir o aluno pois ele tem uma matrícula. Por favor, exclua a matrícula antes de excluir o aluno.");
-            return "redirect:/listarAlunos";
+        aluno.setCpf(cpf);
+        aluno.setProntuario(prontuario);
+        aluno.setNomeMae(nomeMae);
+        aluno.setNomePai(nomePai);
+        aluno.setContatoResponsavel(contatoResponsavel);
+        aluno.setAnoIngresso(anoIngresso);
+        aluno.setAnoSaida(anoSaida);
+        aluno.setIdCurso(idCurso);
+
+        boolean ok;
+        if (idAluno == null || idAluno == 0) {
+            ok = alunoRepository.insert(aluno);
+        } else {
+            ok = alunoRepository.update(aluno);
         }
-        return "redirect:/listarAlunos";
-    }
+
+        if (!ok) {
+            redirect.addFlashAttribute("erro", ERRO_SALVAR);
+            return "redirect:/aluno/cadastrar";
+        }
+
+        redirect.addFlashAttribute("mensagem", SUCESSO_SALVO);
+        return "redirect:/aluno/listar";
     }
 
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable Long id, Model model) {
+        Aluno aluno = alunoRepository.findByID(id);
+        model.addAttribute("aluno", aluno);
+        model.addAttribute("cursos", cursoRepository.findAll());
+        model.addAttribute("ufs", UF.values());
+        return "formCadAluno";
+    }
+
+    @GetMapping("/excluir/{id}")
+    public String excluir(@PathVariable int id, RedirectAttributes redirect) {
+        try {
+            alunoRepository.delete(id);
+            redirect.addFlashAttribute("mensagem", SUCESSO_EXCLUIDO);
+        } catch (Exception e) {
+            redirect.addFlashAttribute("erro", "Erro ao excluir aluno: " + e.getMessage());
+        }
+        return "redirect:/aluno/listar";
+    }
+}

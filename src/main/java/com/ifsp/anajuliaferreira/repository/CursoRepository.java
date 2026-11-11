@@ -44,7 +44,7 @@ public class CursoRepository {
      public void update(Curso curso){
         String sql = "UPDATE cursos SET nome = :nome, descricao = :descricao, turno = :turno, semestres = :semestres WHERE id_curso = :id_curso";
         Query query =em.createNativeQuery(sql);
-        query.setParameter("id_curso", curso.getId());
+        query.setParameter("id_curso", curso.getIdCurso());
         query.setParameter("nome", curso.getNome());
         query.setParameter("descricao", curso.getDesc());
         query.setParameter("turno", curso.getTurno());

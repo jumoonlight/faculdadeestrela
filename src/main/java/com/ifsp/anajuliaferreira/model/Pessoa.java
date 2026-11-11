@@ -32,10 +32,10 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pessoa")
     private Long id;    
-    public Long getId() {
+    public Long getIdPessoa() {
         return id;
     }
-    public void setId(Long id) {
+    public void setIdPessoa(Long id) {
         this.id = id;
     }
 

@@ -26,10 +26,10 @@ public class Curso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_curso")
     private int id;
-    public int getId() {
+    public int getIdCurso() {
         return id;
     }
-    public void setId(int id) {
+    public void setIdCurso(int id) {
         this.id = id;
     }
 

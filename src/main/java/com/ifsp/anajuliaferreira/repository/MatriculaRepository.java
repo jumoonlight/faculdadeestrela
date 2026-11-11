@@ -20,7 +20,7 @@ public class MatriculaRepository {
     public void save (Matricula matricula){
         String sql = "INSERT INTO matricula (id_aluno, id_oferta_disc) VALUES (:id_aluno , :id_oferta_disc)";
         Query query = em.createNativeQuery (sql);
-        query.setParameter("id_aluno", matricula.getAluno().getId());
+        query.setParameter("id_aluno", matricula.getAluno().getIdPessoa());
         query.setParameter("id_oferta_disc", matricula.getOfertaDisc().getId());
         query.executeUpdate();
     }
@@ -44,7 +44,7 @@ public class MatriculaRepository {
         String sql = "UPDATE matricula SET id_aluno = :id_aluno, id_oferta_disc = :id_oferta_disc  WHERE id_matricula = :id_matricula";
         Query query =em.createNativeQuery(sql);
         query.setParameter("id_matricula", matricula.getId());
-        query.setParameter("id_aluno", matricula.getAluno().getId());
+        query.setParameter("id_aluno", matricula.getAluno().getIdPessoa());
         query.setParameter("id_oferta_disc", matricula.getOfertaDisc().getId());
         query.executeUpdate();
     }

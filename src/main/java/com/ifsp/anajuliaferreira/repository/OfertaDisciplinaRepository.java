@@ -19,8 +19,8 @@ public class OfertaDisciplinaRepository {
     public void save (OfertaDisciplina ofertaDisc){
         String sql = "INSERT INTO oferta_disciplina(id_professor, id_curso, id_disc ) VALUES (:id_professor , :id_curso, :id_disc)";
         Query query = em.createNativeQuery (sql);
-        query.setParameter("id_professor", ofertaDisc.getProfessor().getId());
-        query.setParameter("id_curso", ofertaDisc.getCurso().getId());
+        query.setParameter("id_professor", ofertaDisc.getProfessor().getIdPessoa());
+        query.setParameter("id_curso", ofertaDisc.getCurso().getIdCurso());
         query.setParameter("id_disc", ofertaDisc.getDisciplina().getId());
         query.executeUpdate();
     }
@@ -44,8 +44,8 @@ public class OfertaDisciplinaRepository {
         String sql = "UPDATE oferta_disciplina SET id_professor = :id_professor, id_curso = :id_curso, id_disc = :id_disc  WHERE id_oferta_disc = :id_oferta_disc";
         Query query =em.createNativeQuery(sql);
         query.setParameter("id_oferta_disc", ofertaDisciplina.getId());
-        query.setParameter("id_professor", ofertaDisciplina.getProfessor().getId());
-        query.setParameter("id_curso", ofertaDisciplina.getCurso().getId());
+        query.setParameter("id_professor", ofertaDisciplina.getProfessor().getIdPessoa());
+        query.setParameter("id_curso", ofertaDisciplina.getCurso().getIdCurso());
         query.setParameter("id_disc", ofertaDisciplina.getDisciplina().getId());
         query.executeUpdate();
     }

@@ -1,6 +1,19 @@
 package com.ifsp.anajuliaferreira.util;
 
 public class Util{
+
+     
+    public static final String CPF_INVALIDO = "CPF inválido.";
+    public static final String EMAIL_INVALIDO = "E-mail inválido.";
+    public static final String EMAIL_DUPLICADO = "Este e-mail já está cadastrado para outra pessoa.";
+    public static final String CPF_DUPLICADO = "Este CPF já está cadastrado.";
+    public static final String PRONTUARIO_DUPLICADO = "Este prontuário já está cadastrado para outro aluno.";
+    public static final String SIAPE_DUPLICADO = "Este SIAPE já está cadastrado para outro professor.";
+    public static final String TELEFONE_INVALIDO = "Telefone inválido. Use formato (XX) XXXXX-XXXX ou (XX) XXXX-XXXX.";
+    public static final String SUCESSO_SALVO = "Registro salvo com sucesso!";
+    public static final String SUCESSO_EXCLUIDO = "Registro excluído com sucesso!";
+    public static final String ERRO_SALVAR = "Erro ao salvar. Verifique os dados.";
+    
     public static boolean validarCPF(String cpf) {
         cpf = cpf.replaceAll("\\D", "");
 

@@ -22,7 +22,7 @@ public class EmprestimoRepository {
         Query query = em.createNativeQuery (sql);
         query.setParameter("data_emprestimo", emprestimo.getDataEmprestimo());
         query.setParameter("data_devolucao", emprestimo.getDataDevolucao());
-        query.setParameter("id_aluno", emprestimo.getAluno().getId());
+        query.setParameter("id_aluno", emprestimo.getAluno().getIdPessoa());
         query.setParameter("id_livro", emprestimo.getLivro().getId());
         query.executeUpdate();
     }
@@ -48,7 +48,7 @@ public class EmprestimoRepository {
         query.setParameter("id_emprestimo", emprestimo.getId());
         query.setParameter("data_emprestimo", emprestimo.getDataEmprestimo());
         query.setParameter("data_devolucao", emprestimo.getDataDevolucao());
-        query.setParameter("id_aluno", emprestimo.getAluno().getId());
+        query.setParameter("id_aluno", emprestimo.getAluno().getIdPessoa());
         query.setParameter("id_livro", emprestimo.getLivro().getId());
         query.executeUpdate();
     }
