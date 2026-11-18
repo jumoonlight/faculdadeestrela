@@ -21,24 +21,27 @@
         <h1>Cadastros</h1>
         <div class="bloco">
             <div class="conteudo-um">
+                <h2>Aluno</h2>
+                <img src="https://files.catbox.moe/nblun5.png" alt="Aluno" width="200">
+                <div class="botoes">
+                      <form method="get" th:action="@{/listarAlunos}">
+                            <button>Consultar Alunos</button>
+                      </form>
+                </div>
+            </div>
+            <div class="conteudo-um">
                 <h2>Matrícula</h2>
                 <img src="https://files.catbox.moe/gv1jtj.jpg" alt="Matrícula" width="200">
                 <div class="botoes">
-                    <form method="get" th:action="@{/formularioMatricula}">
-                            <button>Matricular-se</button>
-                      </form>
                       <form method="get" th:action="@{/listarMatriculas}">
                             <button>Consultar Matrículas</button>
                       </form>
                 </div>
             </div>
             <div class="conteudo-um">
-                 <h2>Livro</h2>
+                <h2>Livro</h2>
                 <img src="https://files.catbox.moe/n71yjg.webp" alt="Livro" width="200">
                 <div class="botoes">
-                    <form method="get" th:action="@{/formularioLivro}">
-                            <button>Cadastrar Livros</button>
-                      </form>
                       <form method="get" th:action="@{/listarLivros}">
                             <button>Consultar Livros</button>
                       </form>
@@ -50,9 +53,6 @@
                 <h2>Curso</h2>
                 <img src="https://files.catbox.moe/2yt0x4.png" alt="Curso" width="200">
                 <div class="botoes">
-                    <form method="get" th:action="@{/formularioCurso}">
-                            <button>Cadastrar Cursos</button>
-                      </form>
                       <form method="get" th:action="@{/listarCursos}">
                             <button>Consultar Cursos</button>
                       </form>
@@ -62,9 +62,6 @@
                 <h2>Disciplina</h2>
                 <img src="https://files.catbox.moe/pb3ddk.png" alt="Disciplina" width="200">
                 <div class="botoes">
-                    <form method="get" th:action="@{/formularioDisciplina}">
-                            <button>Cadastrar Disciplinas</button>
-                      </form>
                       <form method="get" th:action="@{/listarDisciplinas}">
                             <button>Consultar Disciplinas</button>
                       </form>
@@ -74,9 +71,6 @@
                  <h2>Ofertas de Disciplinas</h2>
                  <img src="https://files.catbox.moe/8ms92v.jpg" alt="Ofertas Disciplinas" width="170">
                  <div class="botoes">
-                    <form method="get" th:action="@{/formularioOfertaDisciplina}">
-                            <button>Cadastrar Ofertas</button>
-                      </form>
                       <form method="get" th:action="@{/listarOfertasDisciplina}">
                             <button>Consultar Ofertas</button>
                       </form>
@@ -90,7 +84,7 @@
                             <button>Cadastrar Empréstimos</button>
                       </form>
                       <form method="get" th:action="@{/listarEmprestimos}">
-                            <button>Consultar Empréstimos</button>
+                            <button>Consultar os empréstimos feitos</button>
                       </form>
                  </div>
             </div>
