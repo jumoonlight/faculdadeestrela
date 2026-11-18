@@ -3,12 +3,15 @@ package com.ifsp.anajuliaferreira.repository;
 import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Repository;
+
 import com.ifsp.anajuliaferreira.model.Admin;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 
+@Repository
 public class AdminRepository {
     @PersistenceContext
     private EntityManager em;

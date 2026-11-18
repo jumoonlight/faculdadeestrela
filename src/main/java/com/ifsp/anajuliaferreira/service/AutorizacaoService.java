@@ -17,13 +17,13 @@ public class AutorizacaoService implements UserDetailsService{
     private AlunoRepository alunoRepository;
 
     @Autowired 
-    private ProfessorRepository professorService;
+    private ProfessorRepository professorRepository;
 
     @Autowired 
-    private AdminRepository adminService;
+    private AdminRepository adminRepository;
 
     @Autowired 
-    private BibliotecarioRepository bibliotecarioService;
+    private BibliotecarioRepository bibliotecarioRepository;
 
     @Override 
     public UserDetails loadUserByUsername(String username)
@@ -36,7 +36,7 @@ public class AutorizacaoService implements UserDetailsService{
                     .roles("ALUNO")
                     .build();
             }
-            UserDetails professor = professorService.findByEmail(username);
+            UserDetails professor = professorRepository.findByEmail(username);
             if (professor != null) {
                 return User.builder()
                     .username(professor.getUsername())
@@ -44,7 +44,7 @@ public class AutorizacaoService implements UserDetailsService{
                     .roles("PROFESSOR")
                     .build();
             }
-            UserDetails admin = adminService.findByEmail(username);
+            UserDetails admin = adminRepository.findByEmail(username);
             if (admin != null) {
                 return User.builder()
                     .username(admin.getUsername())
@@ -52,7 +52,7 @@ public class AutorizacaoService implements UserDetailsService{
                     .roles("ADMIN")
                     .build();
             }
-            UserDetails bibliotecario = bibliotecarioService.findByEmail(username);
+            UserDetails bibliotecario = bibliotecarioRepository.findByEmail(username);
             if (bibliotecario != null) {
                 return User.builder()
                     .username(bibliotecario.getUsername())
