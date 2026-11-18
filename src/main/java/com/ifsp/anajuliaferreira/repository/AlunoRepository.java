@@ -2,6 +2,7 @@ package com.ifsp.anajuliaferreira.repository;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import com.ifsp.anajuliaferreira.model.Aluno;
 import jakarta.persistence.EntityManager;
@@ -131,6 +132,7 @@ public class AlunoRepository {
             return null;
         }
     }
+
     @Transactional
     public Aluno findByEmail(String email) {
         try {
@@ -143,6 +145,10 @@ public class AlunoRepository {
         } catch (Exception e) {
             return null;
         }
+    }
+    @Transactional 
+    public UserDetails findByUsername(String username) {
+        return findByEmail(username);
     }
     public Aluno findByEmailUpdate(String email, Long id_pessoa) {
         try {

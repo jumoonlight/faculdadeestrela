@@ -1,7 +1,5 @@
 package com.ifsp.anajuliaferreira.model;
 
-import org.springframework.boot.security.autoconfigure.SecurityProperties.User;
-import org.springframework.security.core.parameters.P;
 
 import com.ifsp.anajuliaferreira.service.PessoaRole;
 

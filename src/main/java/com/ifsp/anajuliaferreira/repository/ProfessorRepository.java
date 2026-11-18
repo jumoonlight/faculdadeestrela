@@ -2,7 +2,6 @@ package com.ifsp.anajuliaferreira.repository;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import com.ifsp.anajuliaferreira.model.Professor;
@@ -145,6 +144,10 @@ public class ProfessorRepository {
         } catch (Exception e) {
             return null;
         }
+    }
+    @Transactional 
+    public UserDetails findByUsername(String username) {
+        return findByEmail(username);
     }
     @Transactional
     public Professor findByEmailUpdate(String email, Long id_pessoa) {
