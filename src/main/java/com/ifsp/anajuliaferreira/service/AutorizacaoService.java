@@ -6,11 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import com.ifsp.anajuliaferreira.model.Admin;
-import com.ifsp.anajuliaferreira.model.Aluno;
-import com.ifsp.anajuliaferreira.model.Bibliotecario;
-import com.ifsp.anajuliaferreira.model.Professor;
 import com.ifsp.anajuliaferreira.repository.AdminRepository;
 import com.ifsp.anajuliaferreira.repository.AlunoRepository;
 import com.ifsp.anajuliaferreira.repository.BibliotecarioRepository;

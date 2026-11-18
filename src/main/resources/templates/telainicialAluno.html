@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/telaInicial.css}">
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <title>Tela Inicial</title>
+</head>
+<body>
+    <header>
+        <img src="https://files.catbox.moe/c5zojs.png" alt="Logo" width="200">
+    </header>
+    <div class="banner">
+        <img src="https://files.catbox.moe/bhbx3t.png" alt="Banner" width="100%">
+    </div>
+    <article>
+        <h1>Cadastros</h1>
+        <div class="bloco">
+            <div class="conteudo-um">
+                 <h2>Matrícula</h2>
+                <img src="https://files.catbox.moe/gv1jtj.jpg" alt="Matrícula" width="200">
+                <div class="botoes">
+                    <form method="get" th:action="@{/formularioMatricula}">
+                            <button>Matricular-se</button>
+                      </form>
+                      <form method="get" th:action="@{/listarMatriculas}">
+                            <button>Consultar Matrículas</button>
+                      </form>
+                </div>
+            </div>
+        <div class="bloco">
+            <div class="conteudo-dois">
+                 <h2>Empréstimos</h2>
+                 <img src="https://files.catbox.moe/s7hmv4.png" alt="Emprestimo" width="195">
+                 <div class="botoes">
+                    <form method="get" th:action="@{/formularioEmprestimo}">
+                            <button>Cadastrar Empréstimos</button>
+                      </form>
+                      <form method="get" th:action="@{/listarEmprestimos}">
+                            <button>Consultar Empréstimos</button>
+                      </form>
+                 </div>
+            </div>
+        </div>
+    </article> 
+    <footer>
+        <p>Faculdade Estrela, fazendo o melhor por você.</p>
+    </footer>
+</body>
+</html>
