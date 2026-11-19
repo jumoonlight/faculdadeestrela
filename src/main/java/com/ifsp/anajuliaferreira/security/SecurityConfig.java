@@ -8,6 +8,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
 @Configuration
@@ -72,11 +73,11 @@ public class SecurityConfig {
                             "/professor/*",
                             "/atualizarLivro").hasAnyRole("ADMIN","BIBLIOTECARIO")
                           .requestMatchers("/listarAlunos",
-                            "aluno/*").hasAnyRole("ADMIN","BIBLIOTECARIO","PROFESSOR")
+                            "/aluno/*").hasAnyRole("ADMIN","BIBLIOTECARIO","PROFESSOR")
                           .requestMatchers("/listarCursos",
-                            "curso/*",
+                            "/curso/*",
                             "/listarMatriculas",
-                            "matricula/*",
+                            "/matricula/*",
                             "/listarOfertasDisciplina",
                             "/oferta/*").hasAnyRole("ADMIN","ALUNO","PROFESSOR")
                           .requestMatchers("/formularioEmprestimo",
@@ -90,12 +91,12 @@ public class SecurityConfig {
                             "/referencia/*",
                             "/listarDisciplinas",
                             "/disciplina/*"
-                          ).hasAllRoles("ADMIN","ALUNO","PROFESSOR","BIBLIOTECARIO")
+                          ).hasAnyRole("ADMIN","ALUNO","PROFESSOR","BIBLIOTECARIO")
                           .anyRequest().authenticated() 
                 )
-                .formLogin(form -> form.loginPage("/login")
+                .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/menu", true)
+                        .successHandler(authenticationSuccessHandler())
                         .failureUrl("/login?erro")
                         .permitAll()) 
                 .logout(logout -> logout
@@ -107,12 +108,15 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                         .sessionFixation(fixation -> fixation.migrateSession()) 
                         .invalidSessionUrl("/login?expirou")
-                        .maximumSessions(1)) 
-                .build();
+                        .maximumSessions(1));
                 return http.build();
             }
             @Bean
             public PasswordEncoder passwordEncoder() {
                 return new BCryptPasswordEncoder();
+            }
+            @Bean
+            public AuthenticationSuccessHandler authenticationSuccessHandler() {
+                return new LoginRedirecionado();
             }
         }

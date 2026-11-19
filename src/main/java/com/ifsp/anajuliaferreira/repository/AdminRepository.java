@@ -16,30 +16,17 @@ public class AdminRepository {
     @PersistenceContext
     private EntityManager em;
 
-    @Transactional
-    public boolean insert (Admin admin) {
+   @Transactional
+    public boolean insert(Admin admin) {
         try {
-            String comando;
-            Query query;
-            comando = "INSERT INTO pessoa(nome, cpf, data_nasc, email, telefone, endereco, cidade, cep, uf,  password) VALUES (:nome, :cpf, :data_nasc, :email, :telefone, :endereco, :cidade, :cep, :uf, :password)";
-            query = em.createNativeQuery(comando);
-            query.setParameter("nome", admin.getNome());
-            query.setParameter("cpf", admin.getCpf());
-            query.setParameter("data_nasc", admin.getDataNasc());
-            query.setParameter("email", admin.getEmail());
-            query.setParameter("telefone", admin.getTelefone());
-            query.setParameter("endereco", admin.getEndereco());
-            query.setParameter("cidade", admin.getCidade());
-            query.setParameter("cep", admin.getCep());
-            query.setParameter("uf", admin.getUf());
-            query.setParameter("password", admin.getPassword());
-            query.executeUpdate();
+            em.persist(admin);
             return true;
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
     }
+    @Transactional
      public List<Admin> findAll() {
         String comando = "SELECT * FROM admin INNER JOIN pessoa ON admin.id_pessoa = pessoa.id_pessoa";
         Query query = em.createNativeQuery(comando, Admin.class);
