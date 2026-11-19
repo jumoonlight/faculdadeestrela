@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Bibliotecário</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="stylesheet" th:href="@{/css/detalhes.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Detalhes do Bibliotecário</h1>
+    <p>Nome: <span th:text="${bibliotecario.nome}"></span></p>
+    <p>CPF: <span th:text="${bibliotecario.cpf}"></span></p>
+    <p>Data de Nascimento: <span th:text="${bibliotecario.dataNasc}"></span></p>
+    <p>E-mail: <span th:text="${bibliotecario.email}"></span></p>
+    <p>Telefone: <span th:text="${bibliotecario.telefone}"></span></p>
+    <p>Endereço: <span th:text="${bibliotecario.endereco}"></span></p>
+    <p>Cidade: <span th:text="${bibliotecario.cidade}"></span></p>
+    <p>CEP: <span th:text="${bibliotecario.cep}"></span></p>
+    <p>UF: <span th:text="${bibliotecario.uf}"></span></p>
+    <br>
+    <form method="get" th:action="@{/listarBibliotecarios}">
+        <button>Voltar para a tabela de Bibliotecários</button>
+    </form>
+</body>
+</html>
