@@ -1,0 +1,23 @@
+<div th:fragment="cabecalho">
+    <header>
+        <img src="https://files.catbox.moe/c5zojs.png" alt="Logo" width="200">
+        <div class="perfil">
+            <a sec:authorize="hasRole('ALUNO')" th:href="@{/perfilAluno}">
+                <p>Meu perfil</p>
+                <img src="https://files.catbox.moe/t0idb0.png" alt="Ícone para informações do Perfil" width="50">
+            </a>
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/perfilAdmin}">
+                <p>Meu perfil</p>
+                <img src="https://files.catbox.moe/t0idb0.png" alt="Ícone para informações do Perfil" width="50">
+            </a>
+            <a sec:authorize="hasRole('PROFESSOR')" th:href="@{/perfilProfessor}">
+                <p>Meu perfil</p>
+                <img src="https://files.catbox.moe/t0idb0.png" alt="Ícone para informações do Perfil" width="50">
+            </a>
+            <a sec:authorize="hasRole('BIBLIOTECARIO')" th:href="@{/perfilBibliotecario}">
+                <p>Meu perfil</p>
+                <img src="https://files.catbox.moe/t0idb0.png" alt="Ícone para informações do Perfil" width="50">
+            </a>
+        </div>
+    </header>
+</div>

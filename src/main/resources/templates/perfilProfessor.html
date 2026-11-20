@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Professor</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="stylesheet" th:href="@{/css/perfilUsuario.css}">
+    <link rel="stylesheet" th:href="@{/css/cabecalho.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <script th:src="@{/js/script.js}"></script>
+</head>
+<body>
+    <div th:replace="fragments/cabecalho :: cabecalho"></div>
+    <div class="conta">
+        <div class="info-conta">
+            <h1 class="titulo">Informações da sua conta</h1>
+            
+            <div th:if="${mensagem}" class="mensagem-sucesso" th:text="${mensagem}"></div>
+            <div th:if="${erro}" class="mensagem-erro" th:text="${erro}"></div>
+            
+            <div class="info-card">
+                <p><strong>Nome:</strong> <span th:text="${professor.nome}"></span></p>
+                <p><strong>CPF:</strong> <span th:text="${professor.cpf}"></span></p>
+                <p><strong>Data de Nascimento:</strong> <span th:text="${professor.dataNasc}"></span></p>
+                <p><strong>E-mail:</strong> <span th:text="${professor.email}"></span></p>
+                <p><strong>Telefone:</strong> <span th:text="${professor.telefone}"></span></p>
+                <p><strong>Endereço:</strong> <span th:text="${professor.endereco}"></span></p>
+                <p><strong>Cidade:</strong> <span th:text="${professor.cidade}"></span></p>
+                <p><strong>CEP:</strong> <span th:text="${professor.cep}"></span></p>
+                <p><strong>UF:</strong> <span th:text="${professor.uf}"></span></p>
+                <p><strong>Siape:</strong> <span th:text="${professor.siape}"></span></p>
+                <p><strong>Área:</strong> <span th:text="${professor.area}"></span></p>
+                <p><strong>Formação:</strong> <span th:text="${professor.formacao}"></span></p>
+            </div>
+             <div class="acoes">
+                <a th:href="@{/perfilProfessor/editar}" id="editar">Editar Perfil</a>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" id="sair">Sair da Conta</button>
+                </form>
+                
+                <form th:action="@{/deletarContaProfessor}" method="post" onsubmit="return confirm('Tem certeza que deseja deletar sua conta? Esta ação não pode ser desfeita.')">
+                    <button type="submit" id="del">Deletar Conta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

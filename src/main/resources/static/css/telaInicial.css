@@ -2,9 +2,7 @@
     margin: 0;
     padding: 0;
 }
-header{ 
-    height: 10%;
-}
+
 .bloco{
     display: flex;
     margin-top: 5%;

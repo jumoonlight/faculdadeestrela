@@ -15,11 +15,14 @@ import com.ifsp.anajuliaferreira.model.Professor;
 import com.ifsp.anajuliaferreira.repository.ProfessorRepository;
 import com.ifsp.anajuliaferreira.util.Util;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Controller
 public class ProfessorController {
     @Autowired
     private ProfessorRepository professorRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @GetMapping("/formularioProfessor")
     public String professor(){
         return "professorFormulario";
@@ -29,6 +32,7 @@ public class ProfessorController {
          @RequestParam String cpf,
          @RequestParam Date dataNasc, 
          @RequestParam String email, 
+         @RequestParam String password,
          @RequestParam String telefone, 
          @RequestParam String endereco,
          @RequestParam String cidade, 
@@ -43,6 +47,7 @@ public class ProfessorController {
             professor.setCpf(cpf);
             professor.setDataNasc(dataNasc);
             professor.setEmail(email);
+            professor.setPassword(passwordEncoder.encode(password));
             professor.setTelefone(telefone);
             professor.setEndereco(endereco);
             professor.setCidade(cidade);
@@ -99,12 +104,13 @@ public class ProfessorController {
         return "editarProfessor";
     }
     @PostMapping("/atualizarProfessor")
-    public String atualizarProfessor(@RequestParam long id,@RequestParam String nome, @RequestParam String cpf, @RequestParam Date dataNascimento, @RequestParam String email, @RequestParam String telefone, @RequestParam String endereco, @RequestParam String cidade, @RequestParam String cep, @RequestParam String uf, @RequestParam String siape, @RequestParam String area, @RequestParam String formacao, RedirectAttributes redirectAttributes){
+    public String atualizarProfessor(@RequestParam long id,@RequestParam String nome, @RequestParam String cpf, @RequestParam Date dataNascimento, @RequestParam String email, @RequestParam String password, @RequestParam String telefone, @RequestParam String endereco, @RequestParam String cidade, @RequestParam String cep, @RequestParam String uf, @RequestParam String siape, @RequestParam String area, @RequestParam String formacao, RedirectAttributes redirectAttributes){
         Professor professor = professorRepository.findByID(id);
         professor.setNome(nome);
         professor.setCpf(cpf);
         professor.setDataNasc(dataNascimento);
         professor.setEmail(email);
+        professor.setPassword(passwordEncoder.encode(password));
         professor.setTelefone(telefone);
         professor.setEndereco(endereco);
         professor.setCidade(cidade);

@@ -15,11 +15,14 @@ import com.ifsp.anajuliaferreira.model.Aluno;
 import com.ifsp.anajuliaferreira.repository.AlunoRepository;
 import com.ifsp.anajuliaferreira.util.Util;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Controller
 public class AlunoController {
     @Autowired
     private AlunoRepository alunoRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @GetMapping("/formularioAluno")
     public String aluno(){
         return "alunoFormulario";
@@ -29,6 +32,7 @@ public class AlunoController {
          @RequestParam String cpf,
          @RequestParam Date dataNascimento, 
          @RequestParam String email, 
+         @RequestParam String password,
          @RequestParam String telefone, 
          @RequestParam String endereco,
          @RequestParam String cidade, 
@@ -43,6 +47,7 @@ public class AlunoController {
             aluno.setCpf(cpf);
             aluno.setDataNasc(dataNascimento);
             aluno.setEmail(email);
+            aluno.setPassword(passwordEncoder.encode(password));
             aluno.setTelefone(telefone);
             aluno.setEndereco(endereco);
             aluno.setCidade(cidade);
@@ -96,12 +101,13 @@ public class AlunoController {
         return "editarAluno";
     }
     @PostMapping("/atualizarAluno")
-    public String atualizarAluno(@RequestParam long id,@RequestParam String nome, @RequestParam String cpf, @RequestParam Date dataNascimento, @RequestParam String email, @RequestParam String telefone, @RequestParam String endereco, @RequestParam String cidade, @RequestParam String cep, @RequestParam String uf, @RequestParam String pront, @RequestParam int ano_ingresso, @RequestParam int ano_saida, RedirectAttributes redirectAttributes){
+    public String atualizarAluno(@RequestParam long id,@RequestParam String nome, @RequestParam String cpf, @RequestParam Date dataNascimento, @RequestParam String email, @RequestParam String password, @RequestParam String telefone, @RequestParam String endereco, @RequestParam String cidade, @RequestParam String cep, @RequestParam String uf, @RequestParam String pront, @RequestParam int ano_ingresso, @RequestParam int ano_saida, RedirectAttributes redirectAttributes){
         Aluno aluno = alunoRepository.findByID(id);
         aluno.setNome(nome);
         aluno.setCpf(cpf);
         aluno.setDataNasc(dataNascimento);
         aluno.setEmail(email);
+        aluno.setPassword(passwordEncoder.encode(password));
         aluno.setTelefone(telefone);
         aluno.setEndereco(endereco);
         aluno.setCidade(cidade);
