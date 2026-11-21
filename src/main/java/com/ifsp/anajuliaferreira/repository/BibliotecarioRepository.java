@@ -3,6 +3,8 @@ package com.ifsp.anajuliaferreira.repository;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+
+import com.ifsp.anajuliaferreira.model.Admin;
 import com.ifsp.anajuliaferreira.model.Bibliotecario;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -13,27 +15,12 @@ import jakarta.transaction.Transactional;
 public class BibliotecarioRepository {
     @PersistenceContext
     private EntityManager em;
-
     @Transactional
-    public boolean insert (Bibliotecario bibliotecario) {
+    public boolean insert(Bibliotecario bibliotecario) {
         try {
-            String comando;
-            Query query;
-            comando = "INSERT INTO pessoa(nome, cpf, data_nasc, email, telefone, endereco, cidade, cep, uf,  password) VALUES (:nome, :cpf, :data_nasc, :email, :telefone, :endereco, :cidade, :cep, :uf, :password)";
-            query = em.createNativeQuery(comando);
-            query.setParameter("nome", bibliotecario.getNome());
-            query.setParameter("cpf", bibliotecario.getCpf());
-            query.setParameter("data_nasc", bibliotecario.getDataNasc());
-            query.setParameter("email", bibliotecario.getEmail());
-            query.setParameter("telefone", bibliotecario.getTelefone());
-            query.setParameter("endereco", bibliotecario.getEndereco());
-            query.setParameter("cidade", bibliotecario.getCidade());
-            query.setParameter("cep", bibliotecario.getCep());
-            query.setParameter("uf", bibliotecario.getUf());
-            query.setParameter("password", bibliotecario.getPassword());
-            query.executeUpdate();
+            em.persist(bibliotecario);
             return true;
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }

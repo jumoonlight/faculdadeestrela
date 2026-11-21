@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +17,12 @@ import com.ifsp.anajuliaferreira.model.Bibliotecario;
 import com.ifsp.anajuliaferreira.repository.BibliotecarioRepository;
 import com.ifsp.anajuliaferreira.util.Util;
 
+@Controller
 public class BibliotecarioController {
-     @Autowired
+    @Autowired
     private BibliotecarioRepository bibliotecarioRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @GetMapping("/formularioBibliotecario")
     public String bibliotecario(){
         return "bibliotecarioFormulario";
@@ -27,6 +32,7 @@ public class BibliotecarioController {
          @RequestParam String cpf,
          @RequestParam Date dataNasc, 
          @RequestParam String email, 
+         @RequestParam String password,
          @RequestParam String telefone, 
          @RequestParam String endereco,
          @RequestParam String cidade, 
@@ -38,6 +44,7 @@ public class BibliotecarioController {
             bibliotecario.setCpf(cpf);
             bibliotecario.setDataNasc(dataNasc);
             bibliotecario.setEmail(email);
+            bibliotecario.setPassword(passwordEncoder.encode(password));
             bibliotecario.setTelefone(telefone);
             bibliotecario.setEndereco(endereco);
             bibliotecario.setCidade(cidade);
@@ -88,12 +95,13 @@ public class BibliotecarioController {
         return "editarBibliotecario";
     }
     @PostMapping("/atualizarBibliotecario")
-    public String atualizarBibliotecario(@RequestParam long id,@RequestParam String nome, @RequestParam String cpf, @RequestParam Date dataNascimento, @RequestParam String email, @RequestParam String telefone, @RequestParam String endereco, @RequestParam String cidade, @RequestParam String cep, @RequestParam String uf, RedirectAttributes redirectAttributes){
+    public String atualizarBibliotecario(@RequestParam long id,@RequestParam String nome, @RequestParam String cpf, @RequestParam Date dataNascimento, @RequestParam String email, @RequestParam String password, @RequestParam String telefone, @RequestParam String endereco, @RequestParam String cidade, @RequestParam String cep, @RequestParam String uf, RedirectAttributes redirectAttributes){
         Bibliotecario bibliotecario = bibliotecarioRepository.findByID(id);
         bibliotecario.setNome(nome);
         bibliotecario.setCpf(cpf);
         bibliotecario.setDataNasc(dataNascimento);
         bibliotecario.setEmail(email);
+        bibliotecario.setPassword(passwordEncoder.encode(password));
         bibliotecario.setTelefone(telefone);
         bibliotecario.setEndereco(endereco);
         bibliotecario.setCidade(cidade);

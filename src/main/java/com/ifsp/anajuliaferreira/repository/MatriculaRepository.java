@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.ifsp.anajuliaferreira.model.Aluno;
 import com.ifsp.anajuliaferreira.model.Matricula;
 
 import jakarta.persistence.EntityManager;
@@ -54,6 +55,13 @@ public class MatriculaRepository {
         Query query = em.createNativeQuery(sql);
         query.setParameter("id_matricula", id);
         query.executeUpdate();
+    }
+    public List<Matricula> findByAluno(Aluno aluno) {
+        String sql = "SELECT * FROM matricula WHERE id_aluno = :id_aluno";
+        Query query = em.createNativeQuery(sql, Matricula.class);
+        query.setParameter("id_aluno", aluno.getId());
+        List<Matricula> matriculas = query.getResultList();
+        return matriculas;
     }
 
 }

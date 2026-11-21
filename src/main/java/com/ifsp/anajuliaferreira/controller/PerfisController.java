@@ -12,9 +12,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ifsp.anajuliaferreira.model.Admin;
 import com.ifsp.anajuliaferreira.model.Aluno;
 import com.ifsp.anajuliaferreira.model.Professor;
+import com.ifsp.anajuliaferreira.model.Bibliotecario;
 import com.ifsp.anajuliaferreira.repository.AdminRepository;
 import com.ifsp.anajuliaferreira.repository.AlunoRepository;
 import com.ifsp.anajuliaferreira.repository.ProfessorRepository;
+import com.ifsp.anajuliaferreira.repository.BibliotecarioRepository;
+
 
 @Controller
 public class PerfisController {
@@ -24,6 +27,8 @@ public class PerfisController {
     AlunoRepository alunoRepository;
     @Autowired 
     ProfessorRepository professorRepository;
+    @Autowired 
+    BibliotecarioRepository bibliotecarioRepository;
     @GetMapping("/perfilAdmin")
     public String perfilAdmin(Principal principal, Model model) {
         Admin admin = adminRepository.findByEmail(principal.getName());
@@ -42,6 +47,12 @@ public class PerfisController {
         model.addAttribute("professor", professor);
         return "perfilProfessor";
     }
+    @GetMapping ("/perfilBibliotecario")
+    public String perfilBibliotecario(Principal principal, Model model) {
+        Bibliotecario bibliotecario = bibliotecarioRepository.findByEmail(principal.getName());
+        model.addAttribute("bibliotecario", bibliotecario);
+        return "perfilBibliotecario";
+    }
     @PostMapping("/deletarContaAluno")
     public String deletarConta(Principal principal, RedirectAttributes redirectAttributes) {
         Aluno aluno = alunoRepository.findByEmail(principal.getName());
@@ -54,6 +65,13 @@ public class PerfisController {
     public String deletarContaProfessor(Principal principal, RedirectAttributes redirectAttributes) {
         Professor professor = professorRepository.findByEmail(principal.getName());
         professorRepository.deleteById(professor.getId());
+        redirectAttributes.addFlashAttribute("mensagem", "Conta excluída com sucesso!");
+        return "redirect:/logout";
+    }
+    @PostMapping("/deletarContaBibliotecario")
+    public String deletarContaBibliotecario(Principal principal, RedirectAttributes redirectAttributes) {
+        Bibliotecario bibliotecario = bibliotecarioRepository.findByEmail(principal.getName());
+        bibliotecarioRepository.deleteById(bibliotecario.getId());
         redirectAttributes.addFlashAttribute("mensagem", "Conta excluída com sucesso!");
         return "redirect:/logout";
     }
