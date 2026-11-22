@@ -68,6 +68,9 @@ public class AlunoController {
             } else if (!Util.validarEmail(email)){
                  redirectAttributes.addFlashAttribute("erro", "Email inválido");
                  return "redirect:/formularioAluno";
+            } else if (!Util.validarSenha(password)){
+                 redirectAttributes.addFlashAttribute("erro", "Senha com pelo menos 8 caracteres!");
+                 return "redirect:/formularioAluno";
             } else if (alunoRepository.findByCpf(cpf) != null) {
                  redirectAttributes.addFlashAttribute("erro", "CPF já cadastrado!");
                  return "redirect:/formularioAluno";
@@ -127,6 +130,9 @@ public class AlunoController {
                  return "redirect:/formularioAluno";
             } else if (!Util.validarEmail(email)){
                  redirectAttributes.addFlashAttribute("erro", "Email inválido");
+                 return "redirect:/formularioAluno";
+            } else if (!Util.validarSenha(password)){
+                 redirectAttributes.addFlashAttribute("erro", "Senha com pelo menos 8 caracteres!");
                  return "redirect:/formularioAluno";
             } else if (alunoRepository.findByCpfUpdate(cpf, id) != null) {
                  redirectAttributes.addFlashAttribute("erro", "CPF já cadastrado!");

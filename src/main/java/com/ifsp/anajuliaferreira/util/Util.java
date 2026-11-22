@@ -72,4 +72,10 @@ public class Util{
 
         return idade < 18;
     }
+    public static boolean validarSenha(String password){
+        if (password.length() > 8){
+            return true;
+        }
+        return false;
+    }
 }

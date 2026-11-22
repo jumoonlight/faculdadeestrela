@@ -18,22 +18,10 @@
             
             <div th:if="${mensagem}" class="mensagem-sucesso" th:text="${mensagem}"></div>
             <div th:if="${erro}" class="mensagem-erro" th:text="${erro}"></div>
-            
-            <div class="info-card">
-                <p><strong>Nome:</strong> <span th:text="${admin.nome}"></span></p>
-                <p><strong>CPF:</strong> <span th:text="${admin.cpf}"></span></p>
-                <p><strong>Data de Nascimento:</strong> <span th:text="${admin.dataNasc}"></span></p>
-                <p><strong>E-mail:</strong> <span th:text="${admin.email}"></span></p>
-                <p><strong>Telefone:</strong> <span th:text="${admin.telefone}"></span></p>
-                <p><strong>Endereço:</strong> <span th:text="${admin.endereco}"></span></p>
-                <p><strong>Cidade:</strong> <span th:text="${admin.cidade}"></span></p>
-                <p><strong>CEP:</strong> <span th:text="${admin.cep}"></span></p>
-                <p><strong>UF:</strong> <span th:text="${admin.uf}"></span></p>
-            </div>
+            <form th:action="@{/logout}" method="post">
+                    <button type="submit" id="sair">Sair da Conta</button>
+            </form>
         </div>
-        <form th:action="@{/logout}" method="post">
-                <button type="submit" id="sair">Sair da Conta</button>
-        </form>
     </div>
 </body>
 </html>

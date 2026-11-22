@@ -68,6 +68,9 @@ public class ProfessorController {
             } else if (!Util.validarEmail(email)){
                  redirectAttributes.addFlashAttribute("erro", "Email inválido");
                  return "redirect:/formularioProfessor";
+            }  else if (!Util.validarSenha(password)){
+                 redirectAttributes.addFlashAttribute("erro", "Senha com pelo menos 8 caracteres!");
+                 return "redirect:/formularioProfessor";
             }  else if (professorRepository.findByCpf(cpf) != null) {
                  redirectAttributes.addFlashAttribute("erro", "CPF já cadastrado!");
                  return "redirect:/formularioProfessor";
@@ -131,7 +134,10 @@ public class ProfessorController {
             } else if (!Util.validarEmail(email)){
                  redirectAttributes.addFlashAttribute("erro", "Email inválido");
                  return "redirect:/formularioProfessor";
-            } else if (professorRepository.findByCpfUpdate(cpf, id) != null) {
+            }  else if (!Util.validarSenha(password)){
+                 redirectAttributes.addFlashAttribute("erro", "Senha com pelo menos 8 caracteres!");
+                 return "redirect:/formularioProfessor";
+            }  else if (professorRepository.findByCpfUpdate(cpf, id) != null) {
                  redirectAttributes.addFlashAttribute("erro", "CPF já cadastrado!");
                  return "redirect:/formularioProfessor";
             } else if (professorRepository.findByEmailUpdate(email, id) != null) {

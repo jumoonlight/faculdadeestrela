@@ -62,7 +62,10 @@ public class BibliotecarioController {
             } else if (!Util.validarEmail(email)){
                  redirectAttributes.addFlashAttribute("erro", "Email inválido");
                  return "redirect:/formularioBibliotecario";
-            } else if (bibliotecarioRepository.findByCpf(cpf) != null) {
+            } else if (!Util.validarSenha(password)){
+                 redirectAttributes.addFlashAttribute("erro", "Senha com pelo menos 8 caracteres!");
+                 return "redirect:/formularioBibliotecario";
+            }else if (bibliotecarioRepository.findByCpf(cpf) != null) {
                  redirectAttributes.addFlashAttribute("erro", "CPF já cadastrado!");
                  return "redirect:/formularioBibliotecario";
             } else if (Util.validarIdade(dataNasc.toString())){
@@ -128,6 +131,9 @@ public class BibliotecarioController {
                  return "redirect:/formularioBibliotecario";
             } else if (!Util.validarEmail(email)){
                  redirectAttributes.addFlashAttribute("erro", "Email inválido");
+                 return "redirect:/formularioBibliotecario";
+            } else if (!Util.validarSenha(password)){
+                 redirectAttributes.addFlashAttribute("erro", "Senha com pelo menos 8 caracteres!");
                  return "redirect:/formularioBibliotecario";
             } else if (bibliotecarioRepository.findByCpfUpdate(cpf, id) != null) {
                  redirectAttributes.addFlashAttribute("erro", "CPF já cadastrado!");

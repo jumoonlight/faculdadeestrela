@@ -9,10 +9,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/formulario.css">
+    <link rel="stylesheet" th:href="@{/css/cabecalho.css}">
+    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
     <div class="conteudo">
         <div class="principal">
+          <div th:replace="fragments/cabecalho :: cabecalho"></div>
           <form method="post" th:action="@{/cadastrarBibliotecario}">
              <h1>Cadastro de Bibliotecário</h1>
              <div th:if="${erro}" style="color: red; font-weight: bold;">
