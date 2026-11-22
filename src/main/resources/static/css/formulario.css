@@ -46,3 +46,14 @@ label{
 h1{
     margin-top:5%;
 }
+.senha{
+     position: relative;
+     display: inline-flex;
+     align-items: center;
+}
+
+.senha svg{
+    cursor: pointer;
+    position: absolute;
+    left: 87%;
+}
