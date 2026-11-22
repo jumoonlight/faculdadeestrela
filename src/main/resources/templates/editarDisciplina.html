@@ -18,8 +18,8 @@
         <div class="principal"></div>
           <form method="post" th:action="@{/atualizarDisciplina}">
              <h1>Editar Disciplina</h1>
-             <a th:href="@{/disciplina/{id}/referencias(id=${disciplina.id})}">
-             > Gerenciar Referências
+             <a sec:authorize="hasRole('ADMIN')" th:href="@{/disciplina/{id}/referencias(id=${disciplina.id})}">
+              Gerenciar Referências
              </a>
              <input type="hidden" name="id" th:value="${disciplina.id}">
              <label>Nome da Disciplina:</label>

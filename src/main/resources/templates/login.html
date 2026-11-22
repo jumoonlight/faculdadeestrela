@@ -103,6 +103,14 @@
       font-size: 14px;
       color: #4b4f56;
     }
+    .erro{
+      margin: 5%;
+      background-color: #db4d48;
+      font-weight: bold;
+      color: #501207;
+      text-align: center;
+      padding: 7%;
+    }
   </style>
 </head>
 <body>
@@ -119,6 +127,7 @@
         <input type="password" id="password" name="password" placeholder="Digite sua senha" required />
       </div>
       <button type="submit" class="btn-login">Entrar</button>
+      <p th:if="${param.erro}" class="erro">Usuário ou senha inválidos.</p>
     </form>
   </div>
 </body>
