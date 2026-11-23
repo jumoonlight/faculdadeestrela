@@ -20,22 +20,49 @@
     <div th:if="${erro}" style="color: red; font-weight: bold;">
         <span th:text="${erro}"></span>
     </div>
+
+    <form th:action="@{/ofertadisciplina/listar}" method="get" class="d-flex align-items-center gap-1">
+                <select name="idDisciplina" class="form-select filtro-select" onchange="this.form.submit()">
+                    <option value="">Todas disciplinas</option>
+                    <option th:each="disciplina : ${disciplinas}"
+                            th:value="${disciplina.idDisciplina}"
+                            th:text="${disciplina.nome}"
+                            th:selected="${disciplina.idDisciplina == idDisciplinaFiltro}">
+                    </option>
+                </select>
+            </form>
+    
+        <form th:action="@{/ofertadisciplina/listar}" method="get" class="d-flex align-items-center gap-1">
+                <select name="idProfessor" class="form-select filtro-select" onchange="this.form.submit()">
+                    <option value="">Todos professores</option>
+                    <option th:each="professor : ${professores}"
+                            th:value="${professor.idProfessor}"
+                            th:text="${professor.nome}"
+                            th:selected="${professor.idProfessor == idProfessorFiltro}">
+                    </option>
+                </select>
+        </form>
+
     <table border="1px">
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Nome da Disciplina</th>
                 <th>Nome do Professor</th>
                 <th>Nome do Curso</th>
-                <th>Nome da Disciplina</th>
+                <th>Ano</th>
+                <th>Semestre</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="oferta : ${ofertas}">
                 <td><span th:text="${oferta.id}"></span></td>
-                <td th:text="${oferta.professor.nome}"></td>
-                <td th:text="${oferta.curso.nome}"></td>
                 <td th:text="${oferta.disciplina.nome}"></td>
+                 <td th:text="${oferta.professor.nome}"></td>
+                <td th:text="${oferta.curso.nome}"></td>
+                 <td th:text="${oferta.ano}"></td>
+                  <td th:text="${oferta.semestre}"></td>
                 <td>
                       <a th:href="@{/oferta/{id}(id=${oferta.id})}" class="btn-tabela btn-ver">Ver Detalhes</a>
                       <a th:href="@{/oferta/{id}/editar(id=${oferta.id})}" class="btn-tabela btn-editar">Editar</a>

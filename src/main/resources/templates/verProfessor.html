@@ -41,7 +41,7 @@
         </thead>
         <tbody>
             <tr th:each="professor : ${professores}">
-                <td><span th:text="${professor.id}"></span></td>
+                <td><span th:text="${professor.idProfessor}"></span></td>
                 <td th:text="${professor.nome}"></td>
                 <td th:text="${professor.cpf}"></td>
                 <td th:text="${professor.dataNasc}"></td>
@@ -55,9 +55,9 @@
                 <td th:text="${professor.area}"></td>
                 <td th:text="${professor.formacao}"></td>
                 <td>
-                      <a th:href="@{/professor/{id}(id=${professor.id})}" class="btn-tabela btn-ver">Ver Detalhes</a>
-                      <a th:href="@{/professor/{id}/editar(id=${professor.id})}" class="btn-tabela btn-editar">Editar</a>
-                      <a th:href="@{/professor/{id}/deletar(id=${professor.id})}" class="detalhes deletar">Remover</a>
+                      <a th:href="@{/professor/{id}(id=${professor.idProfessor})}" class="btn-tabela btn-ver">Ver Detalhes</a>
+                      <a th:href="@{/professor/{id}/editar(id=${professor.idProfessor})}" class="btn-tabela btn-editar">Editar</a>
+                      <a th:href="@{/professor/{id}/deletar(id=${professor.idProfessorProfessor})}" class="detalhes deletar">Remover</a>
                 </td>
              </tr>
         </tbody>

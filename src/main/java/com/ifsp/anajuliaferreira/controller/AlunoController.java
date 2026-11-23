@@ -16,6 +16,7 @@ import com.ifsp.anajuliaferreira.repository.CursoRepository;
 import com.ifsp.anajuliaferreira.util.Util;
 import static com.ifsp.anajuliaferreira.util.Util.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -40,7 +41,7 @@ public class AlunoController {
         model.addAttribute("alunos", alunos);
         model.addAttribute("cursos", cursoRepository.findAll());
         model.addAttribute("idCursoFiltro", idCurso);
-        return "verALuno";
+        return "verAluno";
     }
 
     @GetMapping("/cadastrar")
@@ -61,17 +62,18 @@ public class AlunoController {
     public String salvar(
             @RequestParam(value = "idAluno", required = false) Long idAluno,
             @RequestParam("nome") String nome,
-            @RequestParam("idade") int idade,
             @RequestParam("email") String email,
             @RequestParam("telefone") String telefone,
             @RequestParam("endereco") String endereco,
+            @RequestParam("dataNascimento") Date dataNascimento,
             @RequestParam("cidade") String cidade,
             @RequestParam("uf") String uf,
             @RequestParam("cpf") String cpf,
+            @RequestParam("cep") String cep,
             @RequestParam("prontuario") String prontuario,
             @RequestParam("nomeMae") String nomeMae,
             @RequestParam("nomePai") String nomePai,
-            @RequestParam("contatoResponsavel") String contatoResponsavel,
+            @RequestParam(value = "contatoResponsavel", required = false) String contatoResposavel,
             @RequestParam("anoIngresso") int anoIngresso,
             @RequestParam(value = "anoSaida", required = false) Integer anoSaida,
             @RequestParam("idCurso") Integer idCurso,
@@ -121,11 +123,12 @@ public class AlunoController {
         aluno.setEndereco(endereco);
         aluno.setCidade(cidade);
         aluno.setUf(uf);
+        aluno.setDataNasc(dataNascimento);
         aluno.setCpf(cpf);
         aluno.setProntuario(prontuario);
         aluno.setNomeMae(nomeMae);
         aluno.setNomePai(nomePai);
-        aluno.setContatoResponsavel(contatoResponsavel);
+        aluno.setContatoResponsavel(contatoResposavel);
         aluno.setAnoIngresso(anoIngresso);
         aluno.setAnoSaida(anoSaida);
         aluno.setIdCurso(idCurso);
@@ -146,7 +149,7 @@ public class AlunoController {
         return "redirect:/aluno/listar";
     }
 
-    @GetMapping("/editar/{id}")
+    @GetMapping("/{id}/editar")
     public String editar(@PathVariable Long id, Model model) {
         Aluno aluno = alunoRepository.findByID(id);
         model.addAttribute("aluno", aluno);
@@ -155,7 +158,7 @@ public class AlunoController {
         return "editarAluno";
     }
 
-    @GetMapping("/excluir/{id}")
+    @GetMapping("/{id}//deletar")
     public String excluir(@PathVariable int id, RedirectAttributes redirect) {
         try {
             alunoRepository.delete(id);

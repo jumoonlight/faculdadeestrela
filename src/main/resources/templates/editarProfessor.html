@@ -15,7 +15,7 @@
         <div class="principal"></div>
           <form method="post" th:action="@{/atualizarProfessor}">
              <h1>Editar Professor</h1>
-             <input type="hidden" name="id" th:value="${professor.id}">
+             <input type="hidden" name="id" th:value="${professor.idProfessor}">
              <label>Nome:</label>
              <input type="text" th:name="nome" th:value="${professor.nome}" required>
              <label>CPF: </label>

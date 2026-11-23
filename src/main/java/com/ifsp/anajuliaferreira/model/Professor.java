@@ -45,5 +45,8 @@ public class Professor  extends Pessoa{
         this.formacao = formacao;
     }
 
+    public Long getIdProfessor() { return getIdPessoa(); }
+    public void setIdProfessor(Long id) { setIdPessoa(id); }
+
     
 }

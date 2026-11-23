@@ -49,7 +49,7 @@ public class DisciplinaRepository {
      public void update(Disciplina disciplina){
         String sql = "UPDATE disciplinas SET nome = :nome, descricao = :descricao, semestres = :semestres, carga_horaria = :carga_horaria WHERE id_disc = :id_disc";
         Query query =em.createNativeQuery(sql);
-        query.setParameter("id_disc", disciplina.getId());
+        query.setParameter("id_disc", disciplina.getIdDisciplina());
         query.setParameter("nome", disciplina.getNome());
         query.setParameter("descricao", disciplina.getDesc());
         query.setParameter("semestres", disciplina.getNumeroSemestres());

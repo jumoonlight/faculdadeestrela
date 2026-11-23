@@ -33,15 +33,15 @@
         </thead>
         <tbody>
             <tr th:each="disciplina : ${disciplinas}">
-                <td><span th:text="${disciplina.id}"></span></td>
+                <td><span th:text="${disciplina.idDisciplina}"></span></td>
                 <td th:text="${disciplina.nome}"></td>
                 <td th:text="${disciplina.desc}"></td>
                 <td th:text="${disciplina.numeroSemestres}"></td>
                 <td th:text="${disciplina.cargaHoraria}"> </td>
                 <td>
-                      <a th:href="@{/disciplina/{id}(id=${disciplina.id})}" class="btn-tabela btn-ver">Ver Detalhes</a>
-                      <a th:href="@{/disciplina/{id}/editar(id=${disciplina.id})}" class="btn-tabela btn-editar">Editar</a>
-                      <a th:href="@{/disciplina/{id}/deletar(id=${disciplina.id})}" class="detalhes deletar">Remover</a>
+                      <a th:href="@{/disciplina/{id}(id=${disciplina.idDisciplina})}" class="btn-tabela btn-ver">Ver Detalhes</a>
+                      <a th:href="@{/disciplina/{id}/editar(id=${disciplina.idDisciplina})}" class="btn-tabela btn-editar">Editar</a>
+                      <a th:href="@{/disciplina/{id}/deletar(id=${disciplina.idDisciplina})}" class="detalhes deletar">Remover</a>
                 </td>
              </tr>
         </tbody>

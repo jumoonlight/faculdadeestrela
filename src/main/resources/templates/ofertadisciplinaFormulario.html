@@ -18,18 +18,25 @@
              <label>Professor:</label>
              <select name="id_prof" required>
                     <option value="">Selecione o professor inscrito: </option>
-                    <option th:each="professor : ${professores}" th:value="${professor.id}" th:text="${professor.nome}"></option>
+                    <option th:each="professor : ${professores}" th:value="${professor.idProfessor}" th:text="${professor.nome}"></option>
              </select>
              <label>Curso: </label> 
              <select name="id_curso" required>
                     <option value="">Selecione o curso: </option>
-                    <option th:each="curso : ${cursos}" th:value="${curso.id}" th:text="${curso.nome}"></option>
+                    <option th:each="curso : ${cursos}" th:value="${curso.idCurso}" th:text="${curso.nome}"></option>
              </select>
              <label>Disciplina: </label> 
              <select name="id_disc" required>
                     <option value="">Selecione a disciplina: </option>
-                    <option th:each="disciplina : ${disciplinas}" th:value="${disciplina.id}" th:text="${disciplina.nome}"></option>
+                    <option th:each="disciplina : ${disciplinas}" th:value="${disciplina.idDisciplina}" th:text="${disciplina.nome}"></option>
              </select>
+
+             <label>Ano:</label>
+             <input type="number" th:name="ano" required>
+
+             <label>Semestre:</label>
+             <input type="number" th:name="semestre" required> 
+
              <button type="submit">Cadastre a oferta</button>
              </form>
         </div>

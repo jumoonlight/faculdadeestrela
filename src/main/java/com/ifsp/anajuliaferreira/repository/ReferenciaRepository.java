@@ -17,7 +17,7 @@ public class ReferenciaRepository {
     public void save(Referencia ref) {
         String sql = "INSERT INTO referencias (id_disc, id_livro) VALUES (:id_disc, :id_livro)";
         Query query = em.createNativeQuery(sql);
-        query.setParameter("id_disc", ref.getDisciplina().getId());
+        query.setParameter("id_disc", ref.getDisciplina().getIdDisciplina());
         query.setParameter("id_livro", ref.getLivro().getId());
         query.executeUpdate();
     }
@@ -42,7 +42,7 @@ public class ReferenciaRepository {
         String sql = "UPDATE referencias SET id_disc = :id_disc, id_livro = :id_livro WHERE id_referencia = :id";
         Query query = em.createNativeQuery(sql);
         query.setParameter("id", ref.getId());
-        query.setParameter("id_disc", ref.getDisciplina().getId());
+        query.setParameter("id_disc", ref.getDisciplina().getIdDisciplina());
         query.setParameter("id_livro", ref.getLivro().getId());
         query.executeUpdate();
     }

@@ -19,18 +19,24 @@
              <label>Professor:</label>
              <select name="id_prof" required>
                     <option value="">Selecione o professor inscrito: </option>
-                    <option th:each="professor : ${professores}" th:value="${professor.id}" th:text="${professor.nome}"  th:selected="${professor.id == oferta.professor.id}"></option>
+                    <option th:each="professor : ${professores}" th:value="${professor.idProfessor}" th:text="${professor.nome}"  th:selected="${professor.idProfessor == oferta.professor.idProfessor}"></option>
              </select>
              <label>Curso: </label> 
              <select name="id_curso" required>
                     <option value="">Selecione o curso: </option>
-                    <option th:each="curso : ${cursos}" th:value="${curso.id}" th:text="${curso.nome}"  th:selected="${curso.id == oferta.curso.id}"></option>
+                    <option th:each="curso : ${cursos}" th:value="${curso.idCurso}" th:text="${curso.nome}"  th:selected="${curso.idCurso == oferta.curso.idCurso}"></option>
              </select>
              <label>Disciplina: </label> 
              <select name="id_disc" required>
                     <option value="">Selecione a disciplina: </option>
-                    <option th:each="disciplina : ${disciplinas}" th:value="${disciplina.id}" th:text="${disciplina.nome}" th:selected="${disciplina.id == oferta.disciplina.id}"></option>
+                    <option th:each="disciplina : ${disciplinas}" th:value="${disciplina.idDisciplina}" th:text="${disciplina.nome}" th:selected="${disciplina.idDisciplina == oferta.disciplina.idDisciplina}"></option>
              </select>
+
+             <label>Ano:</label>
+             <input type="number" th:name="ano" th:value="${oferta.ano}" required>
+
+             <label>Semestre:</label>
+             <input type="number" th:name="semestre" th:value="${oferta.semestre}" required> 
              <button type="submit">Edite a oferta</button>
              </form>
         </div>

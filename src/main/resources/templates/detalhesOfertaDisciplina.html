@@ -30,8 +30,9 @@
     <p>Descrição da Disciplina: <span th:text="${ofertas.disciplina.desc}"></span></p>
     <p>Número de Semestres da Disciplina: <span th:text="${ofertas.disciplina.numeroSemestres}"></span></p>
     <p>Carga Horária da Disciplina: <span th:text="${ofertas.disciplina.cargaHoraria}"></span></p>
+    <p>Carga Horária da Disciplina: <span th:text="${ofertas.disciplina.cargaHoraria}"></span></p>
     <br>
-    <form method="get" th:action="@{/listarOfertasDisciplina}">
+    <form method="get" th:action="@{/ofertadisciplina/listar}"
         <button>Voltar para a tabela de Ofertas Disciplinas</button>
     </form>
 </body>

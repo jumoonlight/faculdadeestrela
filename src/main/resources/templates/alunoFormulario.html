@@ -12,27 +12,38 @@
 </head>
 <body>
     <div class="conteudo">
-          <form method="post" th:object="${aluno}" th:action="@{/aluno/cadastrar}" >
+          <form method="post" th:object="${aluno}" th:action="@{/aluno/salvar}" >
              <h1>Cadastro de Aluno</h1>
+
+               <input type="hidden" th:field="*{idAluno}">
+             
+                <div th:if="${mensagem}" class="alert alert-success" th:text="${mensagem}"></div>
              <div th:if="${erro}" style="color: red; font-weight: bold;">
                 <span th:text="${erro}"></span>
              </div>
+             
              <label>Nome:</label>
-             <input type="text" th:name="nome" required>
+             <input type="text"  th:field="*{nome}" th:name="nome" required>
              <label>CPF: </label>
-             <input type="text" th:name="cpf" required>
+             <input type="text" th:field="*{cpf}" required>
              <label>Data de Nascimento: </label>
              <input type="date" th:name="dataNascimento" required>
              <label>E-mail: </label>
-             <input type="email" th:name="email" required>
+             <input type="email" th:field="*{email}"  required>
              <label>Telefone: </label>
-             <input type="tel" th:name="telefone" required>
+             <input type="tel" th:field="*{telefone}"  required>
              <label>Endereço: </label>
-             <input type="text" th:name="endereco" required>
+             <input type="text" th:field="*{endereco}"  required>
              <label>Cidade: </label>
-             <input type="text" th:name="cidade" required>
+             <input type="text" th:field="*{cidade}"  required>
              <label>CEP: </label>
-             <input type="text" th:name="cep" required>
+             <input type="text" th:field="*{cep}"  required>
+             <label>Nome da mãe: </label>
+             <input type="text" th:field="*{nomeMae}"  required>
+             <label>Nome do pai: </label>
+             <input type="text" th:field="*{nomePai}"  required>
+             <label>Contato do Responsável (caso o aluno seja menor de idade) </label>
+             <input type="text" th:field="*{contatoResponsavel}" >
              <label>UF: </label>
              <select th:name="uf" required>
                 <option>AC</option>
@@ -64,11 +75,11 @@
                 <option value="RS">RS</option>
              </select>
              <label>Prontuário:</label>
-             <input type="text" th:name="pront" required>
+             <input type="text" th:field="*{prontuario}"  required>
              <label>Ano de ingresso: </label>
-             <input type="number" th:name="ano_ingresso" required>
+             <input type="number" th:field="*{anoIngresso}"  required>
              <label>Ano de saída: </label>
-             <input type="number" th:name="ano_saida">
+             <input type="number" th:field="*{anoSaida}" >
           
                     <label>Curso</label>
                     <select class="form-select"  th:field="*{idCurso}" required>

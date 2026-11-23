@@ -23,7 +23,7 @@
              <label>Aluno que irá emprestar:</label>
              <select name="id_aluno" required>
                     <option value="">Selecione o nome do aluno:  </option>
-                    <option th:each="aluno : ${alunos}" th:value="${aluno.id}" th:text="${aluno.nome}" th:selected="${aluno.id == emprestimos.aluno.id}"></option>
+                    <option th:each="aluno : ${alunos}" th:value="${aluno.idAluno}" th:text="${aluno.nome}" th:selected="${aluno.idAluno == emprestimos.aluno.idAluno}"></option>
              </select>
              <label>Livro que será emprestado:  </label> 
              <select name="id_livro" required>

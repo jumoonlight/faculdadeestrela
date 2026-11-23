@@ -17,11 +17,13 @@ public class OfertaDisciplinaRepository {
 
     @Transactional
     public void save (OfertaDisciplina ofertaDisc){
-        String sql = "INSERT INTO oferta_disciplina(id_professor, id_curso, id_disc ) VALUES (:id_professor , :id_curso, :id_disc)";
+        String sql = "INSERT INTO oferta_disciplina(id_professor, id_curso, id_disc,  ano, semestre ) VALUES (:id_professor , :id_curso, :id_disc, :ano, :semestre)";
         Query query = em.createNativeQuery (sql);
         query.setParameter("id_professor", ofertaDisc.getProfessor().getIdPessoa());
         query.setParameter("id_curso", ofertaDisc.getCurso().getIdCurso());
-        query.setParameter("id_disc", ofertaDisc.getDisciplina().getId());
+        query.setParameter("id_disc", ofertaDisc.getDisciplina().getIdDisciplina());
+        query.setParameter("ano", ofertaDisc.getAno());
+        query.setParameter("semestre", ofertaDisc.getSemestre());
         query.executeUpdate();
     }
      @Transactional
@@ -41,12 +43,14 @@ public class OfertaDisciplinaRepository {
     }
     @Transactional
      public void update(OfertaDisciplina ofertaDisciplina){
-        String sql = "UPDATE oferta_disciplina SET id_professor = :id_professor, id_curso = :id_curso, id_disc = :id_disc  WHERE id_oferta_disc = :id_oferta_disc";
+        String sql = "UPDATE oferta_disciplina SET id_professor = :id_professor, id_curso = :id_curso, id_disc = :id_disc,  ano = :ano, semestre =:semestre  WHERE id_oferta_disc = :id_oferta_disc";
         Query query =em.createNativeQuery(sql);
         query.setParameter("id_oferta_disc", ofertaDisciplina.getId());
         query.setParameter("id_professor", ofertaDisciplina.getProfessor().getIdPessoa());
         query.setParameter("id_curso", ofertaDisciplina.getCurso().getIdCurso());
-        query.setParameter("id_disc", ofertaDisciplina.getDisciplina().getId());
+        query.setParameter("id_disc", ofertaDisciplina.getDisciplina().getIdDisciplina());
+        query.setParameter("ano", ofertaDisciplina.getAno());
+        query.setParameter("semestre", ofertaDisciplina.getSemestre());
         query.executeUpdate();
     }
     @Transactional
@@ -55,6 +59,22 @@ public class OfertaDisciplinaRepository {
         if (ofertaDisciplina != null){
             em.remove(ofertaDisciplina);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<OfertaDisciplina> findByDisciplina(int idDisciplina) {
+        String sql = "SELECT * FROM oferta_disciplina WHERE id_disc = :idDisciplina ORDER BY ano, semestre";
+        Query query = em.createNativeQuery(sql, OfertaDisciplina.class);
+        query.setParameter("idDisciplina", idDisciplina);
+        return query.getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<OfertaDisciplina> findByProfessor(int idProfessor) {
+        String sql = "SELECT * FROM oferta_disciplina WHERE id_professor = :idProfessor ORDER BY ano, semestre";
+        Query query = em.createNativeQuery(sql, OfertaDisciplina.class);
+        query.setParameter("idProfessor", idProfessor);
+        return query.getResultList();
     }
 
 }

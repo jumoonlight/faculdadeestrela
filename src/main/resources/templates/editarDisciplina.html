@@ -15,10 +15,10 @@
         <div class="principal"></div>
           <form method="post" th:action="@{/atualizarDisciplina}">
              <h1>Editar Disciplina</h1>
-             <a th:href="@{/disciplina/{id}/referencias(id=${disciplina.id})}">
+             <a th:href="@{/disciplina/{id}/referencias(id=${disciplina.idDisciplina})}">
              > Gerenciar Referências
              </a>
-             <input type="hidden" name="id" th:value="${disciplina.id}">
+             <input type="hidden" name="id" th:value="${disciplina.idDisciplina}">
              <label>Nome da Disciplina:</label>
              <input type="text" th:name="nome" th:value="${disciplina.nome}" required>
              <label>Descrição da Disciplina: </label>

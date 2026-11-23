@@ -25,12 +25,12 @@ public class Disciplina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_disc")
-    private int id;    
-    public int getId() {
-        return id;
+    private Integer idDisciplina;    
+    public Integer getIdDisciplina() {
+        return idDisciplina;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setTdDisciplina(Integer idDisciplina) {
+        this.idDisciplina = idDisciplina;
     }
 
     @Column(name = "nome")

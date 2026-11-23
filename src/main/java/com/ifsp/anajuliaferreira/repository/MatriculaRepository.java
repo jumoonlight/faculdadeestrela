@@ -56,4 +56,19 @@ public class MatriculaRepository {
         query.executeUpdate();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Matricula> findByAluno(int idAluno) {
+        String sql = "SELECT * FROM matricula WHERE id_aluno = :idAluno ORDER BY id_matricula";
+        Query query = em.createNativeQuery(sql, Matricula.class);
+        query.setParameter("idAluno", idAluno);
+        return query.getResultList();
+}
+
+  @SuppressWarnings("unchecked")
+    public List<Matricula> findByOferta(int idOferta) {
+        String sql = "SELECT * FROM matricula WHERE id_oferta_disc = :idOferta ORDER BY id_matricula";
+        Query query = em.createNativeQuery(sql, Matricula.class);
+        query.setParameter("idOferta", idOferta);
+        return query.getResultList();
+    }
 }

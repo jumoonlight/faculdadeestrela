@@ -12,12 +12,15 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "oferta_disciplina")
 public class OfertaDisciplina {
-    public OfertaDisciplina() {
-    }
-    public OfertaDisciplina(Professor professor, Curso curso, Disciplina disciplina) {
+   
+    public OfertaDisciplina(Professor professor, Curso curso, Disciplina disciplina, Integer ano, Integer semestre) {
         this.professor = professor;
         this.curso = curso;
         this.disciplina = disciplina;
+        this.ano = ano;
+        this.semestre = semestre;}
+
+    public OfertaDisciplina() {
     }
 
     @Id
@@ -59,6 +62,27 @@ public class OfertaDisciplina {
     }
     public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
+    }
+    
+    @Column(name = "ano")
+    private Integer ano;
+
+    public int getAno() {
+        return ano;
+    }
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    @Column(name = "semestre")
+    private Integer semestre;
+    
+    
+    public int getSemestre() {
+        return semestre;
+    }
+    public void setSemestre(int semestre) {
+        this.semestre = semestre;
     }
 
 }

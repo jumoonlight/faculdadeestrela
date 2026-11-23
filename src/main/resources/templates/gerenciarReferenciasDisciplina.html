@@ -15,7 +15,7 @@
         <span th:text="${erro}"></span>
     </div>
 
-    <form method="post" th:action="@{/disciplina/{id}/referencias/adicionar(id=${disciplina.id})}">
+    <form method="post" th:action="@{/disciplina/{id}/referencias/adicionar(id=${disciplina.idDisciplina})}">
         <label>Adicionar livro de referência:</label>
         <br>
         <br>
@@ -59,7 +59,7 @@
                     <td th:text="${r.livro.autor}"></td>
                     <td th:text="${r.livro.editora}"></td>
                     <td>
-                        <a th:href="@{/disciplina/{id}/referencias/{id_ref}/remover(id=${disciplina.id}, id_ref=${r.id})}"
+                        <a th:href="@{/disciplina/{id}/referencias/{id_ref}/remover(id=${disciplina.idDisciplina}, id_ref=${r.id})}"
                            class="detalhes deletar">Remover</a>
                     </td>
                 </tr>
@@ -68,7 +68,7 @@
     </div>
 
     <br>
-    <form method="get" th:action="@{/disciplina/{id}/referencias/finalizar(id=${disciplina.id})}">
+    <form method="get" th:action="@{/disciplina/{id}/referencias/finalizar(id=${disciplina.idDisciplina})}">
         <button type="submit">Finalizar e voltar para a lista de Disciplinas</button>
     </form>
 </body>

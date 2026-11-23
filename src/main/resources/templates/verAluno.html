@@ -41,7 +41,7 @@
         </thead>
         <tbody>
             <tr th:each="aluno : ${alunos}">
-                <td><span th:text="${aluno.id}"></span></td>
+                <td><span th:text="${aluno.idAluno}"></span></td>
                 <td th:text="${aluno.nome}"></td>
                 <td th:text="${aluno.cpf}"></td>
                 <td th:text="${aluno.dataNasc}"></td>
@@ -52,12 +52,12 @@
                 <td th:text="${aluno.cep}"></td>
                 <td th:text="${aluno.uf}"></td>
                 <td th:text="${aluno.prontuario}"></td>
-                <td th:text="${aluno.ano_ingresso}"></td>
-                <td th:text="${aluno.ano_saida}"></td>
+                <td th:text="${aluno.anoIngresso}"></td>
+                <td th:text="${aluno.anoSaida}"></td>
                 <td>
-                      <a th:href="@{/aluno/{id}(id=${aluno.id})}" class="btn-tabela btn-ver">Ver Detalhes</a>
-                      <a th:href="@{/aluno/{id}/editar(id=${aluno.id})}" class="btn-tabela btn-editar">Editar</a>
-                      <a th:href="@{/aluno/{id}/deletar(id=${aluno.id})}" class="detalhes deletar">Remover</a>
+                      <a th:href="@{/aluno/{id}(id=${aluno.idAluno})}" class="btn-tabela btn-ver">Ver Detalhes</a>
+                      <a th:href="@{/aluno/{id}/editar(id=${aluno.idAluno})}" class="btn-tabela btn-editar">Editar</a>
+                      <a th:href="@{/aluno/{id}/deletar(id=${aluno.idAluno})}" class="detalhes deletar">Remover</a>
                 </td>
              </tr>
         </tbody>

@@ -82,13 +82,13 @@ public class AlunoRepository {
             Number idGerado = (Number) em.createNativeQuery("SELECT LAST_INSERT_ID()").getSingleResult();
 
             
-            String sqlAluno = "INSERT INTO aluno (id_pessoa, prontuario, nome_mae, nome_pai, contato_responsavel, ano_ingresso, ano_saida, id_curso) VALUES (:id, :prontuario, :nomeMae, :nomePai, :contato, :anoIngresso, :anoSaida, :idCurso)";
+            String sqlAluno = "INSERT INTO aluno (id_pessoa, prontuario, nome_mae, nome_pai, contato_responsavel, ano_ingresso, ano_saida, id_curso) VALUES (:id, :prontuario, :nomeMae, :nomePai, :contatoResponsavel, :anoIngresso, :anoSaida, :idCurso)";
             Query qAluno = em.createNativeQuery(sqlAluno);
             qAluno.setParameter("id", idGerado.intValue());
             qAluno.setParameter("prontuario", aluno.getProntuario());
             qAluno.setParameter("nomeMae", aluno.getNomeMae());
             qAluno.setParameter("nomePai", aluno.getNomePai());
-            qAluno.setParameter("contato", aluno.getContatoResponsavel());
+            qAluno.setParameter("contatoResponsavel", aluno.getContatoResponsavel());
             qAluno.setParameter("anoIngresso", aluno.getAnoIngresso());
             qAluno.setParameter("anoSaida", aluno.getAnoSaida());
             qAluno.setParameter("idCurso", aluno.getIdCurso());
@@ -116,12 +116,12 @@ public class AlunoRepository {
             query.setParameter("cep", aluno.getCep());
             query.setParameter("uf", aluno.getUf());
 
-            String sqlAluno = "UPDATE aluno SET prontuario = :prontuario, nome_mae = :nomeMae, nome_pai = :nomePai, contato_responsavel = :contato, ano_ingresso = :anoIngresso, ano_saida = :anoSaida, id_curso = :idCurso WHERE id_pessoa = :id";
+            String sqlAluno = "UPDATE aluno SET prontuario = :prontuario, nome_mae = :nomeMae, nome_pai = :nomePai, contato_responsavel = :contatoResponsavel, ano_ingresso = :anoIngresso, ano_saida = :anoSaida, id_curso = :idCurso WHERE id_pessoa = :id";
             Query qAluno = em.createNativeQuery(sqlAluno);
             qAluno.setParameter("prontuario", aluno.getProntuario());
             qAluno.setParameter("nomeMae", aluno.getNomeMae());
             qAluno.setParameter("nomePai", aluno.getNomePai());
-            qAluno.setParameter("contato", aluno.getContatoResponsavel());
+            qAluno.setParameter("contatoResponsavel", aluno.getContatoResponsavel());
             qAluno.setParameter("anoIngresso", aluno.getAnoIngresso());
             qAluno.setParameter("anoSaida", aluno.getAnoSaida());
             qAluno.setParameter("idCurso", aluno.getIdCurso());

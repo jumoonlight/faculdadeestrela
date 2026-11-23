@@ -37,17 +37,32 @@ public class OfertaDisciplinaController {
          return "ofertadisciplinaFormulario";
     }
     @PostMapping("/cadastrarOfertaDisciplina")
-    public String cadastrarOfertaDisciplina(@RequestParam Long id_prof, @RequestParam Long id_curso, @RequestParam Long id_disc, Model model) {
+    public String cadastrarOfertaDisciplina(@RequestParam Long id_prof, @RequestParam Long id_curso, @RequestParam Long id_disc,  @RequestParam Integer ano, @RequestParam Integer semestre, Model model) {
          Professor professor = professorRepository.findByID(id_prof);
          Curso curso = cursoRepository.findByID(id_curso);
          Disciplina disciplina = disciplinaRepository.findByID(id_disc);
-         ofertaDisciplinaRepository.save(new OfertaDisciplina(professor,curso,disciplina));
-         return "redirect:/listarOfertasDisciplina";
+         ofertaDisciplinaRepository.save(new OfertaDisciplina(professor,curso,disciplina, ano, semestre));
+         return "redirect:/ofertadisciplina/listar";
     }
-     @GetMapping("/listarOfertasDisciplina")
-    public String list(Model model){
-        List<OfertaDisciplina> ofertas = ofertaDisciplinaRepository.findAll();
+     @GetMapping("/ofertadisciplina/listar")
+    public String list( @RequestParam(value = "idDisciplina", required = false) Integer idDisciplina,
+            @RequestParam(value = "idProfessor", required = false) Integer idProfessor,
+            Model model) {
+
+        List<OfertaDisciplina> ofertas;
+        if (idDisciplina != null && idDisciplina > 0) {
+            ofertas = ofertaDisciplinaRepository.findByDisciplina(idDisciplina);
+        } else if (idProfessor != null && idProfessor > 0) {
+            ofertas = ofertaDisciplinaRepository.findByProfessor(idProfessor);
+        } else {
+            ofertas = ofertaDisciplinaRepository.findAll();
+        }
+
         model.addAttribute("ofertas", ofertas);
+        model.addAttribute("disciplinas", disciplinaRepository.findAll());
+        model.addAttribute("professores", professorRepository.findAll());
+        model.addAttribute("idDisciplinaFiltro", idDisciplina);
+        model.addAttribute("idProfessorFiltro", idProfessor);
         return "verOfertaDisciplina";
     }
     @GetMapping("/oferta/{id}")
@@ -69,7 +84,7 @@ public class OfertaDisciplinaController {
         return "editarOfertaDisciplina";
     }
     @PostMapping("/atualizarOfertaDisciplina")
-    public String atualizarOferta(@RequestParam long id,@RequestParam Long id_prof, @RequestParam Long id_curso, @RequestParam Long id_disc){
+    public String atualizarOferta(@RequestParam long id,@RequestParam Long id_prof, @RequestParam Long id_curso, @RequestParam Long id_disc, @RequestParam Integer ano, @RequestParam Integer semestre){
         OfertaDisciplina oferta = ofertaDisciplinaRepository.findByID(id);
         Professor professor = professorRepository.findByID(id_prof);
         Curso curso = cursoRepository.findByID(id_curso);
@@ -77,8 +92,10 @@ public class OfertaDisciplinaController {
         oferta.setProfessor(professor);
         oferta.setCurso(curso);
         oferta.setDisciplina(disciplina);
+        oferta.setAno(ano);
+        oferta.setSemestre(semestre);
         ofertaDisciplinaRepository.update(oferta);
-        return "redirect:/listarOfertasDisciplina";
+        return "redirect:/ofertadisciplina/listar";
     }
     @GetMapping("/oferta/{id}/deletar")
     public String excluirOferta(@PathVariable long id, RedirectAttributes redirectAttributes){
@@ -88,7 +105,7 @@ public class OfertaDisciplinaController {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("erro", "Não é possível excluir a oferta de disciplina pois ela está relacionada a uma matrícula. Por favor, exclua a matrícula antes de excluir a oferta de disciplina.");
         }
-         return "redirect:/listarOfertasDisciplina";
+         return "redirect:/ofertadisciplina/listar";
     }
 }
 

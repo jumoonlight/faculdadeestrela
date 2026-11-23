@@ -17,6 +17,18 @@
                 <a th:href="@{/telainicial}" class="btn-voltar">Voltar para a tela inicial</a>
             </div>
     <div th:unless="${matriculas.isEmpty()}">
+
+      <form th:action="@{/listarMatriculas}" method="get" class="d-flex align-items-center gap-1">
+                <select name="idAluno" class="form-select filtro-select" onchange="this.form.submit()">
+                    <option value="">Todos alunos</option>
+                    <option th:each="aluno : ${alunos}"
+                            th:value="${aluno.idAluno}"
+                            th:text="${aluno.prontuario + ' - ' + aluno.nome}"
+                            th:selected="${aluno.idAluno == idAlunoFiltro}">
+                    </option>
+                </select>
+            </form>
+
     <table border="1px">
         <thead>
             <tr>

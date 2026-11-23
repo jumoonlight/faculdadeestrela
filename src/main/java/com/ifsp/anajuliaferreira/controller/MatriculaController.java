@@ -39,9 +39,24 @@ public class MatriculaController {
          return "redirect:/listarMatriculas";
     }
      @GetMapping("/listarMatriculas")
-    public String list(Model model){
-        List<Matricula> matricula = matriculaRepository.findAll();
-        model.addAttribute("matriculas", matricula);
+    public String list(@RequestParam(value = "idAluno", required = false) Integer idAluno,
+            @RequestParam(value = "idOferta", required = false) Integer idOferta,
+            Model model) {
+
+        List<Matricula> matriculas;
+        if (idAluno != null && idAluno > 0) {
+            matriculas = matriculaRepository.findByAluno(idAluno);
+        } else if (idOferta != null && idOferta > 0) {
+            matriculas = matriculaRepository.findByOferta(idOferta);
+        } else {
+            matriculas = matriculaRepository.findAll();
+        }
+
+        model.addAttribute("matriculas", matriculas);
+        model.addAttribute("alunos", alunoRepository.findAll());
+        model.addAttribute("ofertas", ofertaDisciplinaRepository.findAll());
+        model.addAttribute("idAlunoFiltro", idAluno);
+        model.addAttribute("idOfertaFiltro", idOferta);
         return "verMatricula";
     }
     @GetMapping("/matricula/{id}")

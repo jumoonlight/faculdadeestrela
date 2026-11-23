@@ -13,9 +13,9 @@
 <body>
     <div class="conteudo">
         <div class="principal"></div>
-          <form method="post" th:action="@{/atualizarAluno}">
+          <form method="post" th:action="@{/aluno/salvar}">
              <h1>Editar Aluno</h1>
-             <input type="hidden" name="id" th:value="${aluno.id}">
+             <input type="hidden" name="id" th:value="${aluno.idAluno}">
              <label>Nome:</label>
              <input type="text" th:name="nome" th:value="${aluno.nome}" required>
              <label>CPF: </label>
@@ -66,9 +66,9 @@
             <label>Prontuário:</label>
             <input type="text" th:name="pront" th:value="${aluno.prontuario}" required>
             <label>Ano de ingresso: </label>
-            <input type="number" th:name="ano_ingresso" th:value="${aluno.ano_ingresso}" required>
+            <input type="number" th:name="ano_ingresso" th:value="${aluno.anoIngresso}" required>
             <label>Ano de saída: </label>
-            <input type="number" th:name="ano_saida" th:value="${aluno.ano_saida}" required>
+            <input type="number" th:name="ano_saida" th:value="${aluno.anoSaida}" required>
             <button type="submit">Editar Aluno</button>
           </form>
         </div>
