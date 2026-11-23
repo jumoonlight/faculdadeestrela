@@ -17,7 +17,6 @@
     <h1>Ofertas de Disciplinas</h1>
     <div th:if="${ofertas.isEmpty()}" class="sem-resultados">
                 <p class="sem-resultados">Nenhuma oferta foi encontrada.</p>
-                <a th:href="@{/telainicial}" class="btn-voltar">Voltar para a tela inicial</a>
     </div>
     <div th:unless="${ofertas.isEmpty()}">
     <div th:if="${erro}" style="color: red; font-weight: bold;">

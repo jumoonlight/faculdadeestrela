@@ -3,6 +3,7 @@ header{
     justify-content: space-between;
     height: 10%;
     background-color: white;
+    
 }
 
 .perfil{
@@ -16,4 +17,5 @@ a{
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    
 }

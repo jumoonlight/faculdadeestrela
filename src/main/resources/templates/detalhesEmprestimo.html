@@ -11,8 +11,8 @@
     <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
+    <div th:replace="fragments/cabecalho :: cabecalho"></div>
     <div class="detalhes">
-        <div th:replace="fragments/cabecalho :: cabecalho"></div>
         <h1>Detalhes do emprestimos</h1>
         <p>Data de Empréstimo: <span th:text="${emprestimo.dataEmprestimo}"></span></p>
         <p>Data de Devolução: <span th:text="${emprestimo.dataDevolucao}"></span></p>
