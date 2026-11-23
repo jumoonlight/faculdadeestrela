@@ -53,6 +53,10 @@ public class CursoRepository {
     }
     @Transactional
     public void deleteById(Long id){
+        String sqlOferta = "DELETE FROM  oferta_disciplina WHERE id_curso = :id_curso";
+        Query queryOferta = em.createNativeQuery(sqlOferta);
+        queryOferta.setParameter("id_curso", id);
+        queryOferta.executeUpdate();
         String sql = "DELETE FROM cursos WHERE id_curso = :id_curso";
         Query query = em.createNativeQuery(sql);
         query.setParameter("id_curso", id);

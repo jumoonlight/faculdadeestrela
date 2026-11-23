@@ -72,6 +72,10 @@ public class BibliotecarioRepository {
         Query query = em.createNativeQuery(sql);
         query.setParameter("id_pessoa", id);
         query.executeUpdate();
+        String sqlBiblio = "DELETE FROM pessoa WHERE id_pessoa = :id_pessoa";
+        Query queryBiblio = em.createNativeQuery(sqlBiblio);
+        queryBiblio.setParameter("id_pessoa", id);
+        queryBiblio.executeUpdate();
     }
     @Transactional
     public Bibliotecario findByCpf(String cpf) {

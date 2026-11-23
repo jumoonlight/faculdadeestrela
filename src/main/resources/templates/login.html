@@ -1,134 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #f0f2f5;
-      padding: 16px;
-    }
-
-    .login-box {
-      width: 100%;
-      max-width: 380px;
-      background-color: #ffffff;
-      padding: 32px;
-      border-radius: 10px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .login-box h1 {
-      font-size: 24px;
-      margin-bottom: 24px;
-      text-align: center;
-      color: #1c1e21;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 14px;
-      color: #4b4f56;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccd0d5;
-      border-radius: 6px;
-      font-size: 15px;
-    }
-
-    .form-group input:focus {
-      outline: none;
-      border-color: #1877f2;
-    }
-
-    .form-options {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      margin-bottom: 20px;
-      color: #4b4f56;
-    }
-
-    .form-options a,
-    .signup-link a {
-      color: #1877f2;
-      text-decoration: none;
-    }
-
-    .form-options a:hover,
-    .signup-link a:hover {
-      text-decoration: underline;
-    }
-
-    .btn-login {
-      width: 100%;
-      padding: 12px;
-      background-color: #1877f2;
-      border: none;
-      border-radius: 6px;
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .btn-login:hover {
-      background-color: #166fe5;
-    }
-
-    .signup-link {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 14px;
-      color: #4b4f56;
-    }
-    .erro{
-      margin: 5%;
-      background-color: #db4d48;
-      font-weight: bold;
-      color: #501207;
-      text-align: center;
-      padding: 7%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <script th:src="@{/js/script.js}" defer></script>
+    <script src="https://kit.fontawesome.com/70d231ef29.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="login-box">
-    <h1>Entrar</h1>
-    <form action="/login" method="post">
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="username" id="username" name="username" placeholder="seu@email.com" required />
-      </div>
-
-      <div class="form-group">
-        <label for="password">Senha</label>
-        <input type="password" id="password" name="password" placeholder="Digite sua senha" required />
-      </div>
-      <button type="submit" class="btn-login">Entrar</button>
-      <p th:if="${param.erro}" class="erro">Usuário ou senha inválidos.</p>
-    </form>
-  </div>
+    <div class="caixa">
+         <h1>Login</h1>
+         <form  th:action="@{/login}" method="post">
+             <label for="email">E-mail:</label>
+             <input type="username" id="username" name="username" placeholder="seu@email.com" required>
+             <br>
+             <label>Senha: </label>
+             <div class="senha">
+               <input type="password" th:name="password"  id="password" placeholder="Digite sua senha" required>
+               <i class="fa-solid fa-eye" id="btn-password" onclick="mostrarSenha()"></i>
+             </div>
+             <br>
+             <br>
+             <button type="submit">Login</button>
+         </form>
+    </div>
 </body>
 </html>

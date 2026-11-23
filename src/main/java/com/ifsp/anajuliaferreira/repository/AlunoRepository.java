@@ -100,10 +100,23 @@ public class AlunoRepository {
     }
     @Transactional
     public void deleteById(Long id){
-        String sql = "DELETE FROM aluno WHERE id_pessoa = :id_pessoa";
+        String sql = "DELETE FROM emprestimos WHERE id_aluno = :id_aluno";
         Query query = em.createNativeQuery(sql);
-        query.setParameter("id_pessoa", id);
+        query.setParameter("id_aluno", id);
         query.executeUpdate();
+        String sqlMatricula = "DELETE FROM matricula WHERE id_aluno = :id_aluno";
+        Query queryMatricula = em.createNativeQuery(sqlMatricula);
+        queryMatricula.setParameter("id_aluno", id);
+        queryMatricula.executeUpdate();
+        String sqlAluno = "DELETE FROM aluno WHERE id_pessoa = :id_pessoa";
+        Query queryAluno = em.createNativeQuery(sqlAluno);
+        queryAluno.setParameter("id_pessoa", id);
+        queryAluno.executeUpdate();
+        String sqlPessoa = "DELETE FROM pessoa WHERE id_pessoa = :id_pessoa";
+        Query queryPessoa = em.createNativeQuery(sqlPessoa);
+        queryPessoa.setParameter("id_pessoa", id);
+        queryMatricula.executeUpdate();
+
     }
     @Transactional
     public Aluno findByCpf(String cpf) {

@@ -58,10 +58,20 @@ public class DisciplinaRepository {
     }
     @Transactional
     public void deleteById(Long id){
-        String sql = "DELETE FROM disciplinas WHERE id_disc = :id_disc";
+        String sqlOferta = "DELETE FROM  oferta_disciplina WHERE id_disc= :id_disc";
+        Query queryOferta = em.createNativeQuery(sqlOferta);
+        queryOferta.setParameter("id_disc", id);
+        queryOferta.executeUpdate();
+
+        String sql = "DELETE FROM referencias WHERE id_disc = :id_disc";
         Query query = em.createNativeQuery(sql);
         query.setParameter("id_disc", id);
         query.executeUpdate();
+
+        String sqlDisciplina = "DELETE FROM disciplinas WHERE id_disc = :id_disc";
+        Query queryDisciplina = em.createNativeQuery(sqlDisciplina);
+        queryDisciplina.setParameter("id_disc", id);
+        queryDisciplina.executeUpdate();
     }
 
 }

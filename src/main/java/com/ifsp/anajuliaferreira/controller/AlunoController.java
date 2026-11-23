@@ -154,7 +154,7 @@ public class AlunoController {
             alunoRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
-            redirectAttributes.addFlashAttribute("erro", "Não é possível excluir o aluno pois ele tem uma matrícula. Por favor, exclua a matrícula antes de excluir o aluno.");
+            redirectAttributes.addFlashAttribute("erro", "Não é possível excluir o aluno pois ele tem uma matrícula ou um empréstimo. Por favor, exclua a matrícula ou o empréstimo antes de excluir o aluno.");
             return "redirect:/listarAlunos";
         }
         return "redirect:/listarAlunos";

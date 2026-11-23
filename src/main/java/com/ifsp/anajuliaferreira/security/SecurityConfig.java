@@ -19,7 +19,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/login", "/css/**", "/error").permitAll()
+                        .requestMatchers("/login", "/css/**", "/js/**", "/error").permitAll()
                         .requestMatchers("/formularioAluno",
                         "/cadastrarAluno",
                         "/listarAlunos",
@@ -69,28 +69,12 @@ public class SecurityConfig {
                             "/cadastrarLivro",
                             "/listarLivros",
                             "/livro/**",
-                            "/listarProfessores/*",
-                            "/professor/*",
                             "/atualizarLivro").hasAnyRole("ADMIN","BIBLIOTECARIO")
-                          .requestMatchers("/listarAlunos",
-                            "/aluno/*").hasAnyRole("ADMIN","BIBLIOTECARIO","PROFESSOR")
-                          .requestMatchers("/listarCursos",
-                            "/curso/*",
-                            "/listarMatriculas",
-                            "/matricula/*",
-                            "/listarOfertasDisciplina",
-                            "/oferta/*").hasAnyRole("ADMIN","ALUNO","PROFESSOR")
                           .requestMatchers("/formularioEmprestimo",
                             "/cadastrarEmprestimo",
                             "/listarEmprestimos",
                             "/emprestimo/**",
-                            "/atualizarEmprestimo",
-                            "/listarLivros",
-                            "/livro/*",
-                            "/listarReferencias",
-                            "/referencia/*",
-                            "/listarDisciplinas",
-                            "/disciplina/*"
+                            "/atualizarEmprestimo"
                           ).hasAnyRole("ADMIN","ALUNO","PROFESSOR","BIBLIOTECARIO")
                           .anyRequest().authenticated() 
                 )

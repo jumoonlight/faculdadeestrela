@@ -69,10 +69,15 @@ public class AdminRepository {
     }
     @Transactional
     public void deleteById(Long id){
-        String sql = "DELETE FROM admin WHERE id_pessoa = :id_pessoa";
+        String sql = "DELETE FROM pessoa WHERE id_pessoa = :id_pessoa";
         Query query = em.createNativeQuery(sql);
         query.setParameter("id_pessoa", id);
         query.executeUpdate();
+
+        String sqlAdministrador = "DELETE FROM admin WHERE id_pessoa = :id_pessoa";
+        Query queryAdministrador= em.createNativeQuery(sqlAdministrador);
+        queryAdministrador.setParameter("id_pessoa", id);
+        queryAdministrador.executeUpdate();
     }
     @Transactional
     public Admin findByCpf(String cpf) {

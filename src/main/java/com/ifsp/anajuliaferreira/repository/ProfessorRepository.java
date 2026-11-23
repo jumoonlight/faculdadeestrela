@@ -100,7 +100,15 @@ public class ProfessorRepository {
     }
     @Transactional
     public void deleteById(Long id){
-        String sql = "DELETE FROM professor WHERE id_pessoa = :id_pessoa";
+        String sqlOferta = "DELETE FROM oferta_disciplina WHERE id_professor = :id_professor";
+        Query queryOferta = em.createNativeQuery(sqlOferta);
+        queryOferta.setParameter("id_professor", id);
+        queryOferta.executeUpdate();
+        String sqlProfessor = "DELETE FROM professor WHERE id_pessoa = :id_pessoa";
+        Query queryProfessor = em.createNativeQuery(sqlProfessor);
+        queryProfessor.setParameter("id_aluno", id);
+        queryProfessor.executeUpdate();
+        String sql = "DELETE FROM pessoa WHERE id_pessoa = :id_pessoa";
         Query query = em.createNativeQuery(sql);
         query.setParameter("id_pessoa", id);
         query.executeUpdate();

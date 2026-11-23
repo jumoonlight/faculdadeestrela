@@ -58,6 +58,14 @@ public class LivroRepository {
     }
     @Transactional
     public void deleteById(Long id){
+        String sqlEmprestimo = "DELETE FROM emprestimos WHERE id_livro = :id_livro";
+        Query queryEmprestimo = em.createNativeQuery(sqlEmprestimo);
+        queryEmprestimo.setParameter("id_livro", id);
+        queryEmprestimo.executeUpdate();
+        String sqlReferencia = "DELETE FROM referencias WHERE id_livro= :id_livro";
+        Query queryReferencia = em.createNativeQuery(sqlReferencia);
+        queryReferencia.setParameter("id_livro", id);
+        queryReferencia.executeUpdate();
         String sql = "DELETE FROM livros WHERE id_livro = :id_livro";
         Query query = em.createNativeQuery(sql);
         query.setParameter("id_livro", id);
