@@ -33,7 +33,7 @@ conta é desconectada automaticamente.
   "create table sistemamatricula"
    OBS: Verifique o arquivo application.properties para conferir se seu usuário e senha são os mesmos do
   arquivo. Caso não seja, mude-os para os do seu computador.
-- Após baixado, abra a pasta onde se encontra a faculdadeestrela e abra o terminal. Digite:
+- Acesse a pasta onde se encontra a faculdadeestrela  e abra com o editor de código fonte. Dentro do editor, inicie o terminal e digite:
    "mvn spring-boot:run"
 - Abra seu navegador padrão. Na barra de endereços, digite:
   "localhost:8080/login"
