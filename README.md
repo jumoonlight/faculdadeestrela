@@ -21,4 +21,23 @@ e Oferta de Disciplina.
 ## Cookies
 São inseridos a partir do instante que o usuário realiza login no sistema. Após 30 minutos de inatividade, a
 conta é desconectada automaticamente.
+## Requisitos para rodar o Sistema:
+  - MySQL 8.0
+  - Java versão 21 (pelo menos)
+  - Um editor de código-fonte (VSCode recomendado)
+  - Navegador atualizado para a execução correta do programa
+## Como rodar o sistema:
+- Baixe o arquivo em seu computador ou  copie o link desse repositório e execute no terminal do Java:
+  "git clone <link-do-repositório>
+- Após baixado, abra o programa MySql e execute o código:
+  "create table sistemamatricula"
+   OBS: Verifique o arquivo application.properties para conferir se seu usuário e senha são os mesmos do
+  arquivo. Caso não seja, mude-os para os do seu computador.
+- Após baixado, abra a pasta onde se encontra a faculdadeestrela e abra o terminal. Digite:
+   "mvn spring-boot:run"
+- Abra seu navegador padrão. Na barra de endereços, digite:
+  "localhost:8080/login"
+- Você seria redirecionado a tela de login da faculdade estrela.
+
+  
 # Obrigadas por verem nosso sistema!!
