@@ -13,9 +13,9 @@
 <body>
     <div class="conteudo">
         <div class="principal"></div>
-          <form method="post" th:action="@{/aluno/salvar}">
+          <form method="post" th:object="${aluno}" th:action="@{/aluno/salvar}">
              <h1>Editar Aluno</h1>
-             <input type="hidden" name="id" th:value="${aluno.idAluno}">
+             <input type="hidden" name="idAluno" th:value="${aluno.idAluno}">
              <label>Nome:</label>
              <input type="text" th:name="nome" th:value="${aluno.nome}" required>
              <label>CPF: </label>
@@ -32,6 +32,12 @@
              <input type="text" th:name="cidade" th:value="${aluno.cidade}" required>
              <label>CEP: </label>
              <input type="text" th:name="cep" th:value="${aluno.cep}" required>
+              <label>Nome da mãe: </label>
+             <input type="text"  th:name="nomeMae" th:value="${aluno.nomeMae}"  required>
+             <label>Nome do pai: </label>
+             <input type="text"  th:name="nomePai" th:value="${aluno.nomePai}"  required>
+             <label>Contato do Responsável (caso o aluno seja menor de idade) </label>
+             <input type="text"  th:name="contatoResponsavel" th:value="${aluno.contatoResponsavel}" >
              <label>UF: </label>
              <select th:name="uf" required>
                 <option value="">Selecione...</option>
@@ -64,11 +70,18 @@
                 <option value="RS" th:selected="${aluno.uf == 'RS'}">RS</option>
             </select>
             <label>Prontuário:</label>
-            <input type="text" th:name="pront" th:value="${aluno.prontuario}" required>
+            <input type="text" th:name="prontuario" th:value="${aluno.prontuario}" required>
             <label>Ano de ingresso: </label>
-            <input type="number" th:name="ano_ingresso" th:value="${aluno.anoIngresso}" required>
+            <input type="number" th:name="anoIngresso" th:value="${aluno.anoIngresso}" required>
             <label>Ano de saída: </label>
-            <input type="number" th:name="ano_saida" th:value="${aluno.anoSaida}" required>
+            <input type="number" th:name="anoSaida" th:value="${aluno.anoSaida}">
+
+             <label>Curso</label>
+                    <select class="form-select"  th:field="*{idCurso}" required>
+                        <option value="">Selecione</option>
+                        <option th:each="curso : ${cursos}" th:value="${curso.idCurso}" th:text="${curso.nome}"></option>
+                    </select>
+
             <button type="submit">Editar Aluno</button>
           </form>
         </div>

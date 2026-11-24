@@ -25,12 +25,12 @@ public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_curso")
-    private int id;
+    private int idCurso;
     public int getIdCurso() {
-        return id;
+        return idCurso;
     }
     public void setIdCurso(int id) {
-        this.id = id;
+        this.idCurso = id;
     }
 
     @Column(name = "nome")

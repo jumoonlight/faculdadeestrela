@@ -115,6 +115,8 @@ public class AlunoRepository {
             query.setParameter("cidade", aluno.getCidade());
             query.setParameter("cep", aluno.getCep());
             query.setParameter("uf", aluno.getUf());
+            query.executeUpdate();
+            
 
             String sqlAluno = "UPDATE aluno SET prontuario = :prontuario, nome_mae = :nomeMae, nome_pai = :nomePai, contato_responsavel = :contatoResponsavel, ano_ingresso = :anoIngresso, ano_saida = :anoSaida, id_curso = :idCurso WHERE id_pessoa = :id";
             Query qAluno = em.createNativeQuery(sqlAluno);

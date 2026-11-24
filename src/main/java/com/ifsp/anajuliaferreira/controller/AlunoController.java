@@ -124,7 +124,7 @@ public class AlunoController {
         aluno.setCidade(cidade);
         aluno.setUf(uf);
         aluno.setDataNasc(dataNascimento);
-        aluno.setCpf(cpf);
+        aluno.setCep(cep);        
         aluno.setProntuario(prontuario);
         aluno.setNomeMae(nomeMae);
         aluno.setNomePai(nomePai);
@@ -158,7 +158,7 @@ public class AlunoController {
         return "editarAluno";
     }
 
-    @GetMapping("/{id}//deletar")
+    @GetMapping("/{id}/deletar")
     public String excluir(@PathVariable int id, RedirectAttributes redirect) {
         try {
             alunoRepository.delete(id);
