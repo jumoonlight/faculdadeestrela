@@ -1,5 +1,5 @@
 package com.ifsp.anajuliaferreira.controller;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import com.ifsp.anajuliaferreira.model.Livro;
 import com.ifsp.anajuliaferreira.repository.AlunoRepository;
 import com.ifsp.anajuliaferreira.repository.EmprestimoRepository;
 import com.ifsp.anajuliaferreira.repository.LivroRepository;
+import org.springframework.security.core.Authentication;
 
 
 
@@ -26,16 +27,27 @@ public class EmprestimoController {
     private LivroRepository livroRepository;
     @Autowired
     private AlunoRepository alunoRepository;
+
     @GetMapping("/formularioEmprestimo")
-    public String emprestimo(Model model){
+    public String emprestimo(Model model, Authentication authentication){
+
+        boolean ehAluno = authentication.getAuthorities().stream()
+            .anyMatch(a -> a.getAuthority().equals("ROLE_ALUNO"));
+        
+        if (ehAluno) {
+             Aluno logado = (Aluno) alunoRepository.findByEmail(authentication.getName());
+              model.addAttribute("aluno", logado);
+        }
+
          model.addAttribute("livros", livroRepository.findAll());
          model.addAttribute("alunos", alunoRepository.findAll());
          return "emprestimoFormulario";
     }
     @PostMapping("/cadastrarEmprestimo")
-    public String cadastrarEmprestimo(@RequestParam Date data_emprestimo, @RequestParam Date data_devolucao,  @RequestParam Long id_aluno, @RequestParam Long id_livro) {
+    public String cadastrarEmprestimo(@RequestParam LocalDate data_emprestimo,  @RequestParam Long id_aluno, @RequestParam Long id_livro) {
          Aluno aluno = alunoRepository.findByID(id_aluno); 
          Livro livro = livroRepository.findByID(id_livro);
+         LocalDate  data_devolucao = data_emprestimo.plusDays(7);
          emprestimoRepository.save(new Emprestimo(data_emprestimo, data_devolucao,  aluno, livro));
          return "redirect:/listarEmprestimos";
     }
@@ -62,7 +74,7 @@ public class EmprestimoController {
         return "editarEmprestimo";
     }
     @PostMapping("/atualizarEmprestimo")
-    public String atualizarEmprestimo(@RequestParam long id, @RequestParam Date data_emprestimo, @RequestParam Date data_devolucao, @RequestParam Long id_livro, @RequestParam Long id_aluno){
+    public String atualizarEmprestimo(@RequestParam long id, @RequestParam LocalDate data_emprestimo, @RequestParam LocalDate data_devolucao, @RequestParam Long id_livro, @RequestParam Long id_aluno){
         Emprestimo emprestimo = emprestimoRepository.findByID(id);
         Aluno aluno = alunoRepository.findByID(id_aluno);
         Livro livro = livroRepository.findByID(id_livro);

@@ -42,9 +42,9 @@ public class OfertaDisciplinaController {
          Curso curso = cursoRepository.findByID(id_curso);
          Disciplina disciplina = disciplinaRepository.findByID(id_disc);
          ofertaDisciplinaRepository.save(new OfertaDisciplina(professor,curso,disciplina, ano, semestre));
-         return "redirect:/ofertadisciplina/listar";
+         return "redirect:/listarOfertasDisciplina";
     }
-     @GetMapping("/ofertadisciplina/listar")
+     @GetMapping("/listarOfertasDisciplina")
     public String list( @RequestParam(value = "idDisciplina", required = false) Integer idDisciplina,
             @RequestParam(value = "idProfessor", required = false) Integer idProfessor,
             Model model) {
@@ -95,7 +95,7 @@ public class OfertaDisciplinaController {
         oferta.setAno(ano);
         oferta.setSemestre(semestre);
         ofertaDisciplinaRepository.update(oferta);
-        return "redirect:/ofertadisciplina/listar";
+        return "redirect:/listarOfertasDisciplina";
     }
     @GetMapping("/oferta/{id}/deletar")
     public String excluirOferta(@PathVariable long id, RedirectAttributes redirectAttributes){
@@ -105,7 +105,7 @@ public class OfertaDisciplinaController {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("erro", "Não é possível excluir a oferta de disciplina pois ela está relacionada a uma matrícula. Por favor, exclua a matrícula antes de excluir a oferta de disciplina.");
         }
-         return "redirect:/ofertadisciplina/listar";
+         return "redirect:/listarOfertasDisciplina";
     }
 }
 

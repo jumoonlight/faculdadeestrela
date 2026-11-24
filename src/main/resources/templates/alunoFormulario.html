@@ -8,9 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/cabecalho.css}">
     <link rel="stylesheet" th:href="@{/css/formulario.css}">
+    <script th:src="@{/js/script.js}"></script>
+    <script src="https://kit.fontawesome.com/70d231ef29.js" crossorigin="anonymous"></script>
+    
 </head>
 <body>
+    <div th:replace="fragments/cabecalho :: cabecalho"></div>
     <div class="conteudo">
           <form method="post" th:object="${aluno}" th:action="@{/aluno/salvar}" >
              <h1>Cadastro de Aluno</h1>
@@ -88,6 +93,12 @@
                     </select>
 
                 </div>
+             <label>Senha: </label>
+             <div class="senha">
+               <input type="password" th:name="password"  id="password" required>
+               <i class="fa-solid fa-eye" id="btn-password" onclick="mostrarSenha()"></i>
+             </div>
+
              <button type="submit">Cadastrar Aluno</button>
              </form>
         </div>

@@ -1,6 +1,6 @@
 package com.ifsp.anajuliaferreira.controller;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.ifsp.anajuliaferreira.model.Professor;
 import com.ifsp.anajuliaferreira.repository.ProfessorRepository;
@@ -20,6 +21,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 public class ProfessorController {
     @Autowired
     private ProfessorRepository professorRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping("/formularioProfessor")
     public String professor(){
         return "professorFormulario";
@@ -27,7 +32,7 @@ public class ProfessorController {
     @PostMapping("/cadastrarProfessor")
     public String cadastrarProfessor(@RequestParam String nome, 
          @RequestParam String cpf,
-         @RequestParam Date dataNasc, 
+         @RequestParam LocalDate dataNasc, 
          @RequestParam String email, 
          @RequestParam String telefone, 
          @RequestParam String endereco,
@@ -37,6 +42,7 @@ public class ProfessorController {
          @RequestParam String siape,
          @RequestParam String area, 
          @RequestParam String formacao,
+         @RequestParam("password") String password,
          RedirectAttributes redirectAttributes){
             Professor professor = new Professor();
             professor.setNome(nome);
@@ -51,6 +57,8 @@ public class ProfessorController {
             professor.setSiape(siape);
             professor.setArea(area);
             professor.setFormacao(formacao);
+            professor.setPassword(passwordEncoder.encode(password));
+
             if (!Util.validarCPF(cpf)) {
                 redirectAttributes.addFlashAttribute("erro", "CPF inválido!");
                 return "redirect:/formularioProfessor";
@@ -99,7 +107,7 @@ public class ProfessorController {
         return "editarProfessor";
     }
     @PostMapping("/atualizarProfessor")
-    public String atualizarProfessor(@RequestParam long id,@RequestParam String nome, @RequestParam String cpf, @RequestParam Date dataNascimento, @RequestParam String email, @RequestParam String telefone, @RequestParam String endereco, @RequestParam String cidade, @RequestParam String cep, @RequestParam String uf, @RequestParam String siape, @RequestParam String area, @RequestParam String formacao, RedirectAttributes redirectAttributes){
+    public String atualizarProfessor(@RequestParam long id,@RequestParam String nome, @RequestParam String cpf, @RequestParam LocalDate dataNascimento, @RequestParam String email, @RequestParam String telefone, @RequestParam String endereco, @RequestParam String cidade, @RequestParam String cep, @RequestParam String uf, @RequestParam String siape, @RequestParam String area, @RequestParam String formacao, @RequestParam("password") String password, RedirectAttributes redirectAttributes){
         Professor professor = professorRepository.findByID(id);
         professor.setNome(nome);
         professor.setCpf(cpf);
@@ -113,6 +121,8 @@ public class ProfessorController {
         professor.setSiape(siape);
         professor.setArea(area);
         professor.setFormacao(formacao);
+        professor.setPassword(passwordEncoder.encode(password));
+        
         if (!Util.validarCPF(cpf)) {
                 redirectAttributes.addFlashAttribute("erro", "CPF inválido!");
                 return "redirect:/formularioProfessor";

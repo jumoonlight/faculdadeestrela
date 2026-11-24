@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <script th:src="@{/js/script.js}" defer></script>
+    <script src="https://kit.fontawesome.com/70d231ef29.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="caixa">
+         <h1>Login</h1>
+         <form  th:action="@{/login}" method="post">
+             <label for="email">E-mail:</label>
+             <input type="username" id="username" name="username" placeholder="seu@email.com" required>
+             <br>
+             <label>Senha: </label>
+             <div class="senha">
+               <input type="password" th:name="password"  id="password" placeholder="Digite sua senha" required>
+               <i class="fa-solid fa-eye" id="btn-password" onclick="mostrarSenha()"></i>
+             </div>
+             <br>
+             <br>
+             <button type="submit">Login</button>
+         </form>
+    </div>
+</body>
+</html>

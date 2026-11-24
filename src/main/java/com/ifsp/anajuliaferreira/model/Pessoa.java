@@ -1,21 +1,34 @@
 package com.ifsp.anajuliaferreira.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.ifsp.anajuliaferreira.service.PessoaRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 
+
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa {
     public Pessoa() {
     }
-    public Pessoa(String nome, String cpf, Date dataNasc, String email, String telefone, String endereco, String cidade,
+    public Pessoa(String nome, String cpf, LocalDate dataNasc, String email, String telefone, String endereco, String cidade,
         String cep, String uf) {
         this.nome = nome;
         this.cpf = cpf;
@@ -38,6 +51,15 @@ public class Pessoa {
     public void setIdPessoa(Long id) {
         this.id = id;
     }
+     @Enumerated (EnumType.STRING)
+    @Column(name = "role")
+    private PessoaRole role;
+    public PessoaRole getRole() {
+        return role;
+    }
+    public void setRole(PessoaRole role) {
+        this.role = role;
+    }
 
     @Column(name = "nome")
     private String nome;
@@ -58,11 +80,11 @@ public class Pessoa {
     }
 
     @Column(name = "data_nasc")
-    private Date dataNasc;
-    public Date getDataNasc() {
+    private LocalDate dataNasc;
+    public LocalDate getDataNasc() {
         return dataNasc;
     }
-    public void setDataNasc(Date dataNasc) {
+    public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
 
@@ -120,4 +142,28 @@ public class Pessoa {
         this.uf = uf;
     }
     
+    @Column(name = "password")
+    private String password;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.role == PessoaRole.ADMIN){
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }else if(this.role == PessoaRole.PROFESSOR){
+            return List.of(new SimpleGrantedAuthority("ROLE_PROFESSOR"));
+        }else if(this.role == PessoaRole.ALUNO){
+            return List.of(new SimpleGrantedAuthority("ROLE_ALUNO"));
+        }else if(this.role == PessoaRole.BIBLIOTECARIO){
+            return List.of(new SimpleGrantedAuthority("ROLE_BIBLIOTECARIO"));
+        }else{
+            return Collections.emptyList();
+        }
+    }
+    public String getUsername() {
+        return email;
+    }
+    public String getPassword() {
+        return password;
+    }
 }

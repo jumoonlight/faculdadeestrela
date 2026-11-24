@@ -9,8 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/formulario.css}">
+    <link rel="stylesheet" th:href="@{/css/cabecalho.css}">
+    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
+    <div th:replace="fragments/cabecalho :: cabecalho"></div>
     <div class="conteudo">
         <div class="principal"></div>
           <form method="post" th:object="${aluno}" th:action="@{/aluno/salvar}">
@@ -81,6 +84,9 @@
                         <option value="">Selecione</option>
                         <option th:each="curso : ${cursos}" th:value="${curso.idCurso}" th:text="${curso.nome}"></option>
                     </select>
+            
+              <label> Nova senha: </label>
+             <input type="password" th:name="password" required>
 
             <button type="submit">Editar Aluno</button>
           </form>

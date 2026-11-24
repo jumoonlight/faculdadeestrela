@@ -2,19 +2,24 @@
     margin: 0;
     padding: 0;
 }
-header{ 
-    height: 10%;
-}
+
 .bloco{
     display: flex;
     margin-top: 5%;
     justify-content: space-around;
+
 }
 .botoes{
     display: flex;
     gap: 20px;
     padding: 5px;
     
+}
+.conteudo-um{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
 }
 button{
     background-color: rgb(107, 107, 223);

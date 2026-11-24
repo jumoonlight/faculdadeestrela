@@ -2,6 +2,8 @@ package com.ifsp.anajuliaferreira.controller;
 
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +23,17 @@ import com.ifsp.anajuliaferreira.repository.OfertaDisciplinaRepository;
 public class MatriculaController {
     @Autowired
     private MatriculaRepository matriculaRepository;
+
     @Autowired
     private OfertaDisciplinaRepository ofertaDisciplinaRepository;
+
     @Autowired
     private AlunoRepository alunoRepository;
+
+   
+
+  
+
     @GetMapping("/formularioMatricula")
     public String matricula(Model model){
          model.addAttribute("ofertas", ofertaDisciplinaRepository.findAll());
@@ -40,18 +49,28 @@ public class MatriculaController {
     }
      @GetMapping("/listarMatriculas")
     public String list(@RequestParam(value = "idAluno", required = false) Integer idAluno,
-            @RequestParam(value = "idOferta", required = false) Integer idOferta,
+            @RequestParam(value = "idOferta", required = false) Integer idOferta, Authentication authentication,
             Model model) {
 
+                boolean ehAluno = authentication.getAuthorities().stream()
+            .anyMatch(a -> a.getAuthority().equals("ROLE_ALUNO"));
+
         List<Matricula> matriculas;
-        if (idAluno != null && idAluno > 0) {
+
+        if (ehAluno) {
+             Aluno logado = (Aluno) alunoRepository.findByEmail(authentication.getName());
+            matriculas = matriculaRepository.findByAluno( Math.toIntExact(logado.getIdAluno()));
+            model.addAttribute("aluno", logado);
+    }
+       else if (idAluno != null && idAluno > 0) {
             matriculas = matriculaRepository.findByAluno(idAluno);
         } else if (idOferta != null && idOferta > 0) {
             matriculas = matriculaRepository.findByOferta(idOferta);
         } else {
             matriculas = matriculaRepository.findAll();
         }
-
+       
+    
         model.addAttribute("matriculas", matriculas);
         model.addAttribute("alunos", alunoRepository.findAll());
         model.addAttribute("ofertas", ofertaDisciplinaRepository.findAll());

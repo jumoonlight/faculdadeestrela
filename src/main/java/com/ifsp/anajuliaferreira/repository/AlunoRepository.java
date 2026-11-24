@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
+
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.ifsp.anajuliaferreira.model.Aluno;
@@ -66,7 +68,7 @@ public class AlunoRepository {
     public boolean insert(Aluno aluno) {
         try {
             
-            String sqlPessoa = "INSERT INTO pessoa(nome, cpf, data_nasc, email, telefone, endereco, cidade, cep, uf) VALUES (:nome, :cpf, :data_nasc, :email, :telefone, :endereco, :cidade, :cep, :uf)";
+            String sqlPessoa = "INSERT INTO pessoa(nome, cpf, data_nasc, email, telefone, endereco, cidade, cep, uf, password) VALUES (:nome, :cpf, :data_nasc, :email, :telefone, :endereco, :cidade, :cep, :uf, :password)";
             Query query = em.createNativeQuery(sqlPessoa);
             query.setParameter("nome", aluno.getNome());
             query.setParameter("cpf", aluno.getCpf());
@@ -77,6 +79,7 @@ public class AlunoRepository {
             query.setParameter("cidade", aluno.getCidade());
             query.setParameter("cep", aluno.getCep());
             query.setParameter("uf", aluno.getUf());
+             query.setParameter("password", aluno.getPassword());
             query.executeUpdate();
 
             Number idGerado = (Number) em.createNativeQuery("SELECT LAST_INSERT_ID()").getSingleResult();
@@ -103,7 +106,7 @@ public class AlunoRepository {
     @Transactional
     public boolean update(Aluno aluno) {
         try {
-            String sqlPessoa = "UPDATE pessoa SET id_pessoa = :id_pessoa, nome = :nome, cpf = :cpf, data_nasc = :data_nasc, email = :email, telefone = :telefone, endereco = :endereco, cidade = :cidade, cep = :cep, uf = :uf  WHERE id_pessoa = :id_pessoa";
+            String sqlPessoa = "UPDATE pessoa SET id_pessoa = :id_pessoa, nome = :nome, cpf = :cpf, data_nasc = :data_nasc, email = :email, telefone = :telefone, endereco = :endereco, cidade = :cidade, cep = :cep, uf = :uf, password = :password  WHERE id_pessoa = :id_pessoa";
             Query query =em.createNativeQuery(sqlPessoa);
             query.setParameter("id_pessoa", aluno.getIdPessoa());
             query.setParameter("nome", aluno.getNome());
@@ -115,6 +118,7 @@ public class AlunoRepository {
             query.setParameter("cidade", aluno.getCidade());
             query.setParameter("cep", aluno.getCep());
             query.setParameter("uf", aluno.getUf());
+            query.setParameter("password", aluno.getPassword());
             query.executeUpdate();
             
 
@@ -144,6 +148,19 @@ public class AlunoRepository {
         }
     }
 
+    @Transactional
+    public void deleteById(Long id){
+        String sql = "DELETE FROM pessoa WHERE id_pessoa = :id_pessoa";
+        Query query = em.createNativeQuery(sql);
+        query.setParameter("id_pessoa", id);
+        query.executeUpdate();
+
+        String sqlAdministrador = "DELETE FROM admin WHERE id_pessoa = :id_pessoa";
+        Query queryAdministrador= em.createNativeQuery(sqlAdministrador);
+        queryAdministrador.setParameter("id_pessoa", id);
+        queryAdministrador.executeUpdate();
+    }
+
     public Aluno findByID(Long id) {
          Aluno aluno = em.find(Aluno.class, id);
          return aluno;
@@ -164,18 +181,18 @@ public class AlunoRepository {
     }
 
  @Transactional
-    public Pessoa findByEmail(String email) {
-        try {
-            String sql = "SELECT * from pessoa  WHERE email = :email";
-            Query query = em.createNativeQuery(sql, Pessoa.class);
-            query.setParameter("email", email);
-            @SuppressWarnings("unchecked")
-            List<Pessoa> pessoas= query.getResultList();
-            return pessoas.isEmpty() ? null : pessoas.get(0);
-        } catch (Exception e) {
-            return null;
-        }
+public Aluno findByEmail(String email) {
+    try {
+        String sql = "SELECT * from aluno INNER JOIN pessoa ON aluno.id_pessoa = pessoa.id_pessoa WHERE pessoa.email = :email";
+        Query query = em.createNativeQuery(sql, Aluno.class);
+        query.setParameter("email", email);
+        @SuppressWarnings("unchecked")
+        List<Aluno> alunos = query.getResultList();
+        return alunos.isEmpty() ? null : alunos.get(0);
+    } catch (Exception e) {
+        return null;
     }
+}
 
     public Aluno findByProntuario(String prontuario) {
         try {
@@ -188,6 +205,11 @@ public class AlunoRepository {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Transactional 
+    public UserDetails findByUsername(String username) {
+        return (UserDetails) findByEmail(username);
     }
 
     public List<Aluno> findAll() {

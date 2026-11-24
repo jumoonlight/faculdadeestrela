@@ -9,8 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/formulario.css}">
+    <link rel="stylesheet" th:href="@{/css/cabecalho.css}">
+    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
+    <div th:replace="fragments/cabecalho :: cabecalho"></div>
     <div class="conteudo">
         <div class="principal"></div>
           <form method="post" th:action="@{/atualizarProfessor}">
@@ -24,6 +27,8 @@
              <input type="date" th:name="dataNascimento" th:value="${professor.dataNasc}" required>
              <label>E-mail: </label>
              <input type="email" th:name="email" th:value="${professor.email}" required>
+             <label>Nova Senha: </label>
+             <input type="password" th:name="password"  required>
              <label>Telefone: </label>
              <input type="text" th:name="telefone" th:value="${professor.telefone}" required>
              <label>Endereço: </label>

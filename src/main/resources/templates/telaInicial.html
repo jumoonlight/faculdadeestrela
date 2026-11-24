@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/telaInicial.css}">
+    <link rel="stylesheet" th:href="@{/css/cabecalho.css}">
     <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <script th:src="@{/js/script.js}"></script>
     <title>Tela Inicial</title>
 </head>
 <body>
-    <header>
-        <img src="https://files.catbox.moe/c5zojs.png" alt="Logo" width="200">
-    </header>
+   <div th:replace="fragments/cabecalho :: cabecalho"></div>
     <div class="banner">
         <img src="https://files.catbox.moe/bhbx3t.png" alt="Banner" width="100%">
     </div>
@@ -29,7 +29,7 @@
                       </form>
                       <form method="get" th:action="@{/aluno/listar}">
                             <button>Consultar Alunos</button>
-                      </form>
+                      </form> 
                 </div>
             </div>
             <div class="conteudo-um">
@@ -101,7 +101,7 @@
                     <form method="get" th:action="@{/formularioOfertaDisciplina}">
                             <button>Cadastrar Ofertas</button>
                       </form>
-                      <form method="get" th:action="@{/ofertadisciplina/listar}">
+                      <form method="get" th:action="@{/listarOfertasDisciplina}">
                             <button>Consultar Ofertas</button>
                       </form>
                  </div>
@@ -118,6 +118,18 @@
                       </form>
                  </div>
             </div>
+            <div class="conteudo-dois">
+                 <h2>Bibliotecário</h2>
+                 <img src="https://files.catbox.moe/79xaxv.png" alt="Bibliotecário" width="195">
+                 <div class="botoes">
+                    <form method="get" th:action="@{/formularioBibliotecario}">
+                            <button>Cadastrar Bibliotecários</button>
+                      </form>
+                      <form method="get" th:action="@{/listarBibliotecarios}">
+                            <button>Consultar Bibliotecários</button>
+                      </form>
+                 </div>
+            </div>
         </div>
     </article> 
     <footer>
@@ -125,3 +137,11 @@
     </footer>
 </body>
 </html>
+
+
+  <!-- <form method="get" th:action="@{/aluno/cadastrar}">
+                            <button>Cadastrar Alunos</button>
+                      </form>
+                      <form method="get" th:action="@{/aluno/listar}">
+                            <button>Consultar Alunos</button>
+                      </form> -->

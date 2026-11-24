@@ -9,8 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/formulario.css}">
+    <link rel="stylesheet" th:href="@{/css/cabecalho.css}">
+    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
+    <div th:replace="fragments/cabecalho :: cabecalho"></div>
     <div class="conteudo">
         <div class="principal">
           <form method="post" th:action="@{/atualizarEmprestimo}">
@@ -18,8 +21,6 @@
              <input type="hidden" name="id" th:value="${emprestimos.id}">
              <label>Data de Empréstimo: </label>
              <input type="date" th:name="data_emprestimo" th:value="${emprestimos.dataEmprestimo}" required>
-             <label>Data de Devolução: </label>
-             <input type="date" th:name="data_devolucao" th:value="${emprestimos.dataDevolucao}" required>
              <label>Aluno que irá emprestar:</label>
              <select name="id_aluno" required>
                     <option value="">Selecione o nome do aluno:  </option>

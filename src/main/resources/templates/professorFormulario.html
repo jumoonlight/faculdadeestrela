@@ -9,8 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/formulario.css">
+    <link rel="stylesheet" th:href="@{/css/cabecalho.css}">
+    <script src="https://kit.fontawesome.com/70d231ef29.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
+    <div th:replace="fragments/cabecalho :: cabecalho"></div>
     <div class="conteudo">
         <div class="principal">
           <form method="post" th:action="@{/cadastrarProfessor}">
@@ -26,6 +30,7 @@
              <input type="date" th:name="dataNasc" required>
              <label>E-mail: </label>
              <input type="email" th:name="email" required>
+            
              <label>Telefone: </label>
              <input type="text" th:name="telefone" required>
              <label>Endereço: </label>
@@ -70,6 +75,12 @@
              <input type="text" th:name="area" required>
              <label>Formação: </label>
              <input type="text" th:name="formacao" required>
+
+              <label>Senha: </label>
+             <div class="senha">
+               <input type="password" th:name="password"  id="password" required>
+               <i class="fa-solid fa-eye" id="btn-password" onclick="mostrarSenha()"></i>
+             </div>
              <button type="submit">Cadastrar Professor</button>
              </form>
         </div>

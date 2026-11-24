@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.ifsp.anajuliaferreira.model.Aluno;
 import com.ifsp.anajuliaferreira.model.UF;
@@ -16,7 +17,7 @@ import com.ifsp.anajuliaferreira.repository.CursoRepository;
 import com.ifsp.anajuliaferreira.util.Util;
 import static com.ifsp.anajuliaferreira.util.Util.*;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -29,6 +30,9 @@ public class AlunoController {
 
     @Autowired
     private CursoRepository cursoRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/listar")
     public String listar(@RequestParam(value = "idCurso", required = false) Integer idCurso, Model model) {
@@ -65,7 +69,7 @@ public class AlunoController {
             @RequestParam("email") String email,
             @RequestParam("telefone") String telefone,
             @RequestParam("endereco") String endereco,
-            @RequestParam("dataNascimento") Date dataNascimento,
+            @RequestParam("dataNascimento") LocalDate dataNascimento,
             @RequestParam("cidade") String cidade,
             @RequestParam("uf") String uf,
             @RequestParam("cpf") String cpf,
@@ -77,6 +81,7 @@ public class AlunoController {
             @RequestParam("anoIngresso") int anoIngresso,
             @RequestParam(value = "anoSaida", required = false) Integer anoSaida,
             @RequestParam("idCurso") Integer idCurso,
+            @RequestParam("password") String password,
             RedirectAttributes redirect) {
 
         
@@ -132,6 +137,7 @@ public class AlunoController {
         aluno.setAnoIngresso(anoIngresso);
         aluno.setAnoSaida(anoSaida);
         aluno.setIdCurso(idCurso);
+        aluno.setPassword(passwordEncoder.encode(password));
 
         boolean ok;
         if (idAluno == null || idAluno == 0) {

@@ -7,8 +7,12 @@
     <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
     <link rel="stylesheet" th:href="@{/css/detalhes.css}">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/cabecalho.css}">
+    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
+    <div th:replace="fragments/cabecalho :: cabecalho"></div>
+    <div class="detalhes">
     <h1>Detalhes da Oferta de Disciplina</h1>
     <p>Nome do Professor: <span th:text="${ofertas.professor.nome}"></span></p>
     <p>CPF do Professor: <span th:text="${ofertas.professor.cpf}"></span></p>
@@ -35,5 +39,6 @@
     <form method="get" th:action="@{/ofertadisciplina/listar}"
         <button>Voltar para a tabela de Ofertas Disciplinas</button>
     </form>
+    </div>
 </body>
 </html>

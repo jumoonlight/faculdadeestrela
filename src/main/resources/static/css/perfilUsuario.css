@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color:  rgb(149, 215, 235);
+}
+.conta{
+    display: flex;
+    text-align: left;
+   
+}
+.info-conta{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width:100%;
+}
+
+strong{
+    font-family: "Comfortaa", cursive;
+    color: rgb(38, 96, 163);
+}
+.detalhes{
+    margin-bottom: 2%;
+}
+
+h1{
+    margin-top: 1%;
+    font-family: "Comfortaa", cursive;
+    color: rgb(14, 12, 12);
+    margin-bottom: 1%;
+}
+.info-conta a{
+    color: rgb(109, 109, 226);
+    margin-left: 25%;
+    margin-bottom: 1%;
+}
+#sair{
+    background-color: rgba(156, 154, 154, 0.89);
+    color: black;
+    font-weight: bold;
+    border: 1px solid  rgb(48, 44, 42);
+    border-radius: 20px 20px 20px 20px;
+    padding-left:1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    margin-top: 5%;
+    width: 20vw;
+}
+
+#editar {
+    display: block;      
+    box-sizing: border-box;
+    width: 20vw;
+    text-align: center;  
+    margin-left: auto;   
+    margin-right: auto;  
+    background-color: #326b8b;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid rgb(48, 44, 42);
+    border-radius: 20px 20px 20px 20px;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    margin-top: 5%;
+}
+#del{
+    background-color: rgba(212, 83, 83, 0.89);
+    color: black;
+    font-weight: bold;
+    border: 1px solid  rgb(48, 44, 42);
+    border-radius: 20px 20px 20px 20px;
+    padding-left:1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    margin-top: 5%;
+    width: 20vw;
+    margin-bottom: 60%;
+    
+}
+.btn-editar-perfil:hover {
+    background-color: #c86c55;
+}
+.mensagem-sucesso {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #c3e6cb;
+}
+.mensagem-erro {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c6cb;
+}
+
+p{
+    font-family: 'Confortaa', cursive;
+}
+
+        

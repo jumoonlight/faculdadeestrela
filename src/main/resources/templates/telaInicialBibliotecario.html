@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/telaInicial.css}">
+    <link rel="stylesheet" th:href="@{/css/cabecalho.css}">
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <script th:src="@{/js/script.js}"></script>
+    <title>Tela Inicial</title>
+</head>
+<body>
+    <div th:replace="fragments/cabecalho :: cabecalho"></div>
+    <div class="banner">
+        <img src="https://files.catbox.moe/bhbx3t.png" alt="Banner" width="100%">
+    </div>
+    <article>
+        <h1>Cadastros</h1>
+        <div class="bloco">
+            <div class="conteudo-um">
+                 <h2>Livro</h2>
+                <img src="https://files.catbox.moe/n71yjg.webp" alt="Livro" width="200">
+                <div class="botoes">
+                    <form method="get" th:action="@{/formularioLivro}">
+                            <button>Cadastrar Livros</button>
+                      </form>
+                      <form method="get" th:action="@{/listarLivros}">
+                            <button>Consultar Livros</button>
+                      </form>
+                </div>
+            </div>
+            <div class="conteudo-um">
+                 <h2>Empréstimos</h2>
+                 <img src="https://files.catbox.moe/s7hmv4.png" alt="Emprestimo" width="195">
+                 <div class="botoes">
+                    <form method="get" th:action="@{/formularioEmprestimo}">
+                            <button>Cadastrar Empréstimos</button>
+                      </form>
+                      <form method="get" th:action="@{/listarEmprestimos}">
+                            <button>Consultar Empréstimos</button>
+                      </form>
+                 </div>
+            </div>
+        </div>
+    </article> 
+    <footer>
+        <p>Faculdade Estrela, fazendo o melhor por você.</p>
+    </footer>
+</body>
+</html>

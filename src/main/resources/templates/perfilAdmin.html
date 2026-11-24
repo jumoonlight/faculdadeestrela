@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Administrador</title>
+    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/no1m7b.png">
+    <link rel="stylesheet" th:href="@{/css/perfilUsuario.css}">
+    <link rel="stylesheet" th:href="@{/css/cabecalho.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <script th:src="@{/js/script.js}"></script>
+</head>
+<body>
+    <div th:replace="fragments/cabecalho :: cabecalho"></div>
+    <div class="conta">
+        <div class="info-conta">
+            <h1 class="titulo">Informações da sua conta</h1>
+            
+            <div th:if="${mensagem}" class="mensagem-sucesso" th:text="${mensagem}"></div>
+            <div th:if="${erro}" class="mensagem-erro" th:text="${erro}"></div>
+            <form th:action="@{/logout}" method="post">
+                    <button type="submit" id="sair">Sair da Conta</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
