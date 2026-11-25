@@ -85,7 +85,14 @@ public class PerfisController {
     @PostMapping("/deletarContaBibliotecario")
     public String deletarContaBibliotecario(Principal principal, RedirectAttributes redirectAttributes) {
         Bibliotecario bibliotecario = bibliotecarioRepository.findByEmail(principal.getName());
-        bibliotecarioRepository.deleteById(bibliotecario.getIdPessoa());
+
+         try{
+         bibliotecarioRepository.deleteById(bibliotecario.getIdPessoa());
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("erro", "Não é possível excluir o bibliotecário pois ele tem um empréstimo. Por favor, exclua o empréstimo antes de excluir o bibliotecário.");
+             return "redirect:/perfilBibliotecario";
+        }
         redirectAttributes.addFlashAttribute("mensagem", "Conta excluída com sucesso!");
         return "redirect:/logout";
     }

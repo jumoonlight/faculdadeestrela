@@ -18,7 +18,7 @@
     <h1>Disciplina</h1>
     <div th:if="${disciplinas.isEmpty()}" class="sem-resultados">
                 <p class="sem-resultados">Nenhuma disciplina encontrada.</p>
-                <a th:href="@{/telainicial}" class="btn-voltar">Voltar para a tela inicial</a>
+                
             </div>
     <div th:unless="${disciplinas.isEmpty()}">
     <div th:if="${erro}" style="color: red; font-weight: bold;">
@@ -51,8 +51,6 @@
         </tbody>
     </table>
     <br>
-    <form method="get" th:action="@{/telainicial}">
-        <button>Voltar para a Tela Inicial</button>
-    </form>
+    
     </div>
 </body>

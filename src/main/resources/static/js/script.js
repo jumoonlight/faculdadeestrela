@@ -16,22 +16,7 @@ function mostrarSenha(){
     }
 }
 
-function selectsDinamicos(){
-            const tipo = document.getElementById('tipoPessoa');
-            const selects = document.querySelectorAll('.sel-pessoa');
-            function atualizar() {
-                selects.forEach(function (s) {
-                    const ativo = s.dataset.tipo === tipo.value;
-                    s.style.display = ativo ? '' : 'none';
-                    s.disabled = !ativo;      
-                    s.required = ativo;
-                    if (!ativo) s.value = '';
-                });
-            }
-            tipo.addEventListener('change', atualizar);
-            atualizar();
-    
-}
+
 
  
         

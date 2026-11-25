@@ -29,6 +29,7 @@
           <div sec:authorize="hasAnyRole('ADMIN','BIBLIOTECARIO')">
             <div th:replace="fragments/selecionarPessoa :: selecionarPessoa(null, null, false)"></div>
         </div>
+        
               <label> Livro: </label> 
              <select name="id_livro" required>
                     <option value="">Selecione o título do livro: </option>

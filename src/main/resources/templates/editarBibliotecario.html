@@ -18,7 +18,7 @@
         <div class="principal"></div>
           <form method="post" th:action="@{/atualizarBibliotecario}">
              <h1>Editar Bibliotecário</h1>
-             <input type="hidden" name="id" th:value="${bibliotecario.id}">
+             <input type="hidden" name="id" th:value="${bibliotecario.idPessoa}">
              <label>Nome:</label>
              <input type="text" th:name="nome" th:value="${bibliotecario.nome}" required>
              <label>CPF: </label>

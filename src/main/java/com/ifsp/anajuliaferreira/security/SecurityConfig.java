@@ -81,8 +81,12 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .loginProcessingUrl("/login")
                         .successHandler(authenticationSuccessHandler())
                         .failureUrl("/login?erro")
+                        .loginPage("/login") 
+                        
+            .permitAll()
                         .permitAll()) 
                 .logout(logout -> logout
                         .logoutUrl("/logout")

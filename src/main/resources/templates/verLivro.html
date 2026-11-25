@@ -18,7 +18,7 @@
     <h1>Livros</h1>
     <div th:if="${livros.isEmpty()}" class="sem-resultados">
                 <p class="sem-resultados">Nenhum livro encontrado.</p>
-                <a th:href="@{/telainicial}" class="btn-voltar">Voltar para a tela inicial</a>
+               
             </div>
     <div th:unless="${livros.isEmpty()}">
     <div th:if="${erro}" style="color: red; font-weight: bold;">
@@ -59,28 +59,6 @@
         </tbody>
     </table>
     <br>
-    <div sec:authorize="hasAnyRole('ADMIN')">
-             <form method="get" th:action="@{/telainicial}">
-            <button>Voltar para a Tela Inicial</button>
-        </form>
-         </div>
-
-         <div sec:authorize="hasAnyRole('BIBLIOTECARIO')">
-             <form method="get" th:action="@{/telainicialBibliotecario}">
-            <button>Voltar para a Tela Inicial</button>
-        </form>
-         </div>
-
-         <div sec:authorize="hasAnyRole('ALUNO')">
-             <form method="get" th:action="@{/telainicialAluno}">
-            <button>Voltar para a Tela Inicial</button>
-        </form>
-         </div>
-
-         <div sec:authorize="hasAnyRole('PROFESSOR')">
-             <form method="get" th:action="@{/telainicialProfessor}">
-            <button>Voltar para a Tela Inicial</button>
-        </form>
-         </div>
+    
     </div>
 </body>

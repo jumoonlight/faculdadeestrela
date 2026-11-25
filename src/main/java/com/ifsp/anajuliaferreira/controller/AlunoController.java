@@ -175,4 +175,11 @@ public class AlunoController {
         }
         return "redirect:/aluno/listar";
     }
+
+    @GetMapping("/{id}")
+    public String aluno(@PathVariable long id, Model model){
+        Aluno aluno = alunoRepository.findByID(id);
+        model.addAttribute("aluno", aluno);
+        return "detalhesAluno";
+    }
 }

@@ -24,18 +24,18 @@
     <p th:if="${param.livroReservado}" style="color:red">Não foi possível renovar: o livro já está emprestado a outra pessoa nos próximos dias.</p>
     <div th:if="${erro}" style="color: red; font-weight: bold;"><span th:text="${erro}"></span></div>
 
-    <div th:if="${ehStaff}">
     <form method="get" th:action="@{/listarEmprestimos}">
-        <div th:replace="fragments/selecionarPessoa :: selecionarPessoa(${idPessoaFiltro}, ${tipoFiltro}, true)"></div>
-        <button type="submit">Filtrar</button>
-        <a th:href="@{/listarEmprestimos}">Limpar</a>
+         <div th:class="filtro" th:if="${ehStaff}">
+             <div th:replace="fragments/selecionarPessoa :: selecionarPessoa(${idPessoaFiltro}, ${tipoFiltro}, true)"></div>
+            <button type="submit">Filtrar</button>
+         </div>
+       
     </form>
 </div>
 
     <div th:if="${emprestimos.isEmpty()}" class="sem-resultados">
         <p class="sem-resultados">Nenhum empréstimo foi encontrado.</p>
-        <a th:href="${ehStaff} ? @{/telainicial} : @{/formularioEmprestimo}" class="btn-voltar"
-           th:text="${ehStaff} ? 'Voltar para a tela inicial' : 'Fazer um empréstimo'"></a>
+        
     </div>
 
     <div th:unless="${emprestimos.isEmpty()}">
@@ -78,29 +78,7 @@
             </tbody>
         </table>
         <br>
-         <div sec:authorize="hasAnyRole('ADMIN')">
-             <form method="get" th:action="@{/telainicial}">
-            <button>Voltar para a Tela Inicial</button>
-        </form>
-         </div>
-
-         <div sec:authorize="hasAnyRole('BIBLIOTECARIO')">
-             <form method="get" th:action="@{/telainicialBibliotecario}">
-            <button>Voltar para a Tela Inicial</button>
-        </form>
-         </div>
-
-         <div sec:authorize="hasAnyRole('ALUNO')">
-             <form method="get" th:action="@{/telainicialAluno}">
-            <button>Voltar para a Tela Inicial</button>
-        </form>
-         </div>
-
-         <div sec:authorize="hasAnyRole('PROFESSOR')">
-             <form method="get" th:action="@{/telainicialProfessor}">
-            <button>Voltar para a Tela Inicial</button>
-        </form>
-         </div>
+       
        
     </div>
 </body>

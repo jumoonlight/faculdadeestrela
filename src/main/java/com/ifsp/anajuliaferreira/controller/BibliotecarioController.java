@@ -155,7 +155,7 @@ public class BibliotecarioController {
             bibliotecarioRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
-            redirectAttributes.addFlashAttribute("erro", "Não é possível excluir o bibliotecário pois ele tem uma matrícula. Por favor, exclua a matrícula antes de excluir o bibliotecário.");
+            redirectAttributes.addFlashAttribute("erro", "Não é possível excluir o bibliotecário pois ele tem um empréstimo. Por favor, exclua o empréstimo antes de excluir o bibliotecário.");
             return "redirect:/listarBibliotecarios";
         }
         return "redirect:/listarBibliotecarios";

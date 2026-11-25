@@ -17,7 +17,7 @@
     <h1>Professores</h1>
     <div th:if="${professores.isEmpty()}" class="sem-resultados">
                 <p class="sem-resultados">Nenhum professor encontrado.</p>
-                <a th:href="@{/telainicial}" class="btn-voltar">Voltar para a tela inicial</a>
+                
             </div>
     <div th:unless="${professores.isEmpty()}">
     <div th:if="${erro}" style="color: red; font-weight: bold;">
@@ -66,8 +66,6 @@
         </tbody>
     </table>
     <br>
-    <form method="get" th:action="@{/telainicial}">
-        <button>Voltar para a Tela Inicial</button>
-    </form>
+    
     </div>
 </body>

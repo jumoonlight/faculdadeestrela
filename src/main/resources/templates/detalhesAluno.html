@@ -26,8 +26,10 @@
     <p>Prontuário: <span th:text="${aluno.prontuario}"></span></p>
     <p>Ano de ingresso: <span th:text="${aluno.anoIngresso}"></span></p>
     <p>Ano de saída: <span th:text="${aluno.anoSaida}"></span></p>
+    <p>Nome da Mãe: <span th:text="${aluno.nomeMae}"></span></p>
+    <p>Nome da Pai: <span th:text="${aluno.nomePai}"></span></p>
     <br>
-    <form method="get" th:action="@{/listarAlunos}">
+    <form method="get" th:action="@{/aluno/listar}">
         <button>Voltar para a tabela de Alunos</button>
     </form>
     </div>

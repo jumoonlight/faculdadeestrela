@@ -21,7 +21,7 @@
              <input type="hidden" name="id" th:value="${matriculas.id}">
              <div sec:authorize="hasRole('ADMIN')">
             <label>Aluno que vai se matricular:</label>
-    <       select name="id_aluno" required>
+           <select name="id_aluno" required>
              <option value="">Selecione o nome do aluno: </option>
         <option th:each="aluno : ${alunos}" th:value="${aluno.idAluno}" th:text="${aluno.nome}"
                 th:selected="${aluno.idAluno == matriculas.aluno.idAluno}"></option>

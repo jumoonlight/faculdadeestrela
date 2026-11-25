@@ -20,7 +20,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <h1>Matriculas</h1>
     <div th:if="${matriculas.isEmpty()}" class="sem-resultados">
                 <p class="sem-resultados">Nenhuma matrícula encontrada.</p>
-                <a th:href="@{/telainicial}" class="btn-voltar">Voltar para a tela inicial</a>
+                
             </div>
     <div th:unless="${matriculas.isEmpty()}">
 
@@ -60,17 +60,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         </tbody>
     </table>
     <br>
-     <div sec:authorize="hasRole('ADMIN')">
-         <form method="get" th:action="@{/telainicial}">
-        <button>Voltar para a Tela Inicial</button>
-    </form>
-     </div>
-
-     <div sec:authorize="hasRole('ALUNO')">
-         <form method="get" th:action="@{/telainicialAluno}">
-        <button>Voltar para a Tela Inicial</button>
-    </form>
-     </div>
+     
    
     </div>
 </body>
