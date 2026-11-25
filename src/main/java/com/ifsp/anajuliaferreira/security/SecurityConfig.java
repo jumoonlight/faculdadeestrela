@@ -20,6 +20,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/login", "/css/**", "/js/**", "/error").permitAll()
+                        .requestMatchers("/listarOfertasDisciplina", "/oferta/*").hasAnyRole("ADMIN", "PROFESSOR")
                         .requestMatchers("/formularioAluno",
                         "/cadastrarAluno",
                         "/listarAlunos",

@@ -18,26 +18,29 @@
         <div class="principal">
           <form method="post" th:action="@{/cadastrarEmprestimo}">
 
-           <input type="hidden" name="id_aluno" th:value="${aluno.idAluno}">
+        
              <h1>Cadastrar Empréstimos</h1>
+             <div th:if="${erro}" style="color: red; font-weight: bold;">
+             <span th:text="${erro}"></span>
+            </div>
              <label>Data de Empréstimo: </label>
              <input type="date" name="data_emprestimo" required>
 
-             <div sec:authorize="hasRole('ADMIN')">
-                label>Aluno que irá emprestar:</label>
-             <select name="id_aluno" required>
-                    <option value="">Selecione o nome do aluno: </option>
-                    <option th:each="aluno : ${alunos}" th:value="${aluno.idAluno}" th:text="${aluno.nome}"></option>
-             </select>
-
-             </div><
-             <label>Livro: </label> 
+          <div sec:authorize="hasAnyRole('ADMIN','BIBLIOTECARIO')">
+            <div th:replace="fragments/selecionarPessoa :: selecionarPessoa(null, null, false)"></div>
+        </div>
+              <label> Livro: </label> 
              <select name="id_livro" required>
                     <option value="">Selecione o título do livro: </option>
                     <option th:each="livro : ${livros}" th:value="${livro.id}" th:text="${livro.titulo}"></option>
              </select>
-             <button type="submit">Cadastre o livro</button>
+             <button type="submit">Cadastre o Emprétimo</button>
              </form>
+        
+
+             </div>
+           
         </div>
+    
 </body>
 </html>

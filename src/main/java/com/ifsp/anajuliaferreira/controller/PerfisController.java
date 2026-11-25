@@ -3,6 +3,7 @@ package com.ifsp.anajuliaferreira.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +57,13 @@ public class PerfisController {
     @PostMapping("/deletarContaAluno")
     public String deletarConta(Principal principal, RedirectAttributes redirectAttributes) {
         Aluno aluno = (Aluno) alunoRepository.findByEmail(principal.getName());
-        alunoRepository.deleteById(aluno.getIdPessoa());
+        try{
+            alunoRepository.deleteById(aluno.getIdPessoa());
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("erro", "Não é possível excluir o aluno pois ele está relacionado a uma ou mais matrículas");
+            return "redirect:/perfilAluno";
+        }
         redirectAttributes.addFlashAttribute("mensagem", "Conta excluída com sucesso!");
         return "redirect:/logout";
     }
@@ -64,10 +71,17 @@ public class PerfisController {
     @PostMapping("/deletarContaProfessor")
     public String deletarContaProfessor(Principal principal, RedirectAttributes redirectAttributes) {
         Professor professor = professorRepository.findByEmail(principal.getName());
-        professorRepository.deleteById(professor.getIdPessoa());
+        try{
+            professorRepository.deleteById(professor.getIdPessoa());
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("erro", "Não é possível excluir o professor pois ele está relacionado a uma oferta de disciplina. Por favor, exclua a oferta de disciplina antes de excluir o professor.");
+            return "redirect:/perfilProfessor";
+        }
         redirectAttributes.addFlashAttribute("mensagem", "Conta excluída com sucesso!");
         return "redirect:/logout";
     }
+    
     @PostMapping("/deletarContaBibliotecario")
     public String deletarContaBibliotecario(Principal principal, RedirectAttributes redirectAttributes) {
         Bibliotecario bibliotecario = bibliotecarioRepository.findByEmail(principal.getName());

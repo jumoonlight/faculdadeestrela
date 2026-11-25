@@ -1,0 +1,28 @@
+<div th:fragment="selecionarPessoa(pessoaAtualId, tipoAtual, filtro)">
+    <label th:text="${filtro} ? 'Filtrar por:' : 'Categoria de quem vai pegar emprestado:'"></label>
+
+    <select id="tipoPessoa" name="tipo" th:required="${!filtro}">
+        <option value="" th:text="${filtro} ? 'Todas as categorias' : 'Selecione a categoria'"></option>
+        <option value="aluno" th:selected="${tipoAtual == 'aluno'}">Aluno</option>
+        <option value="professor" th:selected="${tipoAtual == 'professor'}">Professor</option>
+        <option value="bibliotecario" th:selected="${tipoAtual == 'bibliotecario'}">Bibliotecário</option>
+    </select>
+
+    <select class="sel-pessoa" name="id_pessoa" data-tipo="aluno" style="display:none" disabled>
+        <option value="" th:text="${filtro} ? 'Todos os alunos' : 'Selecione o aluno'"></option>
+        <option th:each="p : ${alunos}" th:value="${p.idPessoa}" th:text="${p.nome}"
+                th:selected="${p.idPessoa == pessoaAtualId}"></option>
+    </select>
+
+    <select class="sel-pessoa" name="id_pessoa" data-tipo="professor" style="display:none" disabled>
+        <option value="" th:text="${filtro} ? 'Todos os professores' : 'Selecione o professor'"></option>
+        <option th:each="p : ${professores}" th:value="${p.idPessoa}" th:text="${p.nome}"
+                th:selected="${p.idPessoa == pessoaAtualId}"></option>
+    </select>
+
+    <select class="sel-pessoa" name="id_pessoa" data-tipo="bibliotecario" style="display:none" disabled>
+        <option value="" th:text="${filtro} ? 'Todos os bibliotecários' : 'Selecione o bibliotecário'"></option>
+        <option th:each="p : ${bibliotecarios}" th:value="${p.idPessoa}" th:text="${p.nome}"
+                th:selected="${p.idPessoa == pessoaAtualId}"></option>
+    </select>
+</div>

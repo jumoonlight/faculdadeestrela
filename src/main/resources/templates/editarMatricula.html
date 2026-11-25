@@ -19,11 +19,14 @@
           <form method="post" th:action="@{/atualizarMatricula}">
              <h1>Matrícula</h1>
              <input type="hidden" name="id" th:value="${matriculas.id}">
-             <label>Aluno que vai se matricular:</label>
-             <select name="id_aluno" required>
-                    <option value="">Selecione o nome do aluno: </option>
-                    <option th:each="aluno : ${alunos}" th:value="${aluno.idAluno}" th:text="${aluno.nome}" th:selected="${aluno.idAluno == matriculas.aluno.idAluno}"></option>
-             </select>
+             <div sec:authorize="hasRole('ADMIN')">
+            <label>Aluno que vai se matricular:</label>
+    <       select name="id_aluno" required>
+             <option value="">Selecione o nome do aluno: </option>
+        <option th:each="aluno : ${alunos}" th:value="${aluno.idAluno}" th:text="${aluno.nome}"
+                th:selected="${aluno.idAluno == matriculas.aluno.idAluno}"></option>
+    </select>
+</div>
              <label>Oferta de disciplina desejada: </label> 
              <select name="id_oferta_disc" required>
                     <option value="">Selecione a oferta: </option>

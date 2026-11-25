@@ -129,6 +129,7 @@ public class AlunoController {
         aluno.setCidade(cidade);
         aluno.setUf(uf);
         aluno.setDataNasc(dataNascimento);
+        aluno.setCpf(cpf); 
         aluno.setCep(cep);        
         aluno.setProntuario(prontuario);
         aluno.setNomeMae(nomeMae);

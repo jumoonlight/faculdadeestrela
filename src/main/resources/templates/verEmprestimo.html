@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,51 +17,91 @@
 <body>
     <div th:replace="fragments/cabecalho :: cabecalho"></div>
     <h1>Empréstimos</h1>
+
+    <p th:if="${param.devolvido}" style="color:green">Livro devolvido com sucesso.</p>
+    <p th:if="${param.renovado}" style="color:green">Empréstimo renovado por mais 7 dias.</p>
+    <p th:if="${param.renovacaoNegada}" style="color:red">Só é possível renovar empréstimos pendentes e dentro do prazo.</p>
+    <p th:if="${param.livroReservado}" style="color:red">Não foi possível renovar: o livro já está emprestado a outra pessoa nos próximos dias.</p>
+    <div th:if="${erro}" style="color: red; font-weight: bold;"><span th:text="${erro}"></span></div>
+
+    <div th:if="${ehStaff}">
+    <form method="get" th:action="@{/listarEmprestimos}">
+        <div th:replace="fragments/selecionarPessoa :: selecionarPessoa(${idPessoaFiltro}, ${tipoFiltro}, true)"></div>
+        <button type="submit">Filtrar</button>
+        <a th:href="@{/listarEmprestimos}">Limpar</a>
+    </form>
+</div>
+
     <div th:if="${emprestimos.isEmpty()}" class="sem-resultados">
-                <p class="sem-resultados">Nenhum empréstimo foi encontrado.</p>
-                <a th:href="@{/telainicial}" class="btn-voltar">Voltar para a tela inicial</a>
+        <p class="sem-resultados">Nenhum empréstimo foi encontrado.</p>
+        <a th:href="${ehStaff} ? @{/telainicial} : @{/formularioEmprestimo}" class="btn-voltar"
+           th:text="${ehStaff} ? 'Voltar para a tela inicial' : 'Fazer um empréstimo'"></a>
     </div>
+
     <div th:unless="${emprestimos.isEmpty()}">
-    <div th:if="${erro}" style="color: red; font-weight: bold;">
-        <span th:text="${erro}"></span>
-    </div>
-    <table border="1px">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Data de Empréstimos</th>
-                <th>Data de Devolução</th>
-                <th>Nome do Aluno</th>
-                <th>Título do Livro</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="emprestimo : ${emprestimos}">
-                <td><span th:text="${emprestimo.id}"></span></td>
-                <td th:text="${emprestimo.dataEmprestimo}"></td>
-                <td th:text="${emprestimo.dataDevolucao}"></td>
-                <td th:text="${emprestimo.aluno.nome}"></td>
-                <td th:text="${emprestimo.livro.titulo}"></td>
-                <td>
-                      <a th:href="@{/emprestimo/{id}(id=${emprestimo.id})}" class="btn-tabela btn-ver">Ver Detalhes</a>
-                      <a th:href="@{/emprestimo/{id}/editar(id=${emprestimo.id})}" class="btn-tabela btn-editar">Editar</a>
-                      <a th:href="@{/emprestimo/{id}/deletar(id=${emprestimo.id})}" class="detalhes deletar">Remover</a>
-                </td>
-             </tr>
-        </tbody>
-    </table>
-    <br>
-    <div sec:authorize="hasRole('ADMIN')"> <form method="get" th:action="@{/telainicial}">
-        <button>Voltar para a Tela Inicial</button>
-    </form></div>
-    <div sec:authorize="hasRole('ALUNO')"> <form method="get" th:action="@{/telainicialaluno}">
-        <button>Voltar para a Tela Inicial</button>
-    </form></div>
-    <div sec:authorize="hasRole('PROFESSOR')"><form method="get" th:action="@{/telainicialprofessor}">
-        <button>Voltar para a Tela Inicial</button>
-       </div>
-    </div>
-    <div sec:authorize="hasRole('BIBLIOTECARIO')"></div>
+        <table border="1px">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data de Empréstimo</th>
+                    <th>Data de Devolução</th>
+                    <th>Quem pegou</th>
+                    <th>Título do Livro</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="emprestimo : ${emprestimos}">
+                    <td th:text="${emprestimo.id}"></td>
+                    <td th:text="${emprestimo.dataEmprestimo}"></td>
+                    <td th:text="${emprestimo.dataDevolucao}"></td>
+                    <td th:text="${emprestimo.pessoa.nome + ' (' + emprestimo.tipoPessoa + ')'}"></td>
+                    <td th:text="${emprestimo.livro.titulo}"></td>
+                    <td>
+                        <span th:if="${emprestimo.atrasado}" style="color:#c0392b;font-weight:bold">Pendente (atrasado)</span>
+                        <span th:if="${emprestimo.pendente and !emprestimo.atrasado}" style="color:#d68910;font-weight:bold">Pendente</span>
+                        <span th:unless="${emprestimo.pendente}" style="color:#1e8449;font-weight:bold">Devolvido</span>
+                    </td>
+                    <td>
+                        <a th:href="@{/emprestimo/{id}(id=${emprestimo.id})}" class="btn-tabela btn-ver">Ver Detalhes</a>
+                        <a th:if="${emprestimo.podeRenovar}"
+                           th:href="@{/emprestimo/{id}/renovar(id=${emprestimo.id})}" class="btn-tabela">Renovar</a>
+                            <a th:if="${emprestimo.pendente}"
+                               th:href="@{/emprestimo/{id}/devolver(id=${emprestimo.id})}" class="btn-tabela">Devolver</a>
+                        <span th:if="${ehStaff}">
+                            <a th:href="@{/emprestimo/{id}/editar(id=${emprestimo.id})}" class="btn-tabela btn-editar">Editar</a>
+                            <a th:href="@{/emprestimo/{id}/deletar(id=${emprestimo.id})}" class="detalhes deletar">Remover</a>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+         <div sec:authorize="hasAnyRole('ADMIN')">
+             <form method="get" th:action="@{/telainicial}">
+            <button>Voltar para a Tela Inicial</button>
+        </form>
+         </div>
+
+         <div sec:authorize="hasAnyRole('BIBLIOTECARIO')">
+             <form method="get" th:action="@{/telainicialBibliotecario}">
+            <button>Voltar para a Tela Inicial</button>
+        </form>
+         </div>
+
+         <div sec:authorize="hasAnyRole('ALUNO')">
+             <form method="get" th:action="@{/telainicialAluno}">
+            <button>Voltar para a Tela Inicial</button>
+        </form>
+         </div>
+
+         <div sec:authorize="hasAnyRole('PROFESSOR')">
+             <form method="get" th:action="@{/telainicialProfessor}">
+            <button>Voltar para a Tela Inicial</button>
+        </form>
+         </div>
+       
     </div>
 </body>
+</html>

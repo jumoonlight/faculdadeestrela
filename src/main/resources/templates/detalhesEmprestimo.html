@@ -14,20 +14,27 @@
     <div th:replace="fragments/cabecalho :: cabecalho"></div>
     <div class="detalhes">
         <h1>Detalhes do emprestimos</h1>
+        <p>Status:
+        <span th:if="${emprestimo.atrasado}">Pendente (atrasado)</span>
+        <span th:if="${emprestimo.pendente and !emprestimo.atrasado}">Pendente</span>
+        <span th:unless="${emprestimo.pendente}">Devolvido</span>
+        </p>
         <p>Data de Empréstimo: <span th:text="${emprestimo.dataEmprestimo}"></span></p>
         <p>Data de Devolução: <span th:text="${emprestimo.dataDevolucao}"></span></p>
-        <p>Nome do Aluno: <span th:text="${emprestimo.aluno.nome}"></span></p>
-        <p>CPF do Aluno: <span th:text="${emprestimo.aluno.cpf}"></span></p>
-        <p>Data de Nascimento do Aluno: <span th:text="${emprestimo.aluno.dataNasc}"></span></p>
-        <p>E-mail do Aluno: <span th:text="${emprestimo.aluno.email}"></span></p>
-        <p>Telefone do Aluno: <span th:text="${emprestimo.aluno.telefone}"></span></p>
-        <p>Endereço do Aluno: <span th:text="${emprestimo.aluno.endereco}"></span></p>
-        <p>Cidade do Aluno: <span th:text="${emprestimo.aluno.cidade}"></span></p>
-        <p>CEP do Aluno: <span th:text="${emprestimo.aluno.cep}"></span></p>
-        <p>UF do Aluno: <span th:text="${emprestimo.aluno.uf}"></span></p>
-        <p>Prontuário do Aluno: <span th:text="${emprestimo.aluno.prontuario}"></span></p>
-        <p>Data de  Ingresso do Aluno: <span th:text="${emprestimo.aluno.ano_ingresso}"></span></p>
-        <p>Data de Saída do Aluno: <span th:text="${emprestimo.aluno.ano_saida}"></span></p>
+        <p>Nome do Aluno: <span th:text="${emprestimo.pessoa.nome}"></span></p>
+        <p>CPF do Aluno: <span th:text="${emprestimo.pessoa.cpf}"></span></p>
+        <p>Data de Nascimento do Aluno: <span th:text="${emprestimo.pessoa.dataNasc}"></span></p>
+        <p>E-mail do Aluno: <span th:text="${emprestimo.pessoa.email}"></span></p>
+        <p>Telefone do Aluno: <span th:text="${emprestimo.pessoa.telefone}"></span></p>
+        <p>Endereço do Aluno: <span th:text="${emprestimo.pessoa.endereco}"></span></p>
+        <p>Cidade do Aluno: <span th:text="${emprestimo.pessoa.cidade}"></span></p>
+        <p>CEP do Aluno: <span th:text="${emprestimo.pessoa.cep}"></span></p>
+        <p>UF do Aluno: <span th:text="${emprestimo.pessoa.uf}"></span></p>
+        <div th:if="${emprestimo.tipoPessoa == 'aluno'}">
+        <p>Prontuário: <span th:text="${emprestimo.pessoa.prontuario}"></span></p>
+        <p>Ano de ingresso: <span th:text="${emprestimo.pessoa.ano_ingresso}"></span></p>
+        <p>Ano de saída: <span th:text="${emprestimo.pessoa.ano_saida}"></span></p>
+        </div>
         <p>Título do Livro: <span th:text="${emprestimo.livro.titulo}"></span></p>
         <p>Autor do Livro: <span th:text="${emprestimo.livro.autor}"></span></p>
         <p>Ano de Publicação do Livro: <span th:text="${emprestimo.livro.anoPublicacao}"></span></p>

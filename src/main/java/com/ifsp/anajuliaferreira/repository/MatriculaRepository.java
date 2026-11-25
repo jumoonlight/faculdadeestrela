@@ -57,7 +57,7 @@ public class MatriculaRepository {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Matricula> findByAluno(int idAluno) {
+    public List<Matricula> findByAluno(Integer idAluno) {
         String sql = "SELECT * FROM matricula WHERE id_aluno = :idAluno ORDER BY id_matricula";
         Query query = em.createNativeQuery(sql, Matricula.class);
         query.setParameter("idAluno", idAluno);

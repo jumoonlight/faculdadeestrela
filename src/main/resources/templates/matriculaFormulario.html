@@ -17,19 +17,27 @@
     <div class="conteudo">
         <div class="principal">
           <form method="post" th:action="@{/cadastrarMatricula}">
-             <h1>Matrícula</h1>
-             <label>Aluno que vai se matricular:</label>
-             <select name="id_aluno" required>
-                    <option value="">Selecione o nome do aluno: </option>
-                    <option th:each="aluno : ${alunos}" th:value="${aluno.idAluno}" th:text="${aluno.nome}"></option>
-             </select>
-             <label>Oferta de disciplina desejada: </label> 
-             <select name="id_oferta_disc" required>
-                    <option value="">Selecione a oferta: </option>
-                    <option th:each="oferta : ${ofertas}" th:value="${oferta.id}" th:text="${oferta.disciplina.nome}"></option>
-             </select>
-             <button type="submit">Matricule-se!</button>
-             </form>
+        <h1>Matrícula</h1>
+
+         <div th:if="${erro}" style="color: red; font-weight: bold;">
+        <span th:text="${erro}"></span>
+    </div>
+
+    <div sec:authorize="hasRole('ADMIN')">
+        <label>Aluno:</label>
+        <select name="id_aluno" required>
+            <option value="">Selecione o nome do aluno: </option>
+            <option th:each="aluno : ${alunos}" th:value="${aluno.idAluno}" th:text="${aluno.nome}"></option>
+        </select>
+    </div>
+
+    <label>Oferta de disciplina: </label>
+    <select name="id_oferta_disc" required>
+        <option value="">Selecione a oferta: </option>
+        <option th:each="oferta : ${ofertas}" th:value="${oferta.id}" th:text="${oferta.disciplina.nome}"></option>
+    </select>
+    <button type="submit">Matricule-se!</button>
+</form>
         </div>
 </body>
 </html>

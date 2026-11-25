@@ -15,3 +15,42 @@ function mostrarSenha(){
         btnShowPass.classList.replace('fa-eye-slash', 'fa-eye')
     }
 }
+
+function selectsDinamicos(){
+            const tipo = document.getElementById('tipoPessoa');
+            const selects = document.querySelectorAll('.sel-pessoa');
+            function atualizar() {
+                selects.forEach(function (s) {
+                    const ativo = s.dataset.tipo === tipo.value;
+                    s.style.display = ativo ? '' : 'none';
+                    s.disabled = !ativo;      
+                    s.required = ativo;
+                    if (!ativo) s.value = '';
+                });
+            }
+            tipo.addEventListener('change', atualizar);
+            atualizar();
+    
+}
+
+ 
+        
+document.addEventListener('DOMContentLoaded', function () {
+    const tipo = document.getElementById('tipoPessoa');
+    if (!tipo) return; 
+
+    const selects = document.querySelectorAll('.sel-pessoa');
+
+    function atualizar() {
+        selects.forEach(function (s) {
+            const ativo = s.dataset.tipo === tipo.value;
+            s.style.display = ativo ? '' : 'none';
+            s.disabled = !ativo;                 
+            s.required = ativo && tipo.required;  
+            if (!ativo) s.value = '';
+        });
+    }
+
+    tipo.addEventListener('change', atualizar);
+    atualizar();
+});

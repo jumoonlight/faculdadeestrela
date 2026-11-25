@@ -40,7 +40,7 @@
         </thead>
         <tbody>
             <tr th:each="bibliotecario : ${bibliotecarios}">
-                <td><span th:text="${bibliotecario.id}"></span></td>
+                <td><span th:text="${bibliotecario.idPessoa}"></span></td>
                 <td th:text="${bibliotecario.nome}"></td>
                 <td th:text="${bibliotecario.cpf}"></td>
                 <td th:text="${bibliotecario.dataNasc}"></td>
@@ -51,9 +51,9 @@
                 <td th:text="${bibliotecario.cep}"></td>
                 <td th:text="${bibliotecario.uf}"></td>
                 <td>
-                      <a th:href="@{/bibliotecario/{id}(id=${bibliotecario.id})}" class="btn-tabela btn-ver">Ver Detalhes</a>
-                      <a th:href="@{/bibliotecario/{id}/editar(id=${bibliotecario.id})}" class="btn-tabela btn-editar">Editar</a>
-                      <a th:href="@{/bibliotecario/{id}/deletar(id=${bibliotecario.id})}" class="detalhes deletar">Remover</a>
+                      <a th:href="@{/bibliotecario/{id}(id=${bibliotecario.idPessoa})}" class="btn-tabela btn-ver">Ver Detalhes</a>
+                      <a th:href="@{/bibliotecario/{id}/editar(id=${bibliotecario.idPessoa})}" class="btn-tabela btn-editar">Editar</a>
+                      <a th:href="@{/bibliotecario/{id}/deletar(id=${bibliotecario.idPessoa})}" class="detalhes deletar">Remover</a>
                 </td>
              </tr>
         </tbody>
